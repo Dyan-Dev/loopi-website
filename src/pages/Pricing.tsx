@@ -9,12 +9,12 @@ export default function Pricing() {
   }, []);
 
   return (
-    <div className="py-16">
+    <div className="py-8 sm:py-12 md:py-16">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-        <h1 className="mb-6">Pricing Plans</h1>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16 text-center">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">Pricing Plans</h1>
         <div className="max-w-2xl mx-auto">
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
             Choose the plan that fits your needs. Start free with open source, upgrade anytime.
           </p>
         </div>

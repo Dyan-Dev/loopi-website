@@ -96,32 +96,32 @@ export default function Enterprise() {
   ];
 
   return (
-    <div className="py-16">
+    <div className="py-8 sm:py-12 md:py-16">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-950/50 text-primary-700 dark:text-primary-400 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-950/50 text-primary-700 dark:text-primary-400 text-xs sm:text-sm mb-4 sm:mb-6">
             Enterprise Grade
           </div>
-          <h1 className="mb-6">Enterprise Edition</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">Enterprise Edition</h1>
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-6 sm:mb-8 text-center">
             Support, SLA, SSO, on-premise installs, and white-glove onboarding for teams and mission-critical workflows.
           </p>
         </div>
       </section>
 
       {/* Features Grid */}
-      <section className="bg-neutral-50 dark:bg-neutral-900 py-16 mb-24">
+      <section className="bg-neutral-50 dark:bg-neutral-900 py-10 sm:py-12 md:py-16 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-12">Enterprise Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-8 sm:mb-10 md:mb-12">Enterprise Features</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {enterpriseFeatures.map((feature) => {
               const Icon = feature.icon;
               return (
-                <div key={feature.title} className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800">
-                  <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" />
-                  <h3 className="text-lg mb-2">{feature.title}</h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{feature.description}</p>
+                <div key={feature.title} className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800">
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400 mb-3 sm:mb-4" />
+                  <h3 className="text-base sm:text-lg mb-1.5 sm:mb-2">{feature.title}</h3>
+                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">{feature.description}</p>
                 </div>
               );
             })}
@@ -130,15 +130,15 @@ export default function Enterprise() {
       </section>
 
       {/* Use Cases */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <h2 className="text-center mb-12">Built for Enterprise Use Cases</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">
-            <h3 className="text-lg mb-3">Financial Services</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-8 sm:mb-10 md:mb-12">Built for Enterprise Use Cases</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="p-5 sm:p-6 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800">
+            <h3 className="text-base sm:text-lg mb-2 sm:mb-3">Financial Services</h3>
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
               Automate compliance reporting, data extraction from legacy systems, and regulatory submissions with audit trails.
             </p>
-            <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-2">
+            <ul className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 space-y-1.5 sm:space-y-2">
               <li>• SOC 2 compliance</li>
               <li>• On-premise deployment</li>
               <li>• Audit logging</li>

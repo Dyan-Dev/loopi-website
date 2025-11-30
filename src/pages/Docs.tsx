@@ -56,24 +56,24 @@ export default function Docs() {
   }, []);
 
   return (
-    <div className="py-16">
+    <div className="py-8 sm:py-12 md:py-16">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="mb-6">Documentation</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">Documentation</h1>
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-6 sm:mb-8 text-center">
             Everything you need to build powerful browser automations
           </p>
           
           {/* Search */}
           <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+            <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-neutral-400" />
             <input
               type="text"
               placeholder="Search documentation..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+              className="w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
             />
           </div>
         </div>
@@ -156,14 +156,14 @@ export default function Docs() {
               </p>
 
               <h3>npm Package</h3>
-              <pre>
-                <code>{`npm install -g @automa/cli
+              <pre className="overflow-x-auto">
+                <code className="text-xs sm:text-sm">{`npm install -g @automa/cli
 automa --version`}</code>
               </pre>
 
               <h3>Build from Source</h3>
-              <pre>
-                <code>{`git clone https://github.com/automa-dev/automa.git
+              <pre className="overflow-x-auto">
+                <code className="text-xs sm:text-sm">{`git clone https://github.com/automa-dev/automa.git
 cd automa
 npm install
 npm run build
@@ -244,8 +244,8 @@ npm start`}</code>
               <p>
                 Extract data from multiple pages with pagination.
               </p>
-              <pre>
-                <code>{`{
+              <pre className="overflow-x-auto">
+                <code className="text-xs sm:text-sm">{`{
   "name": "Pagination Example",
   "nodes": [
     {
@@ -299,8 +299,8 @@ npm start`}</code>
               </ul>
 
               <h3>Example Usage</h3>
-              <pre>
-                <code>{`const { AutomaClient } = require('@automa/client');
+              <pre className="overflow-x-auto">
+                <code className="text-xs sm:text-sm">{`const { AutomaClient } = require('@automa/client');
 
 const client = new AutomaClient();
 

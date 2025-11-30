@@ -40,22 +40,22 @@ export default function Downloads() {
   }, []);
 
   return (
-    <div className="py-16">
+    <div className="py-8 sm:py-12 md:py-16">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="mb-6">Download Automa</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">Download Automa</h1>
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-6 sm:mb-8 text-center">
             Free and open source. Choose your platform and start automating.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <a
               href="https://github.com/automa-dev/automa/releases/latest"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
             >
-              <Github className="w-5 h-5 mr-2" />
+              <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               View on GitHub
             </a>
           </div>
@@ -85,18 +85,18 @@ export default function Downloads() {
       </section>
 
       {/* Platform Downloads */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {platforms.map((platform) => {
             const Icon = platform.icon;
             return (
-              <div key={platform.name} className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800">
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-                  <h3 className="text-xl">{platform.name}</h3>
+              <div key={platform.name} className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400" />
+                  <h3 className="text-lg sm:text-xl">{platform.name}</h3>
                 </div>
                 
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">
+                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-5 sm:mb-6">
                   {platform.requirements}
                 </p>
                 
@@ -126,11 +126,11 @@ export default function Downloads() {
       </section>
 
       {/* Checksums */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl">
-          <h3 className="text-lg mb-4">Verify Downloads (SHA256 Checksums)</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
+        <div className="p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 rounded-lg md:rounded-xl">
+          <h3 className="text-base sm:text-lg mb-3 sm:mb-4">Verify Downloads (SHA256 Checksums)</h3>
+          <div className="overflow-x-auto -mx-5 sm:-mx-6 px-5 sm:px-6">
+            <table className="w-full text-xs sm:text-sm min-w-[500px]">
               <thead className="text-left border-b border-neutral-300 dark:border-neutral-700">
                 <tr>
                   <th className="pb-2 font-semibold">File</th>
@@ -163,15 +163,15 @@ export default function Downloads() {
       </section>
 
       {/* Alternative Install Methods */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <h2 className="mb-8 text-center">Alternative Installation Methods</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800">
-            <h3 className="text-lg mb-4">npm / Node.js</h3>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8 text-center">Alternative Installation Methods</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800">
+            <h3 className="text-base sm:text-lg mb-3 sm:mb-4">npm / Node.js</h3>
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
               Install Automa as a global CLI tool using npm:
             </p>
-            <pre className="text-xs p-4 rounded bg-neutral-100 dark:bg-neutral-900 overflow-x-auto">
+            <pre className="text-xs p-3 sm:p-4 rounded bg-neutral-100 dark:bg-neutral-900 overflow-x-auto">
               <code>npm install -g @automa/cli{'\n'}automa --version</code>
             </pre>
           </div>

@@ -78,62 +78,62 @@ const plans = [
 
 export function PricingTable() {
   return (
-    <section className="py-24 bg-neutral-50 dark:bg-neutral-900">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="mb-4">Simple, transparent pricing for teams and enterprises</h2>
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">Simple, transparent pricing for teams and enterprises</h2>
           <div className="max-w-2xl mx-auto">
-            <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+            <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
               Start with open source for free, upgrade when you need support and enterprise features
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-2xl p-8 ${
+              className={`relative rounded-xl md:rounded-2xl p-6 sm:p-8 ${
                 plan.popular
-                  ? 'bg-primary-600 text-white shadow-2xl scale-105'
+                  ? 'bg-primary-600 text-white shadow-2xl lg:scale-105'
                   : 'bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800'
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-white text-primary-600 rounded-full text-sm font-semibold">
+                <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 bg-white text-primary-600 rounded-full text-xs sm:text-sm font-semibold">
                   Most Popular
                 </div>
               )}
 
-              <div className="mb-8">
-                <h3 className={`text-2xl mb-2 ${plan.popular ? 'text-white' : ''}`}>
+              <div className="mb-6 sm:mb-8">
+                <h3 className={`text-xl sm:text-2xl mb-2 ${plan.popular ? 'text-white' : ''}`}>
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-2">
-                  <span className={`text-4xl font-bold ${plan.popular ? 'text-white' : ''}`}>
+                  <span className={`text-3xl sm:text-4xl font-bold ${plan.popular ? 'text-white' : ''}`}>
                     {plan.price}
                   </span>
                   {plan.period && (
-                    <span className={`text-sm ${plan.popular ? 'text-white/80' : 'text-neutral-500 dark:text-neutral-400'}`}>
+                    <span className={`text-xs sm:text-sm ${plan.popular ? 'text-white/80' : 'text-neutral-500 dark:text-neutral-400'}`}>
                       {plan.period}
                     </span>
                   )}
                 </div>
                 {plan.yearlyPrice && (
-                  <p className={`text-sm ${plan.popular ? 'text-white/80' : 'text-neutral-500 dark:text-neutral-400'}`}>
+                  <p className={`text-xs sm:text-sm ${plan.popular ? 'text-white/80' : 'text-neutral-500 dark:text-neutral-400'}`}>
                     or {plan.yearlyPrice}
                   </p>
                 )}
-                <p className={`mt-4 text-sm ${plan.popular ? 'text-white/90' : 'text-neutral-600 dark:text-neutral-400'}`}>
+                <p className={`mt-3 sm:mt-4 text-xs sm:text-sm ${plan.popular ? 'text-white/90' : 'text-neutral-600 dark:text-neutral-400'}`}>
                   {plan.description}
                 </p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 shrink-0 ${plan.popular ? 'text-white' : 'text-primary-600 dark:text-primary-400'}`} />
-                    <span className={`text-sm ${plan.popular ? 'text-white/90' : 'text-neutral-600 dark:text-neutral-400'}`}>
+                  <li key={feature} className="flex items-start gap-2.5 sm:gap-3">
+                    <Check className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 ${plan.popular ? 'text-white' : 'text-primary-600 dark:text-primary-400'}`} />
+                    <span className={`text-xs sm:text-sm ${plan.popular ? 'text-white/90' : 'text-neutral-600 dark:text-neutral-400'}`}>
                       {feature}
                     </span>
                   </li>
@@ -142,7 +142,7 @@ export function PricingTable() {
 
               <Link
                 to={plan.ctaLink}
-                className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-colors ${
+                className={`block w-full text-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg font-medium transition-colors ${
                   plan.popular
                     ? 'bg-white text-primary-600 hover:bg-neutral-100'
                     : 'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-500 dark:text-white dark:hover:bg-primary-600'

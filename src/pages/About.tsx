@@ -7,44 +7,44 @@ export default function About() {
   }, []);
 
   return (
-    <div className="py-16">
+    <div className="py-8 sm:py-12 md:py-16">
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="mb-6">About Automa</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">About Automa</h1>
+          <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
             An open source project building the most accessible browser automation platform for everyone
           </p>
         </div>
       </section>
 
       {/* Mission */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="mb-6">Our Mission</h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Our Mission</h2>
+          <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
             We believe browser automation should be accessible to everyone, not just developers. Automa makes it possible to build complex automations visually, without writing code.
           </p>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400">
+          <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400">
             By combining an intuitive visual editor with the power of real browser automation, we're democratizing a technology that has historically been complex and expensive.
           </p>
         </div>
       </section>
 
       {/* Community */}
-      <section className="bg-neutral-50 dark:bg-neutral-900 py-16 mb-24">
+      <section className="bg-neutral-50 dark:bg-neutral-900 py-10 sm:py-12 md:py-16 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-12">Join Our Community</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-8 sm:mb-10 md:mb-12">Join Our Community</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <a
               href="https://github.com/automa-dev/automa"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
+              className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
             >
-              <Github className="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="text-lg mb-2">GitHub</h3>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+              <Github className="w-7 h-7 sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400 mb-3 sm:mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="text-base sm:text-lg mb-1.5 sm:mb-2">GitHub</h3>
+              <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
                 View source code, report issues, and contribute
               </p>
             </a>

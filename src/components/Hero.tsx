@@ -8,21 +8,21 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-linear-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-950 pt-20 pb-24">
+      <section className="relative overflow-hidden bg-linear-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-950 pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-20 md:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl">
+            <div className="space-y-6 md:space-y-8">
+              <div className="space-y-3 md:space-y-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
                   Automa — Visual Browser Automation for humans and teams
                 </h1>
-                <p className="text-xl text-neutral-600 dark:text-neutral-400">
+                <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400">
                   Design browser automation as a node graph, run it in real Chromium windows, and integrate with your systems.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                 <Link
                   to="/open-source"
                   className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors group"
@@ -53,8 +53,8 @@ export function Hero() {
             </div>
 
             {/* Video/Media */}
-            <div className="relative">
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-neutral-900 shadow-2xl border border-neutral-200 dark:border-neutral-800">
+            <div className="relative mt-8 lg:mt-0">
+              <div className="relative aspect-video rounded-lg md:rounded-xl overflow-hidden bg-neutral-900 shadow-xl md:shadow-2xl border border-neutral-200 dark:border-neutral-800">
                 <video
                   autoPlay
                   muted
@@ -70,15 +70,15 @@ export function Hero() {
                   className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors group"
                   aria-label="Watch full demo"
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Play className="w-8 h-8 text-primary-600 ml-1" fill="currentColor" />
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Play className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600 ml-1" fill="currentColor" />
                   </div>
                 </button>
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl -z-10"></div>
-              <div className="absolute -bottom-4 -left-4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl -z-10"></div>
+              <div className="absolute -top-4 -right-4 w-48 h-48 sm:w-72 sm:h-72 bg-primary-500/10 rounded-full blur-3xl -z-10"></div>
+              <div className="absolute -bottom-4 -left-4 w-48 h-48 sm:w-72 sm:h-72 bg-accent-500/10 rounded-full blur-3xl -z-10"></div>
             </div>
           </div>
         </div>
