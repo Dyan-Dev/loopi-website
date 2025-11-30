@@ -82,9 +82,11 @@ export function PricingTable() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="mb-4">Simple, transparent pricing for teams and enterprises</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Start with open source for free, upgrade when you need support and enterprise features
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+              Start with open source for free, upgrade when you need support and enterprise features
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

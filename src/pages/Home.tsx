@@ -6,10 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 
 export default function Home() {
-  useEffect(() => {
-    // Update page metadata
-    document.title = 'Automa — Visual Browser Automation for humans and teams';
-  }, []);
+
 
   return (
     <>
@@ -21,9 +18,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4">See Automa in Action</h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              Build, run, and manage browser automations visually
-            </p>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+                Build, run, and manage browser automations visually
+              </p>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -72,9 +71,11 @@ export default function Home() {
       <section className="py-24 bg-linear-to-br from-primary-600 to-primary-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-white mb-4">Ready to automate?</h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Start with the open source edition or talk to our team about Enterprise features
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xl text-primary-100 mb-8 text-center">
+              Start with the open source edition or talk to our team about Enterprise features
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/open-source"

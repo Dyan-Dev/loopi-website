@@ -12,7 +12,7 @@ export default function About() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="mb-6">About Automa</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
             An open source project building the most accessible browser automation platform for everyone
           </p>
         </div>
@@ -20,7 +20,7 @@ export default function About() {
 
       {/* Mission */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
           <h2 className="mb-6">Our Mission</h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-4">
             We believe browser automation should be accessible to everyone, not just developers. Automa makes it possible to build complex automations visually, without writing code.
@@ -171,9 +171,11 @@ git checkout -b feature/my-feature`}
         <div className="p-8 rounded-2xl bg-linear-to-br from-primary-600 to-primary-700 text-white text-center">
           <Heart className="w-12 h-12 mx-auto mb-4" />
           <h2 className="text-white mb-4">Support Open Source</h2>
-          <p className="text-lg text-primary-100 mb-6 max-w-2xl mx-auto">
-            Automa is free and open source. If you find it useful, consider sponsoring the project or contributing.
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-lg text-primary-100 mb-6 text-center">
+              Automa is free and open source. If you find it useful, consider sponsoring the project or contributing.
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://github.com/sponsors/automa-dev"

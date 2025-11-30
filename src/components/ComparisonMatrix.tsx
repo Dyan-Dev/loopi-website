@@ -147,9 +147,11 @@ export function ComparisonMatrix() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="mb-4">Feature Comparison</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Compare what's included in each plan
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+              Compare what's included in each plan
+            </p>
+          </div>
         </div>
 
         <div className="overflow-x-auto">

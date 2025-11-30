@@ -45,7 +45,7 @@ export default function Downloads() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="mb-6">Download Automa</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
             Free and open source. Choose your platform and start automating.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

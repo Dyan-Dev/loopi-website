@@ -67,9 +67,11 @@ export function FeatureGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="mb-4">Why Automa</h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            Powerful features that make browser automation accessible to everyone
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+              Powerful features that make browser automation accessible to everyone
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

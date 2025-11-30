@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00.000 --> 00:05.000
+When I click on Run Automation, the workflow starts immediately in the first node lights up in green.
+
+00:05.000 --> 00:09.000
+A new browser window opens on its own and loads the e-commerce website.
+
+00:10.000 --> 00:14.000
+As each step runs, the matching node highlights in green so I can follow along easily.
+
+00:15.000 --> 00:20.000
+The automation navigates to a product category, opens an item, and clicks Add to Cart.
+
+00:20.000 --> 00:23.000
+By the time it finishes, the final node turns green.

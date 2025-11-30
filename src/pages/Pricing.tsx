@@ -13,9 +13,11 @@ export default function Pricing() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
         <h1 className="mb-6">Pricing Plans</h1>
-        <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-          Choose the plan that fits your needs. Start free with open source, upgrade anytime.
-        </p>
+        <div className="max-w-2xl mx-auto">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 text-center">
+            Choose the plan that fits your needs. Start free with open source, upgrade anytime.
+          </p>
+        </div>
       </section>
 
       <PricingTable />

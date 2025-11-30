@@ -11,16 +11,16 @@ export default function OpenSource() {
     <div className="py-16">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-100 dark:bg-accent-950/50 text-accent-700 dark:text-accent-400 text-sm mb-6">
             <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
             MIT License · Free Forever
           </div>
           <h1 className="mb-6">Open Source Reference Edition</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
             Free, MIT licensed. Includes the full visual editor and community support. Perfect for individual developers and small teams getting started with browser automation.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="https://github.com/automa-dev/automa"
               target="_blank"

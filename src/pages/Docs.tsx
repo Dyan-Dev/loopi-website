@@ -61,7 +61,7 @@ export default function Docs() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="mb-6">Documentation</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
             Everything you need to build powerful browser automations
           </p>
           

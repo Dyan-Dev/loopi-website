@@ -99,12 +99,12 @@ export default function Enterprise() {
     <div className="py-16">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-950/50 text-primary-700 dark:text-primary-400 text-sm mb-6">
             Enterprise Grade
           </div>
           <h1 className="mb-6">Enterprise Edition</h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8 text-center">
             Support, SLA, SSO, on-premise installs, and white-glove onboarding for teams and mission-critical workflows.
           </p>
         </div>
