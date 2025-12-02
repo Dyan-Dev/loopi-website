@@ -21,7 +21,7 @@ export function Footer() {
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a
-                href="https://github.com/automa-dev/automa"
+                href="https://github.com/Dyan-Dev/automa"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -30,7 +30,7 @@ export function Footer() {
                 <Github className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://twitter.com/automa_dev"
+                href="https://x.com/AutomaSupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -39,7 +39,7 @@ export function Footer() {
                 <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://discord.gg/automa"
+                href="https://discord.gg/B8SwwcGh"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -48,7 +48,7 @@ export function Footer() {
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://youtube.com/@automa"
+                href="https://www.youtube.com/@automasupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -65,22 +65,17 @@ export function Footer() {
             <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
               <li>
                 <Link to="/open-source" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  Open Source
-                </Link>
-              </li>
-              <li>
-                <Link to="/enterprise" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  Enterprise
-                </Link>
-              </li>
-              <li>
-                <Link to="/pricing" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  Pricing
+                  Features
                 </Link>
               </li>
               <li>
                 <Link to="/downloads" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
                   Downloads
+                </Link>
+              </li>
+              <li>
+                <Link to="/docs" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                  Documentation
                 </Link>
               </li>
             </ul>
@@ -96,18 +91,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/automa-dev/automa" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                <a href="https://github.com/Dyan-Dev/automa" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
                   GitHub
                 </a>
               </li>
               <li>
                 <Link to="/about" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  About
+                  Community
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/automa-dev/automa/discussions" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
-                  Community
+                <a href="https://github.com/Dyan-Dev/automa/discussions" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                  Discussions
                 </a>
               </li>
             </ul>
@@ -138,7 +133,7 @@ export function Footer() {
 
         <div className="pt-6 sm:pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-center sm:text-left">
           <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
-            © {currentYear} Automa. Open Source Reference Edition licensed under MIT.
+            © {currentYear} Automa. Open Source software licensed under MIT.
           </p>
           <p className="text-xs text-neutral-500 dark:text-neutral-500">
             We respect privacy — analytics disabled by default. See <Link to="/privacy" className="underline">Privacy</Link>.

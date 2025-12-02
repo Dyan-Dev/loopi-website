@@ -6,9 +6,9 @@ const platforms = [
     name: 'Windows',
     icon: Monitor,
     downloads: [
-      { type: 'Installer (.exe)', size: '85 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-Setup.exe' },
-      { type: 'MSI Package', size: '82 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-Setup.msi' },
-      { type: 'Portable (.zip)', size: '120 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-Portable.zip' },
+      { type: 'Installer (.exe)', size: '85 MB', url: 'https://github.com/Dyan-Dev/automa/releases/download/v1.0.0/automa-1.0.0.Setup.exe' },
+      { type: 'MSI Package', size: '82 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa-Setup.msi' },
+      { type: 'Portable (.zip)', size: '120 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa-Portable.zip' },
     ],
     requirements: 'Windows 10 or later (64-bit)',
   },
@@ -16,9 +16,9 @@ const platforms = [
     name: 'macOS',
     icon: Apple,
     downloads: [
-      { type: 'Universal (.dmg)', size: '95 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-Universal.dmg' },
-      { type: 'Intel (.dmg)', size: '88 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-Intel.dmg' },
-      { type: 'Apple Silicon (.dmg)', size: '82 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa-ARM64.dmg' },
+      { type: 'Universal (.dmg)', size: '95 MB', url: 'https://github.com/Dyan-Dev/automa/releases/download/v1.0.0/automa-darwin-arm64-1.0.0.zip' },
+      { type: 'Intel (.dmg)', size: '88 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa-Intel.dmg' },
+      { type: 'Apple Silicon (.dmg)', size: '82 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa-ARM64.dmg' },
     ],
     requirements: 'macOS 11 (Big Sur) or later',
   },
@@ -26,9 +26,9 @@ const platforms = [
     name: 'Linux',
     icon: Package,
     downloads: [
-      { type: 'AppImage', size: '92 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa.AppImage' },
-      { type: 'Debian (.deb)', size: '85 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa.deb' },
-      { type: 'RPM (.rpm)', size: '86 MB', url: 'https://github.com/automa-dev/automa/releases/latest/download/Automa.rpm' },
+      { type: 'AppImage', size: '92 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa.AppImage' },
+      { type: 'Debian (.deb)', size: '85 MB', url: 'https://github.com/Dyan-Dev/automa/releases/download/v1.0.0/automa_1.0.0_amd64.deb' },
+      { type: 'RPM (.rpm)', size: '86 MB', url: 'https://github.com/Dyan-Dev/automa/releases/latest/download/Automa.rpm' },
     ],
     requirements: 'Ubuntu 20.04+, Fedora 35+, or equivalent',
   },
@@ -50,7 +50,7 @@ export default function Downloads() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <a
-              href="https://github.com/automa-dev/automa/releases/latest"
+              href="https://github.com/Dyan-Dev/automa/releases/latest"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
@@ -69,7 +69,7 @@ export default function Downloads() {
             <div>
               <h3 className="text-lg mb-1">Latest Release: v1.2.0</h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Released November 28, 2025 · <a href="https://github.com/automa-dev/automa/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
+                Released November 28, 2025 · <a href="https://github.com/Dyan-Dev/automa/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
               </p>
             </div>
             <div className="flex gap-4 text-sm text-neutral-600 dark:text-neutral-400">
@@ -155,7 +155,7 @@ export default function Downloads() {
           </div>
           <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-4">
             Full checksums available on the{' '}
-            <a href="https://github.com/automa-dev/automa/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">
+            <a href="https://github.com/Dyan-Dev/automa/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">
               GitHub Releases page
             </a>
           </p>
@@ -166,16 +166,6 @@ export default function Downloads() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 md:mb-16">
         <h2 className="text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8 text-center">Alternative Installation Methods</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          <div className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800">
-            <h3 className="text-base sm:text-lg mb-3 sm:mb-4">npm / Node.js</h3>
-            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
-              Install Automa as a global CLI tool using npm:
-            </p>
-            <pre className="text-xs p-3 sm:p-4 rounded bg-neutral-100 dark:bg-neutral-900 overflow-x-auto">
-              <code>npm install -g @automa/cli{'\n'}automa --version</code>
-            </pre>
-          </div>
-
           <div className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800">
             <h3 className="text-lg mb-4">Build from Source</h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
@@ -183,10 +173,10 @@ export default function Downloads() {
             </p>
             <pre className="text-xs p-4 rounded bg-neutral-100 dark:bg-neutral-900 overflow-x-auto">
               <code>
-                git clone https://github.com/automa-dev/automa.git{'\n'}
+                git clone https://github.com/Dyan-Dev/automa.git{'\n'}
                 cd automa{'\n'}
                 npm install{'\n'}
-                npm run build
+                npm start
               </code>
             </pre>
           </div>
@@ -257,7 +247,7 @@ export default function Downloads() {
               Installation Guide
             </a>
             <a
-              href="https://discord.gg/automa"
+              href="https://discord.gg/B8SwwcGh"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition-colors"

@@ -34,19 +34,16 @@ export default function NotFound() {
           <p className="mb-4">Popular pages:</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/open-source" className="text-primary-600 dark:text-accent-400 hover:underline">
-              Open Source Edition
-            </Link>
-            <Link to="/enterprise" className="text-primary-600 dark:text-accent-400 hover:underline">
-              Enterprise Edition
-            </Link>
-            <Link to="/pricing" className="text-primary-600 dark:text-accent-400 hover:underline">
-              Pricing
+              Features
             </Link>
             <Link to="/downloads" className="text-primary-600 dark:text-accent-400 hover:underline">
               Downloads
             </Link>
+            <Link to="/docs" className="text-primary-600 dark:text-accent-400 hover:underline">
+              Documentation
+            </Link>
             <Link to="/about" className="text-primary-600 dark:text-accent-400 hover:underline">
-              About
+              Community
             </Link>
           </div>
         </div>

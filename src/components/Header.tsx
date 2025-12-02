@@ -9,12 +9,10 @@ export function Header() {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Open Source', href: '/open-source' },
-    { name: 'Enterprise', href: '/enterprise' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Features', href: '/open-source' },
     { name: 'Docs', href: '/docs' },
     { name: 'Downloads', href: '/downloads' },
-    { name: 'About', href: '/about' },
+    { name: 'Community', href: '/about' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
@@ -58,13 +56,6 @@ export function Header() {
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            <Link
-              to="/enterprise"
-              className="hidden sm:inline-flex items-center px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
-            >
-              Contact Sales
-            </Link>
-
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -94,13 +85,6 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/enterprise"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
-              >
-                Contact Sales
-              </Link>
             </div>
           </div>
         )}

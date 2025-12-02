@@ -2,8 +2,6 @@ import { createBrowserRouter } from 'react-router';
 import Root from '../pages/Root';
 import Home from '../pages/Home';
 import OpenSource from '../pages/OpenSource';
-import Enterprise from '../pages/Enterprise';
-import Pricing from '../pages/Pricing';
 import Docs from '../pages/Docs';
 import Downloads from '../pages/Downloads';
 import About from '../pages/About';
@@ -18,8 +16,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'open-source', Component: OpenSource },
-      { path: 'enterprise', Component: Enterprise },
-      { path: 'pricing', Component: Pricing },
       { path: 'docs', Component: Docs },
       { path: 'downloads', Component: Downloads },
       { path: 'about', Component: About },

@@ -32,11 +32,10 @@ export function Hero() {
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  to="/enterprise"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-primary-600 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950/20 transition-colors"
+                  to="/docs"
+                  className="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg border-2 border-primary-600 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950/20 transition-colors"
                 >
-                  Contact Sales
-                  <span className="ml-2 text-sm text-neutral-500 dark:text-neutral-400">SLA · SSO · On-prem</span>
+                  Read Documentation
                 </Link>
               </div>
 

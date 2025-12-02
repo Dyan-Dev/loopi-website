@@ -18,30 +18,13 @@ export default function Terms() {
 
           <h2>2. Description of Service</h2>
           <p>
-            Automa provides visual browser automation software available in two editions:
+            Automa provides free, open source visual browser automation software licensed under the Mozilla Public License 2.0 (MPL-2.0).
           </p>
-          <ul>
-            <li><strong>Open Source Reference Edition:</strong> Free software licensed under the Mozilla Public License 2.0 (MPL-2.0)</li>
-            <li><strong>Enterprise Edition:</strong> Commercial software with additional features and support</li>
-          </ul>
 
           <h2>3. License Terms</h2>
-          
-          <h3>3.1 Open Source Edition</h3>
           <p>
-            The Open Source Reference Edition is licensed under the MPL-2.0 license. You may use, modify, and distribute the software in accordance with the terms of that license. The full license text is available in the software repository.
+            Automa is licensed under the MPL-2.0 license. You may use, modify, and distribute the software in accordance with the terms of that license. The full license text is available in the software repository.
           </p>
-
-          <h3>3.2 Enterprise Edition</h3>
-          <p>
-            The Enterprise Edition is proprietary software. Your use is governed by a separate Enterprise License Agreement. Key terms include:
-          </p>
-          <ul>
-            <li>Limited license grant for internal business use</li>
-            <li>Restrictions on redistribution and modification</li>
-            <li>Support and maintenance terms</li>
-            <li>Compliance and audit rights</li>
-          </ul>
 
           <h2>4. Acceptable Use</h2>
           <p>You agree NOT to use Automa to:</p>
@@ -117,13 +100,8 @@ export default function Terms() {
 
           <h2>12. Termination</h2>
           <p>
-            We reserve the right to suspend or terminate your access to our services at any time, with or without cause or notice. Upon termination:
+            We reserve the right to suspend or terminate your access to our services at any time, with or without cause or notice. Your rights under the MPL-2.0 license continue as permitted by that license.
           </p>
-          <ul>
-            <li>Your license to use the Enterprise Edition terminates immediately</li>
-            <li>Your rights under the Open Source Edition continue as permitted by the MPL-2.0 license</li>
-            <li>Provisions that by their nature should survive termination will continue to apply</li>
-          </ul>
 
           <h2>13. Modifications to Terms</h2>
           <p>

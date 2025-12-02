@@ -37,7 +37,7 @@ export default function About() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-8 sm:mb-10 md:mb-12">Join Our Community</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <a
-              href="https://github.com/automa-dev/automa"
+              href="https://github.com/Dyan-Dev/automa"
               target="_blank"
               rel="noopener noreferrer"
               className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -50,7 +50,7 @@ export default function About() {
             </a>
 
             <a
-              href="https://discord.gg/automa"
+              href="https://discord.gg/B8SwwcGh"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -63,7 +63,7 @@ export default function About() {
             </a>
 
             <a
-              href="https://github.com/automa-dev/automa/discussions"
+              href="https://github.com/Dyan-Dev/automa/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -76,7 +76,7 @@ export default function About() {
             </a>
 
             <a
-              href="https://github.com/automa-dev/automa/security"
+              href="https://github.com/Dyan-Dev/automa/security"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -108,7 +108,7 @@ export default function About() {
               <li>• <strong>Community:</strong> Help others and share workflows</li>
             </ul>
             <a
-              href="https://github.com/automa-dev/automa/blob/main/CONTRIBUTING.md"
+              href="https://github.com/Dyan-Dev/automa/blob/main/CONTRIBUTING.md"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-primary-600 dark:text-primary-400 underline"
@@ -129,7 +129,7 @@ export default function About() {
               <li>• Show empathy towards others</li>
             </ul>
             <a
-              href="https://github.com/automa-dev/automa/blob/main/CODE_OF_CONDUCT.md"
+              href="https://github.com/Dyan-Dev/automa/blob/main/CODE_OF_CONDUCT.md"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-primary-600 dark:text-primary-400 underline"
@@ -146,17 +146,17 @@ export default function About() {
             <pre className="text-xs p-4 rounded bg-white dark:bg-neutral-950 overflow-x-auto border border-neutral-200 dark:border-neutral-800">
               <code>
                 {`# Fork and clone the repository
-git clone https://github.com/YOUR_USERNAME/automa.git
+git clone https://github.com/Dyan-Dev/automa.git
 cd automa
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm start
 
 # Run tests
-npm test
+pnpm test
 
 # Create a branch for your feature
 git checkout -b feature/my-feature`}
@@ -178,7 +178,7 @@ git checkout -b feature/my-feature`}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/sponsors/automa-dev"
+              href="https://github.com/sponsors/Dyan-Dev"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-white text-primary-600 hover:bg-neutral-100 transition-colors"
@@ -186,7 +186,7 @@ git checkout -b feature/my-feature`}
               Become a Sponsor
             </a>
             <a
-              href="https://github.com/automa-dev/automa"
+              href="https://github.com/Dyan-Dev/automa"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-white text-white hover:bg-white/10 transition-colors"

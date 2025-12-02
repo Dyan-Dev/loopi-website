@@ -328,7 +328,7 @@ console.log(results);`}</code>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://discord.gg/automa"
+              href="https://discord.gg/B8SwwcGh"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
@@ -336,7 +336,7 @@ console.log(results);`}</code>
               Join Discord
             </a>
             <a
-              href="https://github.com/automa-dev/automa/discussions"
+              href="https://github.com/Dyan-Dev/automa/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 rounded-lg border-2 border-neutral-300 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 transition-colors"

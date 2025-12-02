@@ -20,7 +20,7 @@ export default function Privacy() {
           
           <h3>Information You Provide</h3>
           <ul>
-            <li><strong>Contact Information:</strong> When you fill out our enterprise contact form, we collect your name, email address, company name, and any message you provide.</li>
+            <li><strong>Contact Information:</strong> When you contact us or participate in community discussions, we may collect your name and email address.</li>
             <li><strong>Account Information:</strong> If you create an account for our community features, we collect your username, email, and password.</li>
           </ul>
 
@@ -40,7 +40,6 @@ export default function Privacy() {
           <p>We use the collected information to:</p>
           <ul>
             <li>Respond to your inquiries and provide customer support</li>
-            <li>Process enterprise license requests</li>
             <li>Send you updates about Automa (with your consent)</li>
             <li>Improve our website and software</li>
             <li>Analyze usage patterns and trends</li>
@@ -111,8 +110,8 @@ export default function Privacy() {
             If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:
           </p>
           <ul>
-            <li>Email: privacy@automa.site</li>
-            <li>GitHub: <a href="https://github.com/automa/automa" target="_blank" rel="noopener noreferrer">github.com/automa/automa</a></li>
+            <li>Email: support@dyan.live</li>
+            <li>GitHub: <a href="https://github.com/Dyan-Dev/automa" target="_blank" rel="noopener noreferrer">github.com/Dyan-Dev/automa</a></li>
           </ul>
 
           <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">

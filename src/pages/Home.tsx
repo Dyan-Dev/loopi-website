@@ -1,6 +1,5 @@
 import { Hero } from '../components/Hero';
 import { FeatureGrid } from '../components/FeatureGrid';
-import { PricingTable } from '../components/PricingTable';
 import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
@@ -64,8 +63,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <PricingTable />
       
       {/* CTA Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-linear-to-br from-primary-600 to-primary-700 text-white">
@@ -73,22 +70,22 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-white mb-3 md:mb-4">Ready to automate?</h2>
           <div className="max-w-2xl mx-auto">
             <p className="text-base sm:text-lg md:text-xl text-primary-100 mb-6 md:mb-8 text-center">
-              Start with the open source edition or talk to our team about Enterprise features
+              Start automating with our free, open source browser automation tool
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Link
-              to="/open-source"
+              to="/downloads"
               className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-lg bg-white text-primary-600 hover:bg-neutral-100 transition-colors group"
             >
-              Get Started Free
+              Download Now
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              to="/enterprise"
+              to="/docs"
               className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base rounded-lg border-2 border-white text-white hover:bg-white/10 transition-colors"
             >
-              Talk to Sales
+              View Documentation
             </Link>
           </div>
         </div>

@@ -5,8 +5,6 @@ import {
   Variable,
   MousePointer,
   Plug,
-  Clock,
-  Lock,
   Package,
 } from 'lucide-react';
 
@@ -42,18 +40,6 @@ const features = [
     link: '/docs#api-integration',
   },
   {
-    icon: Clock,
-    title: 'Scheduled Runs',
-    description: 'Schedule automations to run at specific times or intervals automatically.',
-    link: '/docs#scheduling',
-  },
-  {
-    icon: Lock,
-    title: 'Credential Vault',
-    description: 'Store API keys and passwords securely with enterprise-grade encryption.',
-    link: '/docs#credentials',
-  },
-  {
     icon: Package,
     title: 'Cross-Platform',
     description: 'Deploy on Windows, macOS, and Linux with native installers and packages.',
@@ -74,7 +60,7 @@ export function FeatureGrid() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
