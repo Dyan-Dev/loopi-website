@@ -44,7 +44,7 @@ export default function Page({ loaderData }: Route.ComponentProps) {
   const Content = clientLoader.getComponent(path);
 
   return (
-    <DocsLayout {...baseOptions()} tree={tree as PageTree.Root}>
+    <DocsLayout {...baseOptions()} tree={tree as PageTree.Root} themeSwitch={{ enabled: false }}>
       <Content />
     </DocsLayout>
   );
