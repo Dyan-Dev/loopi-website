@@ -74,4 +74,3 @@ src/
 ## License
 
 MIT License - see original Automa project for details.
-  
