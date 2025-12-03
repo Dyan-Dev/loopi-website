@@ -1,0 +1,358 @@
+---
+title: Examples
+description: Ready-made automation examples you can import and run
+---
+
+# Examples
+
+This page contains practical automation examples you can import and try immediately.
+
+## Example 1: Hacker News Top Story
+
+Extract the top story from Hacker News and take a screenshot.
+
+```json
+{
+  "name": "Hacker News Top Story",
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Open Hacker News",
+      "value": "https://news.ycombinator.com"
+    },
+    {
+      "id": "2",
+      "type": "wait",
+      "description": "Wait for page load",
+      "value": "1"
+    },
+    {
+      "id": "3",
+      "type": "extract",
+      "description": "Get top story title",
+      "selector": ".titleline a",
+      "storeKey": "topStory"
+    },
+    {
+      "id": "4",
+      "type": "screenshot",
+      "description": "Capture page",
+      "savePath": "hn_top.png"
+    }
+  ]
+}
+```
+
+**Result:** The top story title is saved in `topStory` variable and a screenshot is saved.
+
+## Example 2: Google Search
+
+Perform a Google search and capture results.
+
+```json
+{
+  "name": "Google Search",
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Go to Google",
+      "value": "https://www.google.com/"
+    },
+    {
+      "id": "2",
+      "type": "type",
+      "description": "Enter search query",
+      "selector": "input[name='q']",
+      "value": "automa browser automation"
+    },
+    {
+      "id": "3",
+      "type": "click",
+      "description": "Click search button",
+      "selector": "input[name='btnK']"
+    },
+    {
+      "id": "4",
+      "type": "wait",
+      "description": "Wait for results",
+      "value": "2"
+    },
+    {
+      "id": "5",
+      "type": "screenshot",
+      "description": "Capture results",
+      "savePath": "google_results.png"
+    }
+  ]
+}
+```
+
+**Result:** Searches Google and captures the results page.
+
+## Example 3: Product Price Monitoring
+
+Check if a product price is below a threshold.
+
+```json
+{
+  "name": "Price Monitor",
+  "steps": [
+    {
+      "id": "1",
+      "type": "setVariable",
+      "description": "Set product URL",
+      "variableName": "productUrl",
+      "value": "https://example.com/product/12345"
+    },
+    {
+      "id": "2",
+      "type": "navigate",
+      "description": "Open product page",
+      "value": "{{productUrl}}"
+    },
+    {
+      "id": "3",
+      "type": "extractWithLogic",
+      "description": "Check if price < $50",
+      "selector": ".product-price",
+      "condition": "lessThan",
+      "expectedValue": "50",
+      "transformType": "stripCurrency",
+      "parseAsNumber": true
+    }
+  ]
+}
+```
+
+**Result:** Returns whether the price is less than $50.
+
+**Use case:** Set up a scheduler to run this automation periodically and notify you when price drops.
+
+## Example 4: Form Submission
+
+Fill out and submit a contact form.
+
+```json
+{
+  "name": "Contact Form Submission",
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Go to contact page",
+      "value": "https://example.com/contact"
+    },
+    {
+      "id": "2",
+      "type": "type",
+      "description": "Enter name",
+      "selector": "input[name='name']",
+      "value": "John Doe"
+    },
+    {
+      "id": "3",
+      "type": "type",
+      "description": "Enter email",
+      "selector": "input[name='email']",
+      "value": "john@example.com"
+    },
+    {
+      "id": "4",
+      "type": "type",
+      "description": "Enter message",
+      "selector": "textarea[name='message']",
+      "value": "Hello, this is a test message from Automa!"
+    },
+    {
+      "id": "5",
+      "type": "click",
+      "description": "Submit form",
+      "selector": "button[type='submit']"
+    },
+    {
+      "id": "6",
+      "type": "wait",
+      "description": "Wait for confirmation",
+      "value": "2"
+    },
+    {
+      "id": "7",
+      "type": "screenshot",
+      "description": "Capture confirmation",
+      "savePath": "form_submitted.png"
+    }
+  ]
+}
+```
+
+**Result:** Submits the form and captures confirmation.
+
+## Example 5: API Integration
+
+Fetch data from an API and use it in automation.
+
+```json
+{
+  "name": "API Data Extraction",
+  "steps": [
+    {
+      "id": "1",
+      "type": "apiCall",
+      "description": "Fetch user data",
+      "method": "GET",
+      "url": "https://jsonplaceholder.typicode.com/users/1",
+      "storeKey": "userData"
+    },
+    {
+      "id": "2",
+      "type": "navigate",
+      "description": "Go to profile page",
+      "value": "https://example.com/profile"
+    },
+    {
+      "id": "3",
+      "type": "type",
+      "description": "Fill username",
+      "selector": "input[name='username']",
+      "value": "{{userData.username}}"
+    },
+    {
+      "id": "4",
+      "type": "type",
+      "description": "Fill email",
+      "selector": "input[name='email']",
+      "value": "{{userData.email}}"
+    }
+  ]
+}
+```
+
+**Result:** Fetches user data from API and fills form fields.
+
+## Example 6: Multi-Page Navigation
+
+Navigate through multiple pages and extract data.
+
+```json
+{
+  "name": "Multi-Page Scraper",
+  "steps": [
+    {
+      "id": "1",
+      "type": "setVariable",
+      "description": "Initialize page counter",
+      "variableName": "currentPage",
+      "value": "1"
+    },
+    {
+      "id": "2",
+      "type": "navigate",
+      "description": "Go to page",
+      "value": "https://example.com/products?page={{currentPage}}"
+    },
+    {
+      "id": "3",
+      "type": "extract",
+      "description": "Get product count",
+      "selector": ".product-count",
+      "storeKey": "productCount"
+    },
+    {
+      "id": "4",
+      "type": "screenshot",
+      "description": "Capture page",
+      "savePath": "page_{{currentPage}}.png"
+    },
+    {
+      "id": "5",
+      "type": "modifyVariable",
+      "description": "Next page",
+      "variableName": "currentPage",
+      "operation": "increment",
+      "value": "1"
+    }
+  ]
+}
+```
+
+**Note:** This example shows the concept. For actual looping, you'd need to wrap steps 2-5 in a loop construct (future feature).
+
+## Example 7: Conditional Screenshot
+
+Take a screenshot only if an element exists.
+
+```json
+{
+  "name": "Conditional Screenshot",
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Open page",
+      "value": "https://example.com"
+    },
+    {
+      "id": "2",
+      "type": "extractWithLogic",
+      "description": "Check if banner exists",
+      "selector": ".sale-banner",
+      "condition": "contains",
+      "expectedValue": "Sale"
+    }
+  ]
+}
+```
+
+In your application code, check the `conditionMet` result before taking screenshot.
+
+## How to Use These Examples
+
+### Option 1: Copy & Paste
+
+1. Copy the JSON from any example
+2. In Automa, go to **File** → **Import Automation**
+3. Paste the JSON and click **Import**
+4. Run the automation
+
+### Option 2: Manual Creation
+
+1. Create a new automation
+2. Add steps one by one using the values from the example
+3. Configure each step according to the example
+4. Save and run
+
+## Tips for Creating Your Own
+
+### Start Simple
+Begin with basic navigate + extract patterns, then add complexity.
+
+### Test Each Step
+Run automation after adding each step to catch issues early.
+
+### Use Variables
+Make automations reusable by parameterizing URLs, selectors, and values.
+
+### Add Waits
+Give pages time to load – most issues come from timing.
+
+### Screenshot Everything
+Take screenshots at key points for debugging and verification.
+
+## Community Examples
+
+Share your automations with the community:
+
+1. Export your automation as JSON
+2. Post in [GitHub Discussions](https://github.com/Dyan-Dev/automa/discussions)
+3. Include description and use case
+4. Help others learn from your workflows
+
+## Next Steps
+
+- **Learn more**: Read the [Usage Guide](/docs/usage) for detailed feature explanations
+- **API docs**: See [API Reference](/docs/api-reference) for all step types
+- **Get help**: Check the [FAQ](/docs/faq) for common questions
+
+Happy automating! 🚀

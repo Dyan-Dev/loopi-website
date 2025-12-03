@@ -1,0 +1,107 @@
+---
+title: Getting Started
+description: Install and run your first Automa automation in minutes
+---
+
+# Getting Started
+
+This guide helps you get Automa running locally and create your first automation.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- **Node.js** (>= 18 recommended)
+- **npm** or **pnpm** package manager
+- **Git** for cloning the repository
+
+## Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Dyan-Dev/automa.git
+cd automa
+```
+
+### 2. Install Dependencies
+
+Using pnpm (recommended):
+
+```bash
+pnpm install
+```
+
+Or using npm:
+
+```bash
+npm install
+```
+
+### 3. Start Development Mode
+
+```bash
+pnpm start
+```
+
+This will:
+- Start the Electron application in development mode
+- Enable hot reload for faster development
+- Open the Automa UI automatically
+
+## Creating Your First Automation
+
+Once the app is running, you'll see the main dashboard.
+
+### Step 1: Create a New Workflow
+
+1. Click **"New Automation"** or **"Create Workflow"**
+2. Give it a name (e.g., "My First Automation")
+3. The visual editor will open
+
+### Step 2: Add Steps
+
+Click **"Add Step"** and try these basic steps:
+
+**Navigate to a website:**
+- Type: `Navigate`
+- URL: `https://example.com`
+
+**Take a screenshot:**
+- Type: `Screenshot`
+- Save path: `example.png` (optional)
+
+**Extract text:**
+- Type: `Extract`
+- Selector: `h1`
+- Store as: `pageTitle`
+
+### Step 3: Run the Automation
+
+1. Click the **"Run"** button
+2. Watch the automation execute in a browser window
+3. View results in the output panel
+
+## Next Steps
+
+Now that you have Automa running:
+
+- **Learn more**: Read the [Usage Guide](/docs/usage) to understand all features
+- **Try examples**: Check out [Examples](/docs/examples) for ready-made automations
+- **Explore API**: See the [API Reference](/docs/api-reference) for advanced usage
+- **Build & package**: Visit [Installation](/docs/installation) for packaging instructions
+
+## Troubleshooting
+
+### App won't start
+- Make sure all dependencies are installed: `pnpm install`
+- Check Node.js version: `node --version` (should be >= 18)
+
+### Browser window doesn't open
+- Check console for errors
+- Try closing and restarting the app
+
+### Need more help?
+- Check the [FAQ](/docs/faq)
+- Visit [GitHub Discussions](https://github.com/Dyan-Dev/automa/discussions)
+- Report issues on [GitHub](https://github.com/Dyan-Dev/automa/issues)

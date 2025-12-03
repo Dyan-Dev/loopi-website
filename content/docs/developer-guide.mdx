@@ -1,0 +1,530 @@
+---
+title: Developer Guide
+description: Contribute to Automa - architecture, development workflow, and adding features
+---
+
+# Developer Guide
+
+This guide helps contributors understand Automa's architecture and how to extend the platform.
+
+## Project Overview
+
+Automa is built with:
+- **Electron** – Desktop application framework
+- **React** – UI components
+- **TypeScript** – Type-safe development
+- **Vite** – Fast build tooling
+
+## Project Structure
+
+```
+automa/
+├── src/
+│   ├── main/                      # Electron main process
+│   │   ├── index.ts              # Main entry point & lifecycle
+│   │   ├── windowManager.ts      # Window creation and management
+│   │   ├── automationExecutor.ts # Step execution engine
+│   │   ├── selectorPicker.ts     # Interactive element picker
+│   │   └── ipcHandlers.ts        # IPC communication bridge
+│   ├── components/               # React components
+│   │   ├── AutomationBuilder.tsx # Visual workflow editor
+│   │   ├── Dashboard.tsx         # Automation management
+│   │   └── automationBuilder/    # Builder subcomponents
+│   │       ├── BuilderHeader.tsx
+│   │       ├── BuilderCanvas.tsx
+│   │       ├── AutomationNode.tsx
+│   │       ├── AddStepPopup.tsx
+│   │       └── nodeDetails/      # Node configuration UI
+│   │           ├── NodeDetails.tsx
+│   │           ├── NodeHeader.tsx
+│   │           ├── StepEditor.tsx
+│   │           ├── ConditionEditor.tsx
+│   │           ├── stepTypes/    # Step-specific editors
+│   │           └── customComponents/
+│   ├── hooks/                    # Custom React hooks
+│   │   ├── useNodeActions.ts     # Node CRUD operations
+│   │   └── useExecution.ts       # Automation execution logic
+│   ├── types/                    # TypeScript type definitions
+│   │   ├── steps.ts              # Automation step types (discriminated union)
+│   │   ├── flow.ts               # ReactFlow graph types
+│   │   ├── automation.ts         # Business domain types
+│   │   └── index.ts              # Barrel exports
+│   ├── utils/
+│   │   └── automationIO.ts       # Import/export utilities
+│   ├── preload.ts                # Secure IPC bridge
+│   ├── app.tsx                   # Root React component
+│   └── renderer.ts               # Renderer process entry
+├── assets/                       # Icons and static files
+├── docs/                         # Documentation
+├── package.json                  # Dependencies
+└── forge.config.ts               # Electron Forge config
+```
+
+## Key Concepts
+
+### Main Process vs Renderer Process
+
+**Main Process** (`src/main/`)
+- Runs Node.js
+- Controls application lifecycle
+- Manages browser windows
+- Executes automations
+- Has access to system resources
+
+**Renderer Process** (`src/renderer/`)
+- Runs in browser context
+- React UI components
+- User interactions
+- Communicates via IPC
+
+### IPC Communication
+
+Renderer and Main communicate via IPC (Inter-Process Communication):
+
+```ts
+// Renderer → Main
+const result = await ipcRenderer.invoke('browser:runStep', step);
+
+// Main handler
+ipcMain.handle('browser:runStep', async (event, step) => {
+  return await executor.executeStep(browserWindow, step);
+});
+```
+
+### Automation Execution Flow
+
+1. User creates automation in UI (Renderer)
+2. UI sends steps via IPC to Main
+3. Main process opens browser window
+4. Executor runs steps in browser context
+5. Results returned to UI via IPC
+
+## Development Workflow
+
+### Setup
+
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/Dyan-Dev/automa.git
+   cd automa
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+
+3. **Start development**
+   ```bash
+   pnpm start
+   ```
+
+### Code Style
+
+We use **Biome** for formatting and linting:
+
+```bash
+# Format code
+pnpm format
+
+# Lint code
+pnpm lint
+```
+
+### Type Checking
+
+Run TypeScript compiler:
+
+```bash
+pnpm type-check
+```
+
+### Building
+
+Build for production:
+
+```bash
+pnpm build
+```
+
+Package for current platform:
+
+```bash
+pnpm make
+```
+
+## Adding New Features
+
+### Adding a New Step Type
+
+Follow these steps to add a new automation step:
+
+#### 1. Define TypeScript Interface
+
+In `src/types/steps.ts`:
+
+```ts
+export interface StepCustom extends StepBase {
+  type: 'custom';
+  customField: string;
+  optionalField?: number;
+}
+
+// Add to union type
+export type AutomationStep = 
+  | StepNavigate 
+  | StepClick 
+  | StepCustom  // Add here
+  | ...
+```
+
+#### 2. Add Step Metadata
+
+In `src/utils/stepTypes.ts`:
+
+```ts
+export const stepTypes = [
+  // ... existing steps
+  {
+    type: 'custom',
+    name: 'Custom Step',
+    description: 'Does something custom',
+    icon: 'IconName',
+    category: 'actions'
+  }
+];
+```
+
+#### 3. Create UI Editor Component
+
+In `src/components/automationBuilder/nodeDetails/stepTypes/CustomStep.tsx`:
+
+```tsx
+import { FC } from 'react';
+import { StepCustom } from '@/types/steps';
+
+interface Props {
+  step: StepCustom;
+  onChange: (step: StepCustom) => void;
+}
+
+export const CustomStepEditor: FC<Props> = ({ step, onChange }) => {
+  return (
+    <div>
+      <label>Custom Field</label>
+      <input 
+        value={step.customField}
+        onChange={(e) => onChange({
+          ...step,
+          customField: e.target.value
+        })}
+      />
+    </div>
+  );
+};
+```
+
+#### 4. Register Editor
+
+In `src/components/automationBuilder/nodeDetails/stepTypes/index.ts`:
+
+```ts
+export { CustomStepEditor } from './CustomStep';
+```
+
+In `StepEditor.tsx`:
+
+```tsx
+switch (step.type) {
+  case 'custom':
+    return <CustomStepEditor step={step} onChange={onChange} />;
+  // ... other cases
+}
+```
+
+#### 5. Implement Execution Logic
+
+In `src/main/automationExecutor.ts`:
+
+```ts
+async executeStep(browserWindow: BrowserWindow, step: AutomationStep) {
+  switch (step.type) {
+    case 'custom': {
+      const customField = this.substituteVariables(step.customField);
+      
+      // Execute in browser context
+      const result = await browserWindow.webContents.executeJavaScript(`
+        // Your custom logic here
+        document.querySelector('.something').textContent = '${customField}';
+      `);
+      
+      return result;
+    }
+    // ... other cases
+  }
+}
+```
+
+#### 6. Add Default Values
+
+In `src/hooks/useNodeActions.ts`:
+
+```ts
+const createNode = (type: string) => {
+  const defaults = {
+    custom: {
+      id: generateId(),
+      type: 'custom',
+      description: 'Custom step',
+      customField: '',
+      optionalField: 0
+    },
+    // ... other defaults
+  };
+  
+  return defaults[type];
+};
+```
+
+### Adding a New IPC Channel
+
+#### 1. Define Handler in Main
+
+In `src/main/ipcHandlers.ts`:
+
+```ts
+ipcMain.handle('my-new-channel', async (event, arg1, arg2) => {
+  // Your logic here
+  return result;
+});
+```
+
+#### 2. Call from Renderer
+
+In React component:
+
+```ts
+const result = await ipcRenderer.invoke('my-new-channel', arg1, arg2);
+```
+
+#### 3. Add TypeScript Types
+
+In `src/types/ipc.ts` (create if needed):
+
+```ts
+export interface IpcChannels {
+  'my-new-channel': (arg1: string, arg2: number) => Promise<string>;
+}
+```
+
+## Architecture Patterns
+
+### State Management
+
+Use React hooks and context for UI state:
+
+```tsx
+const AutomationContext = createContext<AutomationState>(initialState);
+
+export const useAutomation = () => {
+  const context = useContext(AutomationContext);
+  return context;
+};
+```
+
+### Error Handling
+
+Always handle errors in async operations:
+
+```ts
+try {
+  const result = await executeStep(step);
+  return { success: true, data: result };
+} catch (error) {
+  console.error('Step execution failed:', error);
+  return { success: false, error: error.message };
+}
+```
+
+### Variable Substitution
+
+Use the executor's `substituteVariables` helper:
+
+```ts
+const processedValue = this.substituteVariables(step.value);
+// "Hello {{name}}" → "Hello John" (if name = "John")
+```
+
+## Testing
+
+### Unit Tests
+
+Add tests in `__tests__/` directory:
+
+```ts
+import { describe, it, expect } from 'vitest';
+import { substituteVariables } from '@/utils/variables';
+
+describe('substituteVariables', () => {
+  it('replaces variables', () => {
+    const result = substituteVariables('Hello {{name}}', { name: 'John' });
+    expect(result).toBe('Hello John');
+  });
+});
+```
+
+Run tests:
+
+```bash
+pnpm test
+```
+
+### E2E Tests
+
+Use Playwright for end-to-end testing:
+
+```ts
+import { test, expect } from '@playwright/test';
+
+test('create automation', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+  await page.click('button:has-text("New Automation")');
+  await expect(page.locator('.automation-builder')).toBeVisible();
+});
+```
+
+## Debugging
+
+### Main Process
+
+Use Chrome DevTools:
+
+```bash
+pnpm start --inspect
+```
+
+Then open `chrome://inspect` in Chrome.
+
+### Renderer Process
+
+Open DevTools in the app:
+- **View** → **Toggle Developer Tools**
+- Or press `Ctrl+Shift+I` / `Cmd+Opt+I`
+
+### Logging
+
+Add debug logging:
+
+```ts
+// Main process
+console.log('[Main]', 'Step executed:', result);
+
+// Renderer
+console.log('[Renderer]', 'Button clicked:', event);
+```
+
+## Performance Optimization
+
+### Debounce User Input
+
+```tsx
+import { debounce } from 'lodash';
+
+const debouncedUpdate = debounce((value) => {
+  updateStep({ ...step, value });
+}, 300);
+```
+
+### Memoize Expensive Calculations
+
+```tsx
+const processedSteps = useMemo(() => {
+  return steps.map(processStep);
+}, [steps]);
+```
+
+### Lazy Load Components
+
+```tsx
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
+```
+
+## Contributing Guidelines
+
+### Code Review Checklist
+
+- [ ] Code follows project style (Biome)
+- [ ] TypeScript types are correct
+- [ ] Tests added for new features
+- [ ] Documentation updated
+- [ ] No console errors
+- [ ] Performance considered
+- [ ] Accessibility checked
+
+### Commit Messages
+
+Follow conventional commits:
+
+```
+feat: add custom step type
+fix: resolve selector picker bug
+docs: update API reference
+refactor: simplify executor logic
+test: add unit tests for variables
+```
+
+### Pull Request Process
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feat/my-feature`
+3. Make changes and commit
+4. Push to your fork: `git push origin feat/my-feature`
+5. Open PR on GitHub
+6. Address review feedback
+7. Merge when approved
+
+## Resources
+
+### Documentation
+
+- [Electron Docs](https://www.electronjs.org/docs)
+- [React Docs](https://react.dev)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs)
+- [Vite Guide](https://vitejs.dev/guide)
+
+### Tools
+
+- **VSCode**: Recommended editor
+- **React DevTools**: Browser extension
+- **Biome**: Linting and formatting
+
+### Community
+
+- [GitHub Discussions](https://github.com/Dyan-Dev/automa/discussions)
+- [GitHub Issues](https://github.com/Dyan-Dev/automa/issues)
+- [Discord](https://discord.gg/automa) (if available)
+
+## FAQ for Developers
+
+**Q: How do I add a new UI theme?**
+A: Modify `src/styles/themes.css` and add theme variables.
+
+**Q: How do I add a new language?**
+A: Add translations in `src/i18n/` and update language selector.
+
+**Q: How do I access main process from renderer?**
+A: Use IPC: `ipcRenderer.invoke('channel-name', args)`
+
+**Q: How do I debug IPC calls?**
+A: Add logging in IPC handlers and check main process console.
+
+**Q: How do I package for a specific platform?**
+A: Use `pnpm make:linux`, `pnpm make:windows`, or `pnpm make:mac`
+
+## Next Steps
+
+- Read [API Reference](/docs/api-reference) for technical details
+- Check [Examples](/docs/examples) for practical use cases
+- Join [GitHub Discussions](https://github.com/Dyan-Dev/automa/discussions)
+
+Thank you for contributing to Automa! 🎉

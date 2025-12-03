@@ -1,3 +1,14 @@
 {
-  "pages": ["index", "..."]
+  "title": "Documentation",
+  "pages": [
+    "index",
+    "getting-started",
+    "installation",
+    "usage",
+    "api-reference",
+    "api-detailed",
+    "examples",
+    "developer-guide",
+    "faq"
+  ]
 }

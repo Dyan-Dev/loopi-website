@@ -1,0 +1,532 @@
+---
+title: API Reference
+description: Complete reference for Automa's automation step types and executor API
+---
+
+# API & Executor Reference
+
+This page documents Automa's automation step types and the main executor API.
+
+## Key Entry Points
+
+### AutomationExecutor
+
+The main executor class handles step execution and variable management.
+
+**Methods:**
+
+- `executeStep(browserWindow, step)` – Execute a single automation step
+- `evaluateConditional(browserWindow, config)` – Evaluate conditional logic
+- `substituteVariables(input)` – Replace `{{varName}}` with runtime values
+- `initVariables(vars)` – Initialize runtime variables
+- `getVariables()` – Get current variable state
+
+## Variable Substitution
+
+All step values support variable substitution using `{{varName}}` syntax.
+
+**Example:**
+```js
+// Variables: { productId: "123", baseUrl: "https://shop.com" }
+const url = "{{baseUrl}}/product/{{productId}}";
+// Result: "https://shop.com/product/123"
+```
+
+**Unknown variables** resolve to empty string.
+
+## Supported Step Types
+
+All steps extend the base `StepBase` interface:
+
+```ts
+interface StepBase {
+  id: string;
+  description: string;
+  type: string;
+}
+```
+
+### Navigate
+
+Load a URL in the browser.
+
+```ts
+interface StepNavigate extends StepBase {
+  type: "navigate";
+  value: string; // URL (supports {{var}})
+}
+```
+
+**Example:**
+```json
+{
+  "id": "1",
+  "type": "navigate",
+  "description": "Go to product page",
+  "value": "https://example.com/product/{{productId}}"
+}
+```
+
+### Click
+
+Click an element on the page.
+
+```ts
+interface StepClick extends StepBase {
+  type: "click";
+  selector: string; // CSS selector
+}
+```
+
+**Example:**
+```json
+{
+  "id": "2",
+  "type": "click",
+  "description": "Click add to cart",
+  "selector": ".add-to-cart-button"
+}
+```
+
+### Type
+
+Enter text into an input field.
+
+```ts
+interface StepType extends StepBase {
+  type: "type";
+  selector: string; // CSS selector for input
+  value: string; // Text to type (supports {{var}})
+  credentialId?: string; // Optional credential reference
+}
+```
+
+**Example:**
+```json
+{
+  "id": "3",
+  "type": "type",
+  "description": "Enter email",
+  "selector": "input[name='email']",
+  "value": "{{userEmail}}"
+}
+```
+
+### Wait
+
+Pause execution for a specified duration.
+
+```ts
+interface StepWait extends StepBase {
+  type: "wait";
+  value: string; // Duration in seconds
+}
+```
+
+**Example:**
+```json
+{
+  "id": "4",
+  "type": "wait",
+  "description": "Wait for page load",
+  "value": "2"
+}
+```
+
+### Screenshot
+
+Capture a screenshot of the current page.
+
+```ts
+interface StepScreenshot extends StepBase {
+  type: "screenshot";
+  savePath?: string; // Optional file path
+}
+```
+
+**Returns:** Base64-encoded PNG image
+
+**Example:**
+```json
+{
+  "id": "5",
+  "type": "screenshot",
+  "description": "Capture checkout page",
+  "savePath": "checkout.png"
+}
+```
+
+### Extract
+
+Extract text from an element.
+
+```ts
+interface StepExtract extends StepBase {
+  type: "extract";
+  selector: string; // CSS selector
+  storeKey?: string; // Variable name to store result
+}
+```
+
+**Example:**
+```json
+{
+  "id": "6",
+  "type": "extract",
+  "description": "Get product price",
+  "selector": ".product-price",
+  "storeKey": "price"
+}
+```
+
+### Extract with Logic
+
+Extract and evaluate a condition.
+
+```ts
+interface StepExtractWithLogic extends StepBase {
+  type: "extractWithLogic";
+  selector: string;
+  condition: "equals" | "contains" | "greaterThan" | "lessThan";
+  expectedValue: string;
+  transformType?: "stripCurrency" | "stripNonNumeric" | "removeChars" | "regexReplace";
+  parseAsNumber?: boolean;
+}
+```
+
+**Returns:** `{ value: string; conditionMet: boolean }`
+
+**Example:**
+```json
+{
+  "id": "7",
+  "type": "extractWithLogic",
+  "description": "Check if price > $50",
+  "selector": ".price",
+  "condition": "greaterThan",
+  "expectedValue": "50",
+  "transformType": "stripCurrency",
+  "parseAsNumber": true
+}
+```
+
+### API Call
+
+Make HTTP requests.
+
+```ts
+interface StepApiCall extends StepBase {
+  type: "apiCall";
+  method?: "GET" | "POST" | "PUT" | "DELETE";
+  url: string; // Supports {{var}}
+  headers?: Record<string, string>;
+  body?: string; // JSON string, supports {{var}}
+  storeKey?: string; // Variable to store response
+}
+```
+
+**Example:**
+```json
+{
+  "id": "8",
+  "type": "apiCall",
+  "description": "Fetch product details",
+  "method": "GET",
+  "url": "https://api.example.com/products/{{productId}}",
+  "headers": {
+    "Authorization": "Bearer {{apiToken}}"
+  },
+  "storeKey": "productData"
+}
+```
+
+### Scroll
+
+Scroll to an element or by a specific amount.
+
+```ts
+interface StepScroll extends StepBase {
+  type: "scroll";
+  scrollType: "toElement" | "byAmount";
+  selector?: string; // For toElement
+  scrollAmount?: number; // Pixels for byAmount
+}
+```
+
+**Example:**
+```json
+{
+  "id": "9",
+  "type": "scroll",
+  "description": "Scroll to footer",
+  "scrollType": "toElement",
+  "selector": "footer"
+}
+```
+
+### Select Option
+
+Select an option from a dropdown.
+
+```ts
+interface StepSelectOption extends StepBase {
+  type: "selectOption";
+  selector: string; // <select> element
+  optionValue?: string; // Value attribute
+  optionIndex?: number; // 0-based index
+}
+```
+
+**Example:**
+```json
+{
+  "id": "10",
+  "type": "selectOption",
+  "description": "Select country",
+  "selector": "select[name='country']",
+  "optionValue": "US"
+}
+```
+
+### File Upload
+
+Upload a file to an input.
+
+```ts
+interface StepFileUpload extends StepBase {
+  type: "fileUpload";
+  selector: string; // <input type="file">
+  filePath: string; // Absolute path to file
+}
+```
+
+**Note:** File upload has browser limitations and may not work in all scenarios.
+
+**Example:**
+```json
+{
+  "id": "11",
+  "type": "fileUpload",
+  "description": "Upload avatar",
+  "selector": "input[type='file']",
+  "filePath": "/path/to/avatar.jpg"
+}
+```
+
+### Hover
+
+Trigger mouseover event on an element.
+
+```ts
+interface StepHover extends StepBase {
+  type: "hover";
+  selector: string;
+}
+```
+
+**Example:**
+```json
+{
+  "id": "12",
+  "type": "hover",
+  "description": "Show dropdown menu",
+  "selector": ".menu-trigger"
+}
+```
+
+### Set Variable
+
+Create or update a variable.
+
+```ts
+interface StepSetVariable extends StepBase {
+  type: "setVariable";
+  variableName: string;
+  value: string; // Supports {{var}}
+}
+```
+
+**Example:**
+```json
+{
+  "id": "13",
+  "type": "setVariable",
+  "description": "Set user ID",
+  "variableName": "userId",
+  "value": "12345"
+}
+```
+
+### Modify Variable
+
+Perform operations on existing variables.
+
+```ts
+interface StepModifyVariable extends StepBase {
+  type: "modifyVariable";
+  variableName: string;
+  operation: "set" | "increment" | "decrement" | "append";
+  value: string;
+}
+```
+
+**Operations:**
+- `set` – Assign new value
+- `increment` – Add to number
+- `decrement` – Subtract from number
+- `append` – Add to end of string
+
+**Example:**
+```json
+{
+  "id": "14",
+  "type": "modifyVariable",
+  "description": "Increment counter",
+  "variableName": "pageCount",
+  "operation": "increment",
+  "value": "1"
+}
+```
+
+## Conditional Evaluation
+
+The `evaluateConditional` method supports:
+
+### Condition Types
+
+- `elementExists` – Check if selector matches any element
+- `valueMatches` – Extract and compare value
+
+### Comparison Operations
+
+- `equals` – Exact match
+- `contains` – Substring match
+- `greaterThan` – Numeric (requires parseAsNumber)
+- `lessThan` – Numeric (requires parseAsNumber)
+
+### Transforms
+
+Apply before comparison:
+
+- `stripCurrency` – Remove $, €, £, ¥
+- `stripNonNumeric` – Keep only digits and decimal
+- `removeChars` – Remove specific characters
+- `regexReplace` – Advanced text replacement
+
+### Example Configuration
+
+```ts
+{
+  conditionType: "valueMatches",
+  selector: ".price",
+  comparison: "greaterThan",
+  expectedValue: "100",
+  transformType: "stripCurrency",
+  parseAsNumber: true
+}
+```
+
+**Returns:**
+```ts
+{
+  conditionResult: boolean;
+  effectiveSelector?: string | null;
+}
+```
+
+## IPC Channels
+
+Communication between renderer and main process.
+
+### browser:open
+- **Purpose:** Open browser window
+- **Parameters:** `(url?: string)`
+- **Returns:** `void`
+
+### browser:close
+- **Purpose:** Close browser window
+- **Parameters:** `none`
+- **Returns:** `void`
+
+### browser:runStep
+- **Purpose:** Execute a step
+- **Parameters:** `(step: AutomationStep)`
+- **Returns:** `Promise<any>` (step result)
+
+### executor:initVariables
+- **Purpose:** Initialize variables
+- **Parameters:** `(vars?: Record<string, string>)`
+- **Returns:** `true`
+
+### executor:getVariables
+- **Purpose:** Get current variables
+- **Parameters:** `none`
+- **Returns:** `Record<string, string>`
+
+### browser:runConditional
+- **Purpose:** Evaluate condition
+- **Parameters:** `(config: ConditionalConfig)`
+- **Returns:** `{ conditionResult: boolean; effectiveSelector?: string }`
+
+### pick-selector
+- **Purpose:** Launch element picker
+- **Parameters:** `(url: string)`
+- **Returns:** `Promise<string | null>` (CSS selector)
+
+## Usage Examples
+
+### Basic Flow
+
+```ts
+// 1. Initialize variables
+await ipcRenderer.invoke('executor:initVariables', {
+  baseUrl: 'https://shop.com',
+  productId: '123'
+});
+
+// 2. Navigate
+await ipcRenderer.invoke('browser:runStep', {
+  id: '1',
+  type: 'navigate',
+  description: 'Go to product',
+  value: '{{baseUrl}}/product/{{productId}}'
+});
+
+// 3. Extract price
+const price = await ipcRenderer.invoke('browser:runStep', {
+  id: '2',
+  type: 'extract',
+  description: 'Get price',
+  selector: '.price',
+  storeKey: 'productPrice'
+});
+
+// 4. Get variables
+const vars = await ipcRenderer.invoke('executor:getVariables');
+console.log(vars.productPrice); // "$29.99"
+```
+
+### Conditional Logic
+
+```ts
+const result = await ipcRenderer.invoke('browser:runConditional', {
+  conditionType: 'valueMatches',
+  selector: '.stock-status',
+  comparison: 'contains',
+  expectedValue: 'In Stock'
+});
+
+if (result.conditionResult) {
+  // Item in stock, proceed with purchase
+  await ipcRenderer.invoke('browser:runStep', {
+    type: 'click',
+    selector: '.add-to-cart'
+  });
+}
+```
+
+## Next Steps
+
+- See [Detailed API](/docs/api-detailed) for complete TypeScript definitions
+- Check [Examples](/docs/examples) for real-world usage
+- Read [Developer Guide](/docs/developer-guide) to extend Automa

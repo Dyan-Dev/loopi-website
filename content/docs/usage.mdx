@@ -1,0 +1,350 @@
+---
+title: Usage Guide
+description: Learn how to build and run automations with Automa's visual editor
+---
+
+# Usage Guide
+
+This page covers how to use Automa to create, run, and debug browser automations.
+
+## The Automation Builder
+
+The Automation Builder is Automa's visual node-based editor for creating workflows.
+
+### Creating a New Automation
+
+1. From the dashboard, click **"New Automation"**
+2. Enter a name and optional description
+3. The visual editor opens with an empty canvas
+
+### Adding Steps
+
+Click **"Add Step"** or the **+** button to add automation nodes:
+
+- **Navigate** – Load a URL
+- **Click** – Click an element
+- **Type** – Enter text into inputs
+- **Extract** – Get element text or attributes
+- **Screenshot** – Capture page image
+- **Wait** – Pause execution
+- **API Call** – Make HTTP requests
+- **Set Variable** – Store values
+- **Modify Variable** – Update existing variables
+
+### Configuring Steps
+
+Click any step to open its configuration panel:
+
+1. **Description**: Add a note (e.g., "Click login button")
+2. **Selector**: Use the **Pick Element** tool for accurate selectors
+3. **Value**: Enter URLs, text, or variable references
+4. **Options**: Configure step-specific settings
+
+## Using Selectors
+
+Selectors tell Automa which elements to interact with.
+
+### Pick Element Tool
+
+The easiest way to get reliable selectors:
+
+1. Click **"Pick Element"** in any step
+2. The browser opens with element picker mode
+3. Hover over elements – they highlight
+4. Click the element you want
+5. Automa generates a CSS selector automatically
+
+### Selector Best Practices
+
+✅ **Good selectors:**
+- `#login-button` (ID)
+- `.submit-btn` (stable class)
+- `input[name="email"]` (attribute)
+
+❌ **Avoid:**
+- `div > div:nth-child(3)` (fragile)
+- `.css-abc123` (generated classes)
+- Long nested paths
+
+### Testing Selectors
+
+Use browser DevTools to test selectors:
+
+```js
+document.querySelector('your-selector-here')
+```
+
+Should return the correct element.
+
+## Variables and Templates
+
+Variables let you store and reuse data throughout your automation.
+
+### Creating Variables
+
+Use the **Set Variable** step:
+
+- **Variable Name**: `productPrice`
+- **Value**: `$29.99`
+
+Or extract from page:
+
+- **Type**: `Extract`
+- **Selector**: `.price`
+- **Store Key**: `productPrice`
+
+### Using Variables
+
+Reference variables with `{{varName}}` syntax:
+
+**In URLs:**
+```
+https://example.com/product/{{productId}}
+```
+
+**In selectors:**
+```
+[data-id="{{userId}}"]
+```
+
+**In text inputs:**
+```
+Hello {{userName}}!
+```
+
+### Variable Operations
+
+**Set Variable:**
+- Create or overwrite a variable
+
+**Modify Variable:**
+- `set` – Assign new value
+- `increment` – Add to number
+- `decrement` – Subtract from number
+- `append` – Add to end of string
+
+### Example: Extract and Use
+
+```
+1. Navigate: https://example.com
+2. Extract: selector=".product-name" → storeKey="name"
+3. Extract: selector=".price" → storeKey="price"
+4. API Call: POST https://api.example.com/save
+   Body: {"name": "{{name}}", "price": "{{price}}"}
+```
+
+## Conditional Logic
+
+Use **Extract with Logic** to make decisions:
+
+### Comparison Operations
+
+- **equals** – Exact match
+- **contains** – Substring match
+- **greaterThan** – Numeric comparison
+- **lessThan** – Numeric comparison
+
+### Example: Check Stock Status
+
+```
+Extract with Logic:
+  Selector: .stock-status
+  Condition: contains
+  Expected: "In Stock"
+```
+
+Returns: `{ value: "In Stock", conditionMet: true }`
+
+## Working with Data
+
+### Extracting Data
+
+**Single element:**
+```
+Extract → selector: ".title" → store: "pageTitle"
+```
+
+**Multiple elements:**
+Use JavaScript execution or loop through selectors.
+
+### Transforming Data
+
+Apply transforms in Extract with Logic:
+
+- **stripCurrency** – Remove $, €, etc.
+- **stripNonNumeric** – Keep only numbers
+- **removeChars** – Remove specific characters
+- **regexReplace** – Advanced text replacement
+
+### Example: Extract Price
+
+```
+Extract with Logic:
+  Selector: .price
+  Transform: stripCurrency
+  Parse as Number: ✓
+  Condition: greaterThan
+  Expected: 50
+```
+
+## API Integration
+
+Make HTTP requests with the **API Call** step.
+
+### GET Request
+
+```
+API Call:
+  Method: GET
+  URL: https://api.example.com/products/{{id}}
+  Store Key: productData
+```
+
+### POST Request
+
+```
+API Call:
+  Method: POST
+  URL: https://api.example.com/submit
+  Headers: {"Content-Type": "application/json"}
+  Body: {"name": "{{name}}", "email": "{{email}}"}
+  Store Key: response
+```
+
+### Using API Responses
+
+API responses are stored as JSON strings. Access nested values in subsequent steps:
+
+```json
+{
+  "product": {
+    "name": "Widget",
+    "price": 29.99
+  }
+}
+```
+
+Reference: `{{productData.product.name}}`
+
+## Running Automations
+
+### Execute
+
+Click **"Run"** to execute the entire workflow:
+
+1. Browser window opens
+2. Steps execute in sequence
+3. Results appear in the output panel
+4. Browser closes when complete (or on error)
+
+### Step-by-Step / Debug Mode
+
+Run one step at a time:
+
+1. Click **"Debug"** or **"Step Mode"**
+2. Use **"Next Step"** to advance
+3. Inspect variables after each step
+4. Identify issues quickly
+
+### Viewing Results
+
+The **Output Panel** shows:
+- Extracted values
+- Screenshots (base64 or saved files)
+- API responses
+- Variable states
+- Errors and warnings
+
+## Debugging Tips
+
+### Use Wait Steps
+
+Add **Wait** steps to:
+- Give pages time to load
+- Observe automation progress
+- Debug timing issues
+
+```
+Wait: 2  // Wait 2 seconds
+```
+
+### Screenshot for Debugging
+
+Add **Screenshot** steps to capture state:
+
+```
+Screenshot: debug_step1.png
+```
+
+### Check the Console
+
+Open DevTools in the main Automa window:
+- **View** → **Toggle Developer Tools**
+- Check for JavaScript errors
+- Inspect network requests
+
+### Common Issues
+
+**Element not found:**
+- Use Pick Element tool
+- Add Wait step before interaction
+- Check if element is in an iframe
+
+**Automation runs too fast:**
+- Add Wait steps between actions
+- Use smart waits (wait for element to appear)
+
+**Variable not substituting:**
+- Check variable name spelling
+- Ensure variable is set before use
+- Use `{{varName}}` syntax exactly
+
+## Best Practices
+
+### Structure Your Workflows
+
+1. **Navigate** first
+2. **Wait** for page load
+3. **Extract** or **Interact**
+4. **Store** important values
+5. **Screenshot** for verification
+
+### Name Your Steps
+
+Add clear descriptions:
+- ✅ "Click login button"
+- ❌ "Click"
+
+### Use Variables
+
+Don't hardcode values that might change:
+- ❌ `https://example.com/product/12345`
+- ✅ `https://example.com/product/{{productId}}`
+
+### Test Incrementally
+
+- Build one step at a time
+- Test after each addition
+- Don't create 50 steps and run once
+
+## Advanced Features
+
+### Loops (Coming Soon)
+
+Iterate over lists and repeat steps.
+
+### Error Handling
+
+Use Try/Catch blocks to handle failures gracefully.
+
+### Scheduling
+
+Schedule automations to run at specific times.
+
+## Next Steps
+
+- **Try examples**: See [Examples](/docs/examples) for ready-made automations
+- **API reference**: Learn more in [API Reference](/docs/api-reference)
+- **Contribute**: Read the [Developer Guide](/docs/developer-guide)
+
+Need help? Check the [FAQ](/docs/faq) or ask in [GitHub Discussions](https://github.com/Dyan-Dev/automa/discussions).
