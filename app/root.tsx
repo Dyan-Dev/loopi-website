@@ -37,8 +37,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/png" href="/logo.png" />
         <title>Automa — Visual Browser Automation for humans and teams</title>
       </head>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+      <body className="flex flex-col min-h-screen" suppressHydrationWarning>
+        <RootProvider 
+          theme={{
+            attribute: 'class',
+            defaultTheme: 'light',
+            storageKey: 'darkMode',
+          }}
+        >
+          {children}
+        </RootProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
