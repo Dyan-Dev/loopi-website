@@ -12,16 +12,16 @@ export function Footer() {
           <div className="col-span-1">
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src="/logo.png" alt="Automa Logo" className="w-7 h-7 sm:w-8 sm:h-8 object-cover" />
+                <img src="/logo.png" alt="Loopi Logo" className="w-7 h-7 sm:w-8 sm:h-8 object-cover" />
               </div>
-              <span className="text-lg sm:text-xl font-semibold">Automa</span>
+              <span className="text-lg sm:text-xl font-semibold">Loopi</span>
             </div>
             <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
               Visual Browser Automation for humans and teams
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a
-                href="https://github.com/Dyan-Dev/automa"
+                href="https://github.com/Dyan-Dev/loopi"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -30,7 +30,7 @@ export function Footer() {
                 <Github className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://x.com/AutomaSupport"
+                href="https://x.com/LoopiSupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -48,7 +48,7 @@ export function Footer() {
                 <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               </a>
               <a
-                href="https://www.youtube.com/@automasupport"
+                href="https://www.youtube.com/@LoopiSupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -91,7 +91,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/Dyan-Dev/automa" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                <a href="https://github.com/Dyan-Dev/loopi" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
                   GitHub
                 </a>
               </li>
@@ -101,7 +101,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/Dyan-Dev/automa/discussions" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                <a href="https://github.com/Dyan-Dev/loopi/discussions" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
                   Discussions
                 </a>
               </li>
@@ -123,7 +123,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com/automa-dev/automa/security" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+                <a href="https://github.com/Dyan-Dev/loopi/security" target="_blank" rel="noopener noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
                   Security
                 </a>
               </li>
@@ -133,7 +133,7 @@ export function Footer() {
 
         <div className="pt-6 sm:pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-center sm:text-left">
           <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
-            © {currentYear} Automa. Open Source software licensed under MIT.
+            © {currentYear} Loopi. Open Source software licensed under MIT.
           </p>
           <p className="text-xs text-neutral-500 dark:text-neutral-500">
             We respect privacy — analytics disabled by default. See <Link to="/privacy" className="underline">Privacy</Link>.

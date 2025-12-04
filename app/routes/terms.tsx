@@ -13,21 +13,21 @@ export default function Terms() {
 
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing or using Automa's website, software, or services, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use our services.
+            By accessing or using Loopi's website, software, or services, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use our services.
           </p>
 
           <h2>2. Description of Service</h2>
           <p>
-            Automa provides free, open source visual browser automation software licensed under the Mozilla Public License 2.0 (MPL-2.0).
+            Loopi provides free, open source visual browser automation software licensed under the Mozilla Public License 2.0 (MPL-2.0).
           </p>
 
           <h2>3. License Terms</h2>
           <p>
-            Automa is licensed under the MPL-2.0 license. You may use, modify, and distribute the software in accordance with the terms of that license. The full license text is available in the software repository.
+            Loopi is licensed under the MPL-2.0 license. You may use, modify, and distribute the software in accordance with the terms of that license. The full license text is available in the software repository.
           </p>
 
           <h2>4. Acceptable Use</h2>
-          <p>You agree NOT to use Automa to:</p>
+          <p>You agree NOT to use Loopi to:</p>
           <ul>
             <li>Violate any laws or regulations</li>
             <li>Infringe on intellectual property rights</li>
@@ -36,26 +36,26 @@ export default function Terms() {
             <li>Scrape data in violation of website terms of service</li>
             <li>Generate spam or conduct phishing attacks</li>
             <li>Distribute malware or harmful code</li>
-            <li>Engage in any activity that harms Automa or third parties</li>
+            <li>Engage in any activity that harms Loopi or third parties</li>
           </ul>
 
           <h2>5. User Responsibilities</h2>
           <p>You are responsible for:</p>
           <ul>
-            <li>Ensuring your use of Automa complies with applicable laws and third-party terms</li>
+            <li>Ensuring your use of Loopi complies with applicable laws and third-party terms</li>
             <li>Obtaining necessary permissions before automating interactions with third-party services</li>
             <li>Maintaining the security of your automation scripts and credentials</li>
-            <li>Any content created or actions performed using Automa</li>
+            <li>Any content created or actions performed using Loopi</li>
           </ul>
 
           <h2>6. Intellectual Property</h2>
           <p>
-            Except for the Open Source Edition (which is licensed under MPL-2.0), all rights, title, and interest in Automa, including all intellectual property rights, belong to Automa and its licensors.
+            Except for the Open Source Edition (which is licensed under MPL-2.0), all rights, title, and interest in Loopi, including all intellectual property rights, belong to Loopi and its licensors.
           </p>
 
           <h2>7. Third-Party Services</h2>
           <p>
-            Automa may integrate with third-party services and websites. Your use of such services is subject to their respective terms of service. We are not responsible for third-party services.
+            Loopi may integrate with third-party services and websites. Your use of such services is subject to their respective terms of service. We are not responsible for third-party services.
           </p>
 
           <h2>8. Privacy</h2>
@@ -85,15 +85,15 @@ export default function Terms() {
             TO THE MAXIMUM EXTENT PERMITTED BY LAW, AUTOMA SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.
           </p>
           <p>
-            Our total liability to you for all claims arising out of or relating to these Terms or your use of Automa shall not exceed the amount you paid us in the 12 months preceding the claim.
+            Our total liability to you for all claims arising out of or relating to these Terms or your use of Loopi shall not exceed the amount you paid us in the 12 months preceding the claim.
           </p>
 
           <h2>11. Indemnification</h2>
           <p>
-            You agree to indemnify and hold harmless Automa and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from:
+            You agree to indemnify and hold harmless Loopi and its officers, directors, employees, and agents from any claims, damages, losses, liabilities, and expenses (including legal fees) arising from:
           </p>
           <ul>
-            <li>Your use of Automa</li>
+            <li>Your use of Loopi</li>
             <li>Your violation of these Terms</li>
             <li>Your violation of any rights of third parties</li>
           </ul>
@@ -105,17 +105,17 @@ export default function Terms() {
 
           <h2>13. Modifications to Terms</h2>
           <p>
-            We may modify these Terms at any time. We will notify you of material changes by posting the new Terms on this page and updating the "Last Updated" date. Your continued use of Automa after such changes constitutes acceptance of the new Terms.
+            We may modify these Terms at any time. We will notify you of material changes by posting the new Terms on this page and updating the "Last Updated" date. Your continued use of Loopi after such changes constitutes acceptance of the new Terms.
           </p>
 
           <h2>14. Export Compliance</h2>
           <p>
-            Automa may be subject to export control laws. You agree to comply with all applicable export and import laws and regulations in your use of the software.
+            Loopi may be subject to export control laws. You agree to comply with all applicable export and import laws and regulations in your use of the software.
           </p>
 
           <h2>15. Governing Law and Dispute Resolution</h2>
           <p>
-            These Terms are governed by the laws of [Your Jurisdiction], without regard to its conflict of law provisions. Any disputes arising from these Terms or your use of Automa shall be resolved through:
+            These Terms are governed by the laws of [Your Jurisdiction], without regard to its conflict of law provisions. Any disputes arising from these Terms or your use of Loopi shall be resolved through:
           </p>
           <ul>
             <li>Good faith negotiation between the parties</li>
@@ -130,7 +130,7 @@ export default function Terms() {
 
           <h2>17. Entire Agreement</h2>
           <p>
-            These Terms, together with our Privacy Policy and any applicable license agreements, constitute the entire agreement between you and Automa regarding your use of our services.
+            These Terms, together with our Privacy Policy and any applicable license agreements, constitute the entire agreement between you and Loopi regarding your use of our services.
           </p>
 
           <h2>18. Contact Information</h2>
@@ -138,8 +138,8 @@ export default function Terms() {
             If you have questions about these Terms, please contact us:
           </p>
           <ul>
-            <li>Email: legal@automa.site</li>
-            <li>GitHub: <a href="https://github.com/automa/automa" target="_blank" rel="noopener noreferrer">github.com/automa/automa</a></li>
+            <li>Email: support@dyan.live</li>
+            <li>GitHub: <a href="https://github.com/Dyan-Dev/loopi" target="_blank" rel="noopener noreferrer">github.com/Dyan-Dev/loopi</a></li>
           </ul>
 
           <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 export default function About() {
   useEffect(() => {
-    document.title = 'About & Community — Automa';
+    document.title = 'About & Community — Loopi';
   }, []);
 
   return (
@@ -11,7 +11,7 @@ export default function About() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">About Automa</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">About Loopi</h1>
           <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
             An open source project building the most accessible browser automation platform for everyone
           </p>
@@ -23,7 +23,7 @@ export default function About() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">Our Mission</h2>
           <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
-            We believe browser automation should be accessible to everyone, not just developers. Automa makes it possible to build complex automations visually, without writing code.
+            We believe browser automation should be accessible to everyone, not just developers. Loopi makes it possible to build complex automations visually, without writing code.
           </p>
           <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400">
             By combining an intuitive visual editor with the power of real browser automation, we're democratizing a technology that has historically been complex and expensive.
@@ -37,7 +37,7 @@ export default function About() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-8 sm:mb-10 md:mb-12">Join Our Community</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <a
-              href="https://github.com/Dyan-Dev/automa"
+              href="https://github.com/Dyan-Dev/loopi"
               target="_blank"
               rel="noopener noreferrer"
               className="p-5 sm:p-6 bg-white dark:bg-neutral-950 rounded-lg md:rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -63,7 +63,7 @@ export default function About() {
             </a>
 
             <a
-              href="https://github.com/Dyan-Dev/automa/discussions"
+              href="https://github.com/Dyan-Dev/loopi/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -76,7 +76,7 @@ export default function About() {
             </a>
 
             <a
-              href="https://github.com/Dyan-Dev/automa/security"
+              href="https://github.com/Dyan-Dev/loopi/security"
               target="_blank"
               rel="noopener noreferrer"
               className="p-6 bg-white dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all group"
@@ -108,7 +108,7 @@ export default function About() {
               <li>• <strong>Community:</strong> Help others and share workflows</li>
             </ul>
             <a
-              href="https://github.com/Dyan-Dev/automa/blob/main/CONTRIBUTING.md"
+              href="https://github.com/Dyan-Dev/loopi/blob/main/CONTRIBUTING.md"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-primary-600 dark:text-primary-400 underline"
@@ -129,7 +129,7 @@ export default function About() {
               <li>• Show empathy towards others</li>
             </ul>
             <a
-              href="https://github.com/Dyan-Dev/automa/blob/main/CODE_OF_CONDUCT.md"
+              href="https://github.com/Dyan-Dev/loopi/blob/main/CODE_OF_CONDUCT.md"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-4 text-sm text-primary-600 dark:text-primary-400 underline"
@@ -146,8 +146,8 @@ export default function About() {
             <pre className="text-xs p-4 rounded bg-white dark:bg-neutral-950 overflow-x-auto border border-neutral-200 dark:border-neutral-800">
               <code>
                 {`# Fork and clone the repository
-git clone https://github.com/Dyan-Dev/automa.git
-cd automa
+git clone https://github.com/Dyan-Dev/loopi.git
+cd loopi
 
 # Install dependencies
 pnpm install
@@ -173,7 +173,7 @@ git checkout -b feature/my-feature`}
           <h2 className="text-white mb-4">Support Open Source</h2>
           <div className="max-w-2xl mx-auto">
             <p className="text-lg text-primary-100 mb-6 text-center">
-              Automa is free and open source. If you find it useful, consider sponsoring the project or contributing.
+              Loopi is free and open source. If you find it useful, consider sponsoring the project or contributing.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -186,7 +186,7 @@ git checkout -b feature/my-feature`}
               Become a Sponsor
             </a>
             <a
-              href="https://github.com/Dyan-Dev/automa"
+              href="https://github.com/Dyan-Dev/loopi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-lg border-2 border-white text-white hover:bg-white/10 transition-colors"

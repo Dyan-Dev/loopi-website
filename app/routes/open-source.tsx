@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function OpenSource() {
   useEffect(() => {
-    document.title = 'Features — Automa';
+    document.title = 'Features — Loopi';
   }, []);
 
   return (
@@ -21,7 +21,7 @@ export default function OpenSource() {
             Free, open source browser automation tool with a visual editor and community support. Perfect for developers, testers, and automation enthusiasts.</p>
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <a
-              href="https://github.com/Dyan-Dev/automa"
+              href="https://github.com/Dyan-Dev/loopi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
@@ -105,10 +105,10 @@ export default function OpenSource() {
             <Github className="w-10 h-10 sm:w-12 sm:h-12 text-primary-600 dark:text-primary-400 mb-4" />
             <h3 className="text-lg sm:text-xl mb-3">Contribute on GitHub</h3>
             <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-4">
-              Help improve Automa by contributing code, reporting bugs, or suggesting features. All contributions are welcome!
+              Help improve Loopi by contributing code, reporting bugs, or suggesting features. All contributions are welcome!
             </p>
             <a
-              href="https://github.com/Dyan-Dev/automa"
+              href="https://github.com/Dyan-Dev/loopi"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-sm sm:text-base text-primary-600 dark:text-primary-400 hover:underline"
@@ -124,7 +124,7 @@ export default function OpenSource() {
               Join our community discussions, ask questions, share workflows, and learn from other automation enthusiasts.
             </p>
             <a
-              href="https://github.com/Dyan-Dev/automa/discussions"
+              href="https://github.com/Dyan-Dev/loopi/discussions"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-sm sm:text-base text-primary-600 dark:text-primary-400 hover:underline"

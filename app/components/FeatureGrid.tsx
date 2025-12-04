@@ -52,7 +52,7 @@ export function FeatureGrid() {
     <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-neutral-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">Why Automa</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">Why Loopi</h2>
           <div className="max-w-2xl mx-auto">
             <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
               Powerful features that make browser automation accessible to everyone

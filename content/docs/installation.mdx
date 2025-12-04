@@ -1,11 +1,11 @@
 ---
 title: Installation & Building
-description: Setup, package, and distribute Automa for different platforms
+description: Setup, package, and distribute Loopi for different platforms
 ---
 
 # Installation & Building
 
-This guide covers installing Automa for development and packaging it for distribution.
+This guide covers installing Loopi for development and packaging it for distribution.
 
 ## Development Setup
 
@@ -21,14 +21,14 @@ pnpm install
 pnpm start
 ```
 
-This starts Automa in development mode with:
+This starts Loopi in development mode with:
 - Hot reload for faster iteration
 - DevTools enabled
 - Source maps for debugging
 
 ## Packaging for Distribution
 
-Automa uses **electron-forge** to create platform-specific installers and packages.
+Loopi uses **electron-forge** to create platform-specific installers and packages.
 
 ### Package for Current Platform
 
@@ -81,8 +81,8 @@ Outputs:
 
 The build configuration is defined in `forge.config.ts`. Key settings:
 
-- **App name**: Automa
-- **App ID**: `com.automa.app`
+- **App name**: Loopi
+- **App ID**: `com.loopi.app`
 - **Icon**: `assets/logo.png`
 - **Output directory**: `out/`
 
@@ -114,7 +114,7 @@ publishers: [
     config: {
       repository: {
         owner: 'Dyan-Dev',
-        name: 'automa'
+        name: 'loopi'
       },
       prerelease: false
     }
@@ -144,16 +144,16 @@ Host installers on:
 Create a Homebrew cask:
 
 ```ruby
-cask "automa" do
+cask "loopi" do
   version "1.0.0"
   sha256 "..."
   
-  url "https://github.com/Dyan-Dev/automa/releases/download/v#{version}/Automa-#{version}.dmg"
-  name "Automa"
+  url "https://github.com/Dyan-Dev/loopi/releases/download/v#{version}/Loopi-#{version}.dmg"
+  name "Loopi"
   desc "Visual Browser Automation"
-  homepage "https://github.com/Dyan-Dev/automa"
+  homepage "https://github.com/Dyan-Dev/loopi"
   
-  app "Automa.app"
+  app "Loopi.app"
 end
 ```
 

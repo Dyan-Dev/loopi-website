@@ -24,9 +24,9 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
-              <img src="/logo.png" alt="Automa Logo" className="w-8 h-8 object-cover" />
+              <img src="/logo.png" alt="Loopi Logo" className="w-8 h-8 object-cover" />
             </div>
-            <span className="text-xl font-semibold">Automa</span>
+            <span className="text-xl font-semibold">Loopi</span>
           </Link>
 
           {/* Desktop Navigation */}

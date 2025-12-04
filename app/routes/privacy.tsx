@@ -13,7 +13,7 @@ export default function Privacy() {
 
           <h2>Introduction</h2>
           <p>
-            Automa ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our software.
+            Loopi ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our software.
           </p>
 
           <h2>Information We Collect</h2>
@@ -33,14 +33,14 @@ export default function Privacy() {
 
           <h3>Open Source Software</h3>
           <p>
-            The Automa Open Source Reference Edition does not collect any personal data or telemetry. All automation runs locally on your machine.
+            The Loopi Open Source Reference Edition does not collect any personal data or telemetry. All automation runs locally on your machine.
           </p>
 
           <h2>How We Use Your Information</h2>
           <p>We use the collected information to:</p>
           <ul>
             <li>Respond to your inquiries and provide customer support</li>
-            <li>Send you updates about Automa (with your consent)</li>
+            <li>Send you updates about Loopi (with your consent)</li>
             <li>Improve our website and software</li>
             <li>Analyze usage patterns and trends</li>
             <li>Detect and prevent fraud or abuse</li>
@@ -111,7 +111,7 @@ export default function Privacy() {
           </p>
           <ul>
             <li>Email: support@dyan.live</li>
-            <li>GitHub: <a href="https://github.com/Dyan-Dev/automa" target="_blank" rel="noopener noreferrer">github.com/Dyan-Dev/automa</a></li>
+            <li>GitHub: <a href="https://github.com/Dyan-Dev/loopi" target="_blank" rel="noopener noreferrer">github.com/Dyan-Dev/loopi</a></li>
           </ul>
 
           <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
