@@ -7,7 +7,7 @@ Allow: /
 # Disallow: /api/
 
 # Sitemap location
-Sitemap: https://automa.site/sitemap.xml
+Sitemap: https://loopi.site/sitemap.xml
 
 # Crawl delay (optional, 1 second - helps prevent server overload)
 Crawl-delay: 1

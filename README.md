@@ -1,7 +1,7 @@
 
-# Automa Marketing Website
+# Loopi Website
 
-Modern, responsive marketing website for Automa - Visual Browser Automation for humans and teams.
+Loopi - Visual Browser Automation for humans and teams.
 
 ## Features
 
@@ -73,5 +73,4 @@ src/
 
 ## License
 
-MIT License - see original Automa project for details.
-  
+MIT License - see original Loopi project for details.

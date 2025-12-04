@@ -1,0 +1,777 @@
+---
+title: Detailed API Reference
+description: Complete TypeScript definitions and IPC channel documentation
+---
+
+# Detailed API & Types Reference
+
+Complete technical reference for Loopi's automation types and IPC communication.
+
+## IPC Channels Reference
+
+All IPC handlers are registered in `src/main/ipcHandlers.ts` and use `ipcMain.handle`.
+
+### browser:open
+
+Open or ensure browser automation window exists.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('browser:open', url?: string): Promise<void>
+```
+
+**Parameters:**
+- `url` (optional): Initial URL to navigate to
+
+**Returns:** `Promise<void>` – Resolves when window is ready
+
+**Notes:**
+- Creates window if it doesn't exist
+- Focuses existing window if already open
+- Sends `browser:closed` event to main window when closed
+
+**Example:**
+```ts
+await ipcRenderer.invoke('browser:open', 'https://example.com');
+```
+
+---
+
+### browser:close
+
+Close the browser automation window.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('browser:close'): Promise<void>
+```
+
+**Parameters:** None
+
+**Returns:** `Promise<void>`
+
+**Notes:**
+- Sends `browser:closed` event after closing
+- Safe to call even if window is already closed
+
+**Example:**
+```ts
+await ipcRenderer.invoke('browser:close');
+```
+
+---
+
+### browser:runStep
+
+Execute a single automation step in the browser context.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('browser:runStep', step: AutomationStep): Promise<any>
+```
+
+**Parameters:**
+- `step`: Automation step object (see [Step Types](#step-types))
+
+**Returns:** Step-specific result:
+- `navigate`: `void`
+- `extract`: `string` (extracted text)
+- `screenshot`: `string` (base64 PNG)
+- `apiCall`: `any` (API response)
+- etc.
+
+**Throws:**
+- Error if browser window is not open
+- Error if step execution fails
+
+**Example:**
+```ts
+const price = await ipcRenderer.invoke('browser:runStep', {
+  id: '1',
+  type: 'extract',
+  description: 'Get price',
+  selector: '.product-price',
+  storeKey: 'price'
+});
+```
+
+---
+
+### executor:initVariables
+
+Initialize the executor's runtime variable map.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('executor:initVariables', vars?: Record<string, string>): Promise<true>
+```
+
+**Parameters:**
+- `vars` (optional): Initial variables as key-value pairs
+
+**Returns:** `Promise<true>`
+
+**Notes:**
+- Call before running automation to seed variables
+- Overwrites existing variables
+
+**Example:**
+```ts
+await ipcRenderer.invoke('executor:initVariables', {
+  baseUrl: 'https://shop.com',
+  userId: '12345'
+});
+```
+
+---
+
+### executor:getVariables
+
+Retrieve current runtime variables.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('executor:getVariables'): Promise<Record<string, string>>
+```
+
+**Parameters:** None
+
+**Returns:** `Promise<Record<string, string>>` – Shallow copy of variables
+
+**Example:**
+```ts
+const vars = await ipcRenderer.invoke('executor:getVariables');
+console.log(vars.productPrice); // "$29.99"
+```
+
+---
+
+### browser:runConditional
+
+Evaluate a conditional expression in the browser.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('browser:runConditional', config: ConditionalConfig): Promise<ConditionalResult>
+```
+
+**Parameters:**
+- `config`: Conditional configuration object
+
+**Returns:**
+```ts
+{
+  conditionResult: boolean;
+  effectiveSelector?: string | null;
+}
+```
+
+**Throws:**
+- Error if browser window is not open
+
+**Example:**
+```ts
+const result = await ipcRenderer.invoke('browser:runConditional', {
+  conditionType: 'valueMatches',
+  selector: '.stock-status',
+  comparison: 'contains',
+  expectedValue: 'In Stock'
+});
+
+if (result.conditionResult) {
+  console.log('Item is in stock!');
+}
+```
+
+---
+
+### pick-selector
+
+Launch element picker UI to select a CSS selector.
+
+**Signature:**
+```ts
+ipcRenderer.invoke('pick-selector', url: string): Promise<string | null>
+```
+
+**Parameters:**
+- `url`: URL to open/navigate before picking
+
+**Returns:** `Promise<string | null>`
+- CSS selector string if element picked
+- `null` if cancelled
+
+**Notes:**
+- Injects picker UI into browser window
+- Resolves when user selects element or cancels
+
+**Example:**
+```ts
+const selector = await ipcRenderer.invoke('pick-selector', 'https://example.com');
+if (selector) {
+  console.log('Selected:', selector);
+}
+```
+
+---
+
+## TypeScript Type Definitions
+
+### Step Types
+
+All steps extend `StepBase`:
+
+```ts
+interface StepBase {
+  id: string;
+  description: string;
+  type: string;
+}
+```
+
+#### StepNavigate
+
+```ts
+interface StepNavigate extends StepBase {
+  type: 'navigate';
+  value: string; // URL, supports {{var}}
+}
+```
+
+#### StepClick
+
+```ts
+interface StepClick extends StepBase {
+  type: 'click';
+  selector: string; // CSS selector
+}
+```
+
+#### StepType
+
+```ts
+interface StepType extends StepBase {
+  type: 'type';
+  selector: string; // Input field selector
+  value: string; // Text to type, supports {{var}}
+  credentialId?: string; // Optional credential reference
+}
+```
+
+#### StepWait
+
+```ts
+interface StepWait extends StepBase {
+  type: 'wait';
+  value: string; // Duration in seconds (parsed as integer)
+}
+```
+
+#### StepScreenshot
+
+```ts
+interface StepScreenshot extends StepBase {
+  type: 'screenshot';
+  savePath?: string; // Optional file path
+}
+```
+
+**Returns:** Base64-encoded PNG string
+
+#### StepExtract
+
+```ts
+interface StepExtract extends StepBase {
+  type: 'extract';
+  selector: string; // Element to extract from
+  storeKey?: string; // Variable name to store result
+}
+```
+
+**Returns:** Extracted `innerText` as string
+
+#### StepExtractWithLogic
+
+```ts
+interface StepExtractWithLogic extends StepBase {
+  type: 'extractWithLogic';
+  selector: string;
+  condition: ComparisonOp;
+  expectedValue: string;
+  transformType?: TransformType;
+  parseAsNumber?: boolean;
+  removeChars?: string; // For removeChars transform
+  regexPattern?: string; // For regexReplace
+  regexReplacement?: string; // For regexReplace
+}
+
+type ComparisonOp = 'equals' | 'contains' | 'greaterThan' | 'lessThan';
+
+type TransformType = 
+  | 'stripCurrency' 
+  | 'stripNonNumeric' 
+  | 'removeChars' 
+  | 'regexReplace';
+```
+
+**Returns:**
+```ts
+{
+  value: string;
+  conditionMet: boolean;
+}
+```
+
+#### StepApiCall
+
+```ts
+interface StepApiCall extends StepBase {
+  type: 'apiCall';
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  url: string; // Supports {{var}}
+  headers?: Record<string, string>;
+  body?: string; // JSON string, supports {{var}}
+  storeKey?: string; // Variable to store response
+}
+```
+
+**Returns:** API response (any)
+
+#### StepScroll
+
+```ts
+interface StepScroll extends StepBase {
+  type: 'scroll';
+  scrollType: 'toElement' | 'byAmount';
+  selector?: string; // For toElement
+  scrollAmount?: number; // Pixels for byAmount
+}
+```
+
+#### StepSelectOption
+
+```ts
+interface StepSelectOption extends StepBase {
+  type: 'selectOption';
+  selector: string; // <select> element
+  optionValue?: string; // option value attribute
+  optionIndex?: number; // 0-based index
+}
+```
+
+#### StepFileUpload
+
+```ts
+interface StepFileUpload extends StepBase {
+  type: 'fileUpload';
+  selector: string; // <input type="file">
+  filePath: string; // Absolute path
+}
+```
+
+**Notes:** Limited browser support, may not work in all scenarios
+
+#### StepHover
+
+```ts
+interface StepHover extends StepBase {
+  type: 'hover';
+  selector: string;
+}
+```
+
+#### StepSetVariable
+
+```ts
+interface StepSetVariable extends StepBase {
+  type: 'setVariable';
+  variableName: string;
+  value: string; // Supports {{var}}
+}
+```
+
+#### StepModifyVariable
+
+```ts
+interface StepModifyVariable extends StepBase {
+  type: 'modifyVariable';
+  variableName: string;
+  operation: 'set' | 'increment' | 'decrement' | 'append';
+  value: string;
+}
+```
+
+**Operations:**
+- `set`: Assign new value
+- `increment`: Add to number (`parseFloat(current) + parseFloat(value)`)
+- `decrement`: Subtract from number
+- `append`: Concatenate to string
+
+---
+
+### Union Type
+
+All step types are combined into:
+
+```ts
+type AutomationStep = 
+  | StepNavigate
+  | StepClick
+  | StepType
+  | StepWait
+  | StepScreenshot
+  | StepExtract
+  | StepExtractWithLogic
+  | StepApiCall
+  | StepScroll
+  | StepSelectOption
+  | StepFileUpload
+  | StepHover
+  | StepSetVariable
+  | StepModifyVariable;
+```
+
+---
+
+### Conditional Configuration
+
+```ts
+interface ConditionalConfig {
+  conditionType: 'elementExists' | 'valueMatches';
+  selector: string;
+  comparison?: ComparisonOp; // For valueMatches
+  expectedValue?: string; // For valueMatches
+  transformType?: TransformType;
+  parseAsNumber?: boolean;
+  removeChars?: string;
+  regexPattern?: string;
+  regexReplacement?: string;
+}
+
+interface ConditionalResult {
+  conditionResult: boolean;
+  effectiveSelector?: string | null;
+}
+```
+
+---
+
+## AutomationExecutor Class
+
+Core class for executing automation steps.
+
+### Properties
+
+```ts
+class AutomationExecutor {
+  private variables: Record<string, string>;
+}
+```
+
+### Methods
+
+#### substituteVariables
+
+Replace `{{varName}}` tokens with runtime values.
+
+```ts
+substituteVariables(input?: string): string
+```
+
+**Parameters:**
+- `input`: String containing variable references
+
+**Returns:** String with variables replaced
+
+**Example:**
+```ts
+// variables = { name: 'John', age: '30' }
+const result = executor.substituteVariables('Hello {{name}}, age {{age}}');
+// Result: "Hello John, age 30"
+```
+
+**Notes:**
+- Unknown variables resolve to `""`
+- Handles nested `{{}}` correctly
+
+---
+
+#### executeStep
+
+Execute a single automation step.
+
+```ts
+async executeStep(
+  browserWindow: BrowserWindow, 
+  step: AutomationStep
+): Promise<any>
+```
+
+**Parameters:**
+- `browserWindow`: Electron BrowserWindow instance
+- `step`: Automation step to execute
+
+**Returns:** Step-specific result
+
+**Throws:** Error if execution fails
+
+**Implementation notes:**
+- Performs variable substitution on all string fields
+- Uses `webContents.executeJavaScript` for DOM operations
+- Uses `axios` for API calls
+- Uses `capturePage` for screenshots
+- Updates `this.variables` for variable operations
+
+---
+
+#### evaluateConditional
+
+Evaluate a conditional expression.
+
+```ts
+async evaluateConditional(
+  browserWindow: BrowserWindow,
+  config: ConditionalConfig
+): Promise<ConditionalResult>
+```
+
+**Parameters:**
+- `browserWindow`: Electron BrowserWindow
+- `config`: Conditional configuration
+
+**Returns:** Conditional result with boolean and optional selector
+
+**Supported conditions:**
+
+**elementExists:**
+```ts
+{
+  conditionType: 'elementExists',
+  selector: '.element-class'
+}
+// Returns: { conditionResult: true/false }
+```
+
+**valueMatches:**
+```ts
+{
+  conditionType: 'valueMatches',
+  selector: '.price',
+  comparison: 'greaterThan',
+  expectedValue: '50',
+  transformType: 'stripCurrency',
+  parseAsNumber: true
+}
+// Returns: { conditionResult: true/false }
+```
+
+---
+
+#### initVariables
+
+Initialize runtime variables.
+
+```ts
+initVariables(vars?: Record<string, string>): true
+```
+
+**Parameters:**
+- `vars`: Initial variable map
+
+**Returns:** `true`
+
+**Example:**
+```ts
+executor.initVariables({
+  baseUrl: 'https://api.example.com',
+  token: 'abc123'
+});
+```
+
+---
+
+#### getVariables
+
+Get shallow copy of current variables.
+
+```ts
+getVariables(): Record<string, string>
+```
+
+**Returns:** Variable map
+
+**Example:**
+```ts
+const vars = executor.getVariables();
+console.log(vars);
+```
+
+---
+
+## Transform Functions
+
+Applied to extracted values before comparison.
+
+### stripCurrency
+
+Remove common currency symbols.
+
+```ts
+'$29.99' → '29.99'
+'€15,50' → '15,50'
+'£100' → '100'
+```
+
+### stripNonNumeric
+
+Keep only digits and decimal point.
+
+```ts
+'Price: $29.99' → '29.99'
+'Qty: 5 items' → '5'
+```
+
+### removeChars
+
+Remove specified characters.
+
+```ts
+// removeChars = ','
+'1,234.56' → '1234.56'
+```
+
+### regexReplace
+
+Advanced pattern replacement.
+
+```ts
+// regexPattern = '[a-z]', regexReplacement = ''
+'abc123' → '123'
+```
+
+---
+
+## Error Handling
+
+All IPC handlers and executor methods can throw errors.
+
+### Common Errors
+
+**Browser window not open:**
+```ts
+throw new Error('Browser window is not available');
+```
+
+**Element not found:**
+```ts
+throw new Error('Element not found: .selector');
+```
+
+**API call failed:**
+```ts
+throw new Error('API call failed: 404 Not Found');
+```
+
+### Catching Errors
+
+```ts
+try {
+  const result = await ipcRenderer.invoke('browser:runStep', step);
+} catch (error) {
+  console.error('Step failed:', error.message);
+  // Handle error
+}
+```
+
+---
+
+## Complete Usage Example
+
+```ts
+// 1. Initialize variables
+await ipcRenderer.invoke('executor:initVariables', {
+  baseUrl: 'https://shop.example.com',
+  productId: '12345'
+});
+
+// 2. Open browser
+await ipcRenderer.invoke('browser:open');
+
+// 3. Navigate to product
+await ipcRenderer.invoke('browser:runStep', {
+  id: '1',
+  type: 'navigate',
+  description: 'Go to product page',
+  value: '{{baseUrl}}/product/{{productId}}'
+});
+
+// 4. Wait for page load
+await ipcRenderer.invoke('browser:runStep', {
+  id: '2',
+  type: 'wait',
+  description: 'Wait',
+  value: '2'
+});
+
+// 5. Check if in stock
+const stockCheck = await ipcRenderer.invoke('browser:runConditional', {
+  conditionType: 'valueMatches',
+  selector: '.stock-status',
+  comparison: 'contains',
+  expectedValue: 'In Stock'
+});
+
+if (stockCheck.conditionResult) {
+  // 6. Extract price
+  await ipcRenderer.invoke('browser:runStep', {
+    id: '3',
+    type: 'extract',
+    description: 'Get price',
+    selector: '.price',
+    storeKey: 'productPrice'
+  });
+  
+  // 7. Check price
+  const priceCheck = await ipcRenderer.invoke('browser:runConditional', {
+    conditionType: 'valueMatches',
+    selector: '.price',
+    comparison: 'lessThan',
+    expectedValue: '100',
+    transformType: 'stripCurrency',
+    parseAsNumber: true
+  });
+  
+  if (priceCheck.conditionResult) {
+    // 8. Add to cart
+    await ipcRenderer.invoke('browser:runStep', {
+      id: '4',
+      type: 'click',
+      description: 'Add to cart',
+      selector: '.add-to-cart-button'
+    });
+    
+    // 9. Screenshot confirmation
+    await ipcRenderer.invoke('browser:runStep', {
+      id: '5',
+      type: 'screenshot',
+      description: 'Capture',
+      savePath: 'cart_confirmation.png'
+    });
+  }
+}
+
+// 10. Get final variables
+const finalVars = await ipcRenderer.invoke('executor:getVariables');
+console.log('Product price:', finalVars.productPrice);
+
+// 11. Close browser
+await ipcRenderer.invoke('browser:close');
+```
+
+---
+
+## Next Steps
+
+- See [API Reference](/docs/api-reference) for simpler overview
+- Check [Examples](/docs/examples) for ready-made automations
+- Read [Developer Guide](/docs/developer-guide) to contribute

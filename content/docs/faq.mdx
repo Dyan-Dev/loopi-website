@@ -1,0 +1,379 @@
+---
+title: FAQ
+description: Frequently asked questions about Loopi
+---
+
+# Frequently Asked Questions
+
+Common questions and answers about using Loopi.
+
+## General Questions
+
+### What is Loopi?
+
+Loopi is a free, open-source visual browser automation platform. It lets you create browser automations using a drag-and-drop interface without writing code.
+
+### Is Loopi really free?
+
+Yes! Loopi is 100% free and open source under the MIT license.
+
+### What platforms does Loopi support?
+
+Loopi runs on:
+- **Windows** (10 and later)
+- **macOS** (11 Big Sur and later)
+- **Linux** (Ubuntu 20.04+, Fedora 35+, or equivalent)
+
+### Do I need to know programming?
+
+No. Loopi is designed for visual automation without coding. However, basic understanding of web pages (HTML, CSS selectors) helps create more reliable automations.
+
+## Installation & Setup
+
+### How do I install Loopi?
+
+See the [Installation Guide](/docs/installation) for detailed instructions. Quick start:
+
+```bash
+git clone https://github.com/Dyan-Dev/loopi.git
+cd loopi
+pnpm install
+pnpm start
+```
+
+### Which Node.js version do I need?
+
+Node.js 18 or later is recommended. Check your version:
+
+```bash
+node --version
+```
+
+### Can I install Loopi without Git?
+
+Yes, download the source as a ZIP file from GitHub, extract it, and run `pnpm install` in the extracted folder.
+
+### The app won't start. What should I do?
+
+1. Ensure all dependencies are installed: `pnpm install`
+2. Check Node.js version is >= 18
+3. Delete `node_modules` and reinstall: `rm -rf node_modules && pnpm install`
+4. Check console for error messages
+
+## Using Loopi
+
+### How do I pick a reliable selector?
+
+Use the **Pick Element** tool in step configuration:
+
+1. Click "Pick Element" button
+2. Browser opens with element picker
+3. Hover and click the element you want
+4. Loopi generates a CSS selector
+
+**Prefer selectors with:**
+- IDs: `#login-button`
+- Stable classes: `.submit-btn`
+- Name attributes: `input[name="email"]`
+
+**Avoid:**
+- Position-based: `div:nth-child(3)`
+- Auto-generated classes: `.css-abc123`
+
+### How do I use variables?
+
+**Create a variable:**
+```json
+{
+  "type": "setVariable",
+  "variableName": "userName",
+  "value": "John"
+}
+```
+
+**Or extract from page:**
+```json
+{
+  "type": "extract",
+  "selector": ".username",
+  "storeKey": "userName"
+}
+```
+
+**Use in other steps:**
+```
+Hello {{userName}}!
+https://example.com/user/{{userName}}
+```
+
+### Where are screenshots saved?
+
+Screenshots are saved to:
+- **Specified path** if you provide `savePath`
+- **Current directory** if no path is specified
+- **Filename format**: `screenshot_timestamp.png` (if no path given)
+
+### How do I handle dynamic content?
+
+Use **Wait** steps to give content time to load:
+
+```json
+{
+  "type": "wait",
+  "value": "2"  // Wait 2 seconds
+}
+```
+
+Or use **Extract with Logic** to wait for specific conditions.
+
+### Why does my automation fail on some websites?
+
+Common reasons:
+- **Dynamic loading**: Add wait steps
+- **Anti-bot protection**: Some sites block automation
+- **Iframe content**: Elements in iframes need special handling
+- **JavaScript rendering**: Wait for JS to complete
+
+### Can I automate login forms?
+
+Yes, but be careful:
+- Don't commit credentials to Git
+- Use environment variables or credential vault
+- Check site's Terms of Service
+- Consider using API tokens instead
+
+### How do I debug failed automations?
+
+1. **Use Debug/Step Mode**: Run one step at a time
+2. **Add screenshots**: Capture state at each step
+3. **Check console**: Open DevTools for errors
+4. **Simplify**: Remove steps until you find the issue
+5. **Test selectors**: Verify in browser DevTools
+
+## Advanced Usage
+
+### Can I loop through multiple items?
+
+Not yet built-in, but planned for future releases. Current workaround:
+- Use variables to track iteration
+- Manually increment counters
+- Check community for custom solutions
+
+### How do I scrape data from multiple pages?
+
+Use variables for page numbers:
+
+```json
+{
+  "type": "navigate",
+  "value": "https://example.com/page/{{pageNumber}}"
+}
+```
+
+Then increment `pageNumber` and repeat. Full pagination support coming soon.
+
+### Can I integrate with external APIs?
+
+Yes! Use the **API Call** step:
+
+```json
+{
+  "type": "apiCall",
+  "method": "POST",
+  "url": "https://api.example.com/data",
+  "headers": {"Authorization": "Bearer {{token}}"},
+  "body": "{\"data\": \"{{extractedValue}}\"}",
+  "storeKey": "apiResponse"
+}
+```
+
+### How do I handle authentication?
+
+Options:
+1. **Session cookies**: Navigate and log in first
+2. **API tokens**: Store in variables, use in headers
+3. **Credentials step**: Use `credentialId` in Type step
+
+### Can I schedule automations to run automatically?
+
+Scheduling is a planned feature. Current options:
+- Use OS task scheduler (cron, Task Scheduler, launchd)
+- Run via command line and automate externally
+- Watch for community plugins
+
+## Development & Contributing
+
+### How can I contribute to Loopi?
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+See [Developer Guide](/docs/developer-guide) for details.
+
+### How do I add a new step type?
+
+See the [Developer Guide](/docs/developer-guide#adding-new-steps) for step-by-step instructions.
+
+### Where should I report bugs?
+
+Report bugs on [GitHub Issues](https://github.com/Dyan-Dev/loopi/issues). Include:
+- Loopi version
+- Operating system
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
+
+### How do I request features?
+
+Open a feature request on [GitHub Discussions](https://github.com/Dyan-Dev/loopi/discussions). Describe:
+- What you want to do
+- Why it's useful
+- Example use cases
+
+## Performance & Limits
+
+### How many steps can an automation have?
+
+No hard limit, but very large automations (100+ steps) may:
+- Be harder to debug
+- Use more memory
+- Take longer to execute
+
+Consider breaking into smaller, reusable automations.
+
+### Can I run multiple automations at once?
+
+Currently one at a time. Concurrent execution is planned for future releases.
+
+### Does Loopi work on slow internet?
+
+Yes, but you may need to:
+- Increase wait times
+- Use longer timeouts
+- Handle network errors gracefully
+
+### What's the maximum page size Loopi can handle?
+
+Depends on your system resources. Very large pages may:
+- Take longer to load
+- Use more memory
+- Slow down element selection
+
+## Troubleshooting
+
+### Element not found error
+
+**Causes:**
+- Selector is wrong
+- Page hasn't loaded yet
+- Element is in an iframe
+- Element is dynamically generated
+
+**Solutions:**
+- Use Pick Element tool
+- Add Wait step before interaction
+- Check if element exists with Extract with Logic
+- Verify selector in DevTools
+
+### Variables not substituting
+
+**Check:**
+- Variable name spelling: `{{varName}}` not `{{var_name}}`
+- Variable was set before use
+- Exact `{{}}` syntax
+- No extra spaces: `{{var}}` not `{{ var }}`
+
+### Automation runs too fast
+
+Add **Wait** steps between actions:
+```json
+{ "type": "wait", "value": "1" }
+```
+
+Or use smart waits that wait for specific elements.
+
+### Browser window doesn't close
+
+Check for:
+- Errors during execution
+- Infinite loops
+- Missing final step
+
+Manually close with `browser:close` IPC call or restart Loopi.
+
+## Security & Privacy
+
+### Is my data safe?
+
+Yes. Loopi runs locally on your machine. No data is sent to external servers unless you explicitly use API Call steps.
+
+### Should I share my automations?
+
+Safe to share:
+- Step configurations
+- Selectors
+- Public URLs
+
+**Never share:**
+- Credentials
+- API keys
+- Personal data
+- Private URLs
+
+### Can websites detect Loopi?
+
+Some websites may detect automation through:
+- WebDriver detection
+- Mouse/keyboard patterns
+- Request headers
+
+Always respect website Terms of Service.
+
+## Getting Help
+
+### Where can I get help?
+
+- **Documentation**: Read [docs](/docs)
+- **GitHub Discussions**: Ask community
+- **GitHub Issues**: Report bugs
+- **Examples**: Check [examples](/docs/examples)
+
+### How do I search the documentation?
+
+Use the search bar (Ctrl+K or Cmd+K) to search all documentation.
+
+### Is there a community forum?
+
+Yes! Use [GitHub Discussions](https://github.com/Dyan-Dev/loopi/discussions) to:
+- Ask questions
+- Share automations
+- Request help
+- Discuss features
+
+## License & Legal
+
+### What license is Loopi under?
+
+MIT License – free to use, modify, and distribute.
+
+### Can I use Loopi commercially?
+
+Yes, MIT license allows commercial use.
+
+### Can I modify Loopi?
+
+Yes! Fork, modify, and customize as needed. Consider contributing improvements back to the community.
+
+### Do I need to credit Loopi?
+
+Not required by MIT license, but appreciated!
+
+---
+
+**Still have questions?**
+
+- Check the [Usage Guide](/docs/usage)
+- Browse [Examples](/docs/examples)
+- Ask in [GitHub Discussions](https://github.com/Dyan-Dev/loopi/discussions)

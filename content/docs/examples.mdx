@@ -1,0 +1,941 @@
+---
+title: Examples
+description: Ready-made automation examples you can import and run
+---
+
+# Examples
+
+This page contains practical automation examples you can import and try immediately.
+
+## Example 1: Hacker News Top Story
+
+Extract the top story from Hacker News and take a screenshot.
+
+```json
+{
+  "id": "1733270000000",
+  "name": "Hacker News Top Story",
+  "description": "Extract top story from Hacker News and take screenshot",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "1",
+          "type": "navigate",
+          "description": "Open Hacker News",
+          "value": "https://news.ycombinator.com"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 50
+      }
+    },
+    {
+      "id": "2",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "2",
+          "type": "wait",
+          "description": "Wait for page load",
+          "value": "1"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 150
+      }
+    },
+    {
+      "id": "3",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "3",
+          "type": "extract",
+          "description": "Get top story title",
+          "selector": ".titleline a",
+          "storeKey": "topStory"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 250
+      }
+    },
+    {
+      "id": "4",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "4",
+          "type": "screenshot",
+          "description": "Capture page",
+          "savePath": "hn_top.png"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 350
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "id": "e2-3",
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "id": "e3-4",
+      "source": "3",
+      "target": "4"
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Open Hacker News",
+      "value": "https://news.ycombinator.com"
+    },
+    {
+      "id": "2",
+      "type": "wait",
+      "description": "Wait for page load",
+      "value": "1"
+    },
+    {
+      "id": "3",
+      "type": "extract",
+      "description": "Get top story title",
+      "selector": ".titleline a",
+      "storeKey": "topStory"
+    },
+    {
+      "id": "4",
+      "type": "screenshot",
+      "description": "Capture page",
+      "savePath": "hn_top.png"
+    }
+  ]
+}
+```
+
+**Result:** The top story title is saved in `topStory` variable and a screenshot is saved.
+
+## Example 2: Google Search
+
+Perform a Google search and capture results.
+
+```json
+{
+  "id": "1764824758798",
+  "name": "Google Search",
+  "description": "Search Google for 'loopi browser automation' and take screenshot",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "1",
+          "type": "navigate",
+          "description": "Go to Google",
+          "value": "https://www.google.com/"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 48
+      }
+    },
+    {
+      "id": "2",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "2",
+          "type": "type",
+          "description": "Enter search query",
+          "selector": "html > body > div:nth-of-type(2) > div:nth-of-type(4) > form > div > div > div > div > div:nth-of-type(2) > textarea",
+          "value": "loopi browser automation"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 150
+      }
+    },
+    {
+      "id": "3",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "3",
+          "type": "click",
+          "description": "Click search button",
+          "selector": "html > body > div:nth-of-type(2) > div:nth-of-type(4) > form > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div > div > ul > li > div > div:nth-of-type(2) > div > div > span"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 250
+      }
+    },
+    {
+      "id": "4",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "4",
+          "type": "wait",
+          "description": "Wait for results",
+          "value": "2"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 349
+      }
+    },
+    {
+      "id": "5",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "5",
+          "type": "screenshot",
+          "description": "Capture results",
+          "savePath": "google_results.png"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 450
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "id": "e2-3",
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "id": "e3-4",
+      "source": "3",
+      "target": "4"
+    },
+    {
+      "id": "e4-5",
+      "source": "4",
+      "target": "5"
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Go to Google",
+      "value": "https://www.google.com/"
+    },
+    {
+      "id": "2",
+      "type": "type",
+      "description": "Enter search query",
+      "selector": "html > body > div:nth-of-type(2) > div:nth-of-type(4) > form > div > div > div > div > div:nth-of-type(2) > textarea",
+      "value": "loopi browser automation"
+    },
+    {
+      "id": "3",
+      "type": "click",
+      "description": "Click search button",
+      "selector": "html > body > div:nth-of-type(2) > div:nth-of-type(4) > form > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div:nth-of-type(2) > div > div > ul > li > div > div:nth-of-type(2) > div > div > span"
+    },
+    {
+      "id": "4",
+      "type": "wait",
+      "description": "Wait for results",
+      "value": "2"
+    },
+    {
+      "id": "5",
+      "type": "screenshot",
+      "description": "Capture results",
+      "savePath": "google_results.png"
+    }
+  ]
+}
+```
+
+**Result:** Searches Google and captures the results page.
+
+## Example 3: Product Price Monitoring
+
+Check if a product price is below a threshold.
+
+```json
+{
+  "id": "1764838601041",
+  "name": "E-commerce Price Monitor",
+  "description": "Navigate to product page, extract price with variable, check if price is less than threshold, and take screenshot",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "1",
+          "type": "navigate",
+          "description": "Open product page",
+          "value": "https://www.scrapethissite.com/pages/simple/"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 50
+      }
+    },
+    {
+      "id": "2",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "2",
+          "type": "wait",
+          "description": "Wait for page load",
+          "value": "2"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 150
+      }
+    },
+    {
+      "id": "3",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "3",
+          "type": "extract",
+          "description": "Extract country population",
+          "selector": ".country:first-child .country-population",
+          "storeKey": "population"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 250
+      }
+    },
+    {
+      "id": "4",
+      "type": "conditional",
+      "data": {
+        "conditionType": "valueMatches",
+        "selector": "html > body > div:first-of-type > section > div > div:nth-of-type(6) > div > div > span:nth-of-type(2)",
+        "expectedValue": "1000000",
+        "condition": "greaterThan",
+        "transformType": "stripNonNumeric",
+        "parseAsNumber": true
+      },
+      "position": {
+        "x": 400,
+        "y": 350
+      }
+    },
+    {
+      "id": "5",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "5",
+          "type": "screenshot",
+          "description": "Take screenshot if condition met",
+          "savePath": "high_population.png"
+        }
+      },
+      "position": {
+        "x": 300,
+        "y": 450
+      }
+    },
+    {
+      "id": "6",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "6",
+          "type": "wait",
+          "description": "Wait if condition not met",
+          "value": "1"
+        }
+      },
+      "position": {
+        "x": 500,
+        "y": 450
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "id": "e2-3",
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "id": "e3-4",
+      "source": "3",
+      "target": "4"
+    },
+    {
+      "id": "e4-5-if",
+      "source": "4",
+      "target": "5",
+      "sourceHandle": "if"
+    },
+    {
+      "id": "e4-6-else",
+      "source": "4",
+      "target": "6",
+      "sourceHandle": "else"
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Open product page",
+      "value": "https://www.scrapethissite.com/pages/simple/"
+    },
+    {
+      "id": "2",
+      "type": "wait",
+      "description": "Wait for page load",
+      "value": "2"
+    },
+    {
+      "id": "3",
+      "type": "extract",
+      "description": "Extract country population",
+      "selector": ".country:first-child .country-population",
+      "storeKey": "population"
+    },
+    {
+      "id": "5",
+      "type": "screenshot",
+      "description": "Take screenshot if condition met",
+      "savePath": "high_population.png"
+    },
+    {
+      "id": "6",
+      "type": "wait",
+      "description": "Wait if condition not met",
+      "value": "1"
+    }
+  ]
+}
+```
+
+**Result:** Returns whether the price is less than $50.
+
+**Use case:** Set up a scheduler to run this automation periodically and notify you when price drops.
+
+## Example 4: Form Submission
+
+Fill out and submit a contact form.
+
+```json
+{
+  "id": "1733270300000",
+  "name": "Contact Form Submission",
+  "description": "Fill and submit a contact form with name, email, and message",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "1",
+          "type": "navigate",
+          "description": "Go to contact page",
+          "value": "https://www.selenium.dev/selenium/web/web-form.html"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 50
+      }
+    },
+    {
+      "id": "2",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "2",
+          "type": "wait",
+          "description": "Wait for page load",
+          "value": "1"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 150
+      }
+    },
+    {
+      "id": "3",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "3",
+          "type": "type",
+          "description": "Enter text in input",
+          "selector": "#my-text-id",
+          "value": "John Doe"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 250
+      }
+    },
+    {
+      "id": "4",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "4",
+          "type": "type",
+          "description": "Enter password",
+          "selector": "input[name='my-password']",
+          "value": "SecurePassword123"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 350
+      }
+    },
+    {
+      "id": "5",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "5",
+          "type": "type",
+          "description": "Enter message in textarea",
+          "selector": "textarea[name='my-textarea']",
+          "value": "Hello, this is a test message from Loopi!"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 450
+      }
+    },
+    {
+      "id": "6",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "6",
+          "type": "click",
+          "description": "Submit form",
+          "selector": "button[type='submit']"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 550
+      }
+    },
+    {
+      "id": "7",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "7",
+          "type": "wait",
+          "description": "Wait for confirmation",
+          "value": "2"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 650
+      }
+    },
+    {
+      "id": "8",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "8",
+          "type": "screenshot",
+          "description": "Capture confirmation",
+          "savePath": "form_submitted.png"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 750
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "id": "e2-3",
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "id": "e3-4",
+      "source": "3",
+      "target": "4"
+    },
+    {
+      "id": "e4-5",
+      "source": "4",
+      "target": "5"
+    },
+    {
+      "id": "e5-6",
+      "source": "5",
+      "target": "6"
+    },
+    {
+      "id": "e6-7",
+      "source": "6",
+      "target": "7"
+    },
+    {
+      "id": "e7-8",
+      "source": "7",
+      "target": "8"
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "type": "navigate",
+      "description": "Go to contact page",
+      "value": "https://www.selenium.dev/selenium/web/web-form.html"
+    },
+    {
+      "id": "2",
+      "type": "wait",
+      "description": "Wait for page load",
+      "value": "1"
+    },
+    {
+      "id": "3",
+      "type": "type",
+      "description": "Enter text in input",
+      "selector": "#my-text-id",
+      "value": "John Doe"
+    },
+    {
+      "id": "4",
+      "type": "type",
+      "description": "Enter password",
+      "selector": "input[name='my-password']",
+      "value": "SecurePassword123"
+    },
+    {
+      "id": "5",
+      "type": "type",
+      "description": "Enter message in textarea",
+      "selector": "textarea[name='my-textarea']",
+      "value": "Hello, this is a test message from Loopi!"
+    },
+    {
+      "id": "6",
+      "type": "click",
+      "description": "Submit form",
+      "selector": "button[type='submit']"
+    },
+    {
+      "id": "7",
+      "type": "wait",
+      "description": "Wait for confirmation",
+      "value": "2"
+    },
+    {
+      "id": "8",
+      "type": "screenshot",
+      "description": "Capture confirmation",
+      "savePath": "form_submitted.png"
+    }
+  ]
+}
+```
+
+**Result:** Submits the form and captures confirmation.
+
+## Example 5: Multi-Page Navigation
+
+Navigate through multiple pages and extract data.
+
+```json
+{
+  "id": "1764839184527",
+  "name": "Multi-Page Scraper",
+  "description": "Navigate through pages, extract data, and increment page counter",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "1",
+          "type": "setVariable",
+          "description": "Initialize page counter",
+          "variableName": "currentPage",
+          "value": "1"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 50
+      }
+    },
+    {
+      "id": "2",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "2",
+          "type": "navigate",
+          "description": "Go to Hacker News page",
+          "value": "https://news.ycombinator.com/news?p={{currentPage}}"
+        }
+      },
+      "position": {
+        "x": 324,
+        "y": 146
+      }
+    },
+    {
+      "id": "3",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "3",
+          "type": "wait",
+          "description": "Wait for page load",
+          "value": "2"
+        }
+      },
+      "position": {
+        "x": 456,
+        "y": 253
+      }
+    },
+    {
+      "id": "4",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "4",
+          "type": "extract",
+          "description": "Get first story title",
+          "selector": ".titleline > a",
+          "storeKey": "storyTitle"
+        }
+      },
+      "position": {
+        "x": 491,
+        "y": 357
+      }
+    },
+    {
+      "id": "5",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "5",
+          "type": "screenshot",
+          "description": "Capture page",
+          "savePath": "page_{{currentPage}}.png"
+        }
+      },
+      "position": {
+        "x": 493,
+        "y": 456
+      }
+    },
+    {
+      "id": "6",
+      "type": "automationStep",
+      "data": {
+        "step": {
+          "id": "6",
+          "type": "modifyVariable",
+          "description": "Next page",
+          "variableName": "currentPage",
+          "operation": "increment",
+          "value": "1"
+        }
+      },
+      "position": {
+        "x": 400,
+        "y": 550
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1-2",
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "id": "e2-3",
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "id": "e3-4",
+      "source": "3",
+      "target": "4"
+    },
+    {
+      "id": "e4-5",
+      "source": "4",
+      "target": "5"
+    },
+    {
+      "id": "e5-6",
+      "source": "5",
+      "target": "6"
+    },
+    {
+      "id": "e6-2-default",
+      "source": "6",
+      "target": "2"
+    }
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "type": "setVariable",
+      "description": "Initialize page counter",
+      "variableName": "currentPage",
+      "value": "1"
+    },
+    {
+      "id": "2",
+      "type": "navigate",
+      "description": "Go to Hacker News page",
+      "value": "https://news.ycombinator.com/news?p={{currentPage}}"
+    },
+    {
+      "id": "3",
+      "type": "wait",
+      "description": "Wait for page load",
+      "value": "2"
+    },
+    {
+      "id": "4",
+      "type": "extract",
+      "description": "Get first story title",
+      "selector": ".titleline > a",
+      "storeKey": "storyTitle"
+    },
+    {
+      "id": "5",
+      "type": "screenshot",
+      "description": "Capture page",
+      "savePath": "page_{{currentPage}}.png"
+    },
+    {
+      "id": "6",
+      "type": "modifyVariable",
+      "description": "Next page",
+      "variableName": "currentPage",
+      "operation": "increment",
+      "value": "1"
+    }
+  ]
+}
+```
+
+**Note:** This example shows the concept. For actual looping, you'd need to wrap steps 2-5 in a loop construct (future feature).
+
+## How to Use These Examples
+
+### Option 1: Copy & Paste
+
+1. Copy the JSON code from any example above
+2. Save it to a file named `automation.json` on your computer
+3. In Loopi, click the **Import Automation** button
+4. Select your `automation.json` file
+5. The automation will appear in your workflow list
+6. Click **Run** to execute it
+
+### Option 2: Manual Creation
+
+1. Create a new automation
+2. Add steps one by one using the values from the example
+3. Configure each step according to the example
+4. Save and run
+
+## Tips for Creating Your Own
+
+### Start Simple
+Begin with basic navigate + extract patterns, then add complexity.
+
+### Test Each Step
+Run automation after adding each step to catch issues early.
+
+### Use Variables
+Make automations reusable by parameterizing URLs, selectors, and values.
+
+### Add Waits
+Give pages time to load – most issues come from timing.
+
+### Screenshot Everything
+Take screenshots at key points for debugging and verification.
+
+## Community Examples
+
+Share your automations with the community:
+
+1. Export your automation as JSON
+2. Post in [GitHub Discussions](https://github.com/Dyan-Dev/loopi/discussions)
+3. Include description and use case
+4. Help others learn from your workflows
+
+## Next Steps
+
+- **Learn more**: Read the [Usage Guide](/docs/usage) for detailed feature explanations
+- **API docs**: See [API Reference](/docs/api-reference) for all step types
+- **Get help**: Check the [FAQ](/docs/faq) for common questions
+
+Happy automating! 🚀

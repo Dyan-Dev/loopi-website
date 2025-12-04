@@ -1,0 +1,243 @@
+---
+title: Installation & Building
+description: Setup, package, and distribute Loopi for different platforms
+---
+
+# Installation & Building
+
+This guide covers installing Loopi for development and packaging it for distribution.
+
+## Development Setup
+
+### Install Dependencies
+
+```bash
+pnpm install
+```
+
+### Run in Development Mode
+
+```bash
+pnpm start
+```
+
+This starts Loopi in development mode with:
+- Hot reload for faster iteration
+- DevTools enabled
+- Source maps for debugging
+
+## Packaging for Distribution
+
+Loopi uses **electron-forge** to create platform-specific installers and packages.
+
+### Package for Current Platform
+
+Build an installer for your current operating system:
+
+```bash
+pnpm run make
+```
+
+### Platform-Specific Builds
+
+#### Linux
+
+Create .deb and .rpm packages:
+
+```bash
+pnpm run make:linux
+```
+
+Outputs:
+- `.deb` file for Debian/Ubuntu
+- `.rpm` file for Fedora/RHEL
+- AppImage (portable)
+
+#### Windows
+
+Create Windows installer:
+
+```bash
+pnpm run make:windows
+```
+
+Outputs:
+- `.exe` installer
+- `.msi` package
+
+#### macOS
+
+Create macOS application:
+
+```bash
+pnpm run make:mac
+```
+
+Outputs:
+- `.dmg` disk image
+- Universal binary (Intel + Apple Silicon)
+
+## Build Configuration
+
+The build configuration is defined in `forge.config.ts`. Key settings:
+
+- **App name**: Loopi
+- **App ID**: `com.loopi.app`
+- **Icon**: `assets/logo.png`
+- **Output directory**: `out/`
+
+### Custom Icons
+
+Replace `assets/logo.png` with your custom icon before building. Requirements:
+- PNG format
+- 512x512 pixels minimum
+- Transparent background recommended
+
+## Publishing Releases
+
+### GitHub Releases
+
+1. Update version in `package.json`
+2. Create a git tag: `git tag v1.0.0`
+3. Push tag: `git push origin v1.0.0`
+4. Build packages for all platforms
+5. Upload to GitHub Releases
+
+### Automated Publishing
+
+Configure `forge.config.ts` publishers for automated release:
+
+```js
+publishers: [
+  {
+    name: '@electron-forge/publisher-github',
+    config: {
+      repository: {
+        owner: 'Dyan-Dev',
+        name: 'loopi'
+      },
+      prerelease: false
+    }
+  }
+]
+```
+
+Then run:
+
+```bash
+pnpm run publish
+```
+
+## Distribution Channels
+
+### Direct Download
+
+Host installers on:
+- GitHub Releases (recommended)
+- Your own CDN/server
+- Cloud storage (S3, etc.)
+
+### Package Managers
+
+#### Homebrew (macOS)
+
+Create a Homebrew cask:
+
+```ruby
+cask "loopi" do
+  version "1.0.0"
+  sha256 "..."
+  
+  url "https://github.com/Dyan-Dev/loopi/releases/download/v#{version}/Loopi-#{version}.dmg"
+  name "Loopi"
+  desc "Visual Browser Automation"
+  homepage "https://github.com/Dyan-Dev/loopi"
+  
+  app "Loopi.app"
+end
+```
+
+#### Snap (Linux)
+
+Create a `snapcraft.yaml` for Snap Store distribution.
+
+#### Chocolatey (Windows)
+
+Create a Chocolatey package for Windows users.
+
+## Code Signing
+
+### macOS
+
+Sign your app with an Apple Developer certificate:
+
+```bash
+export APPLE_ID="your@email.com"
+export APPLE_PASSWORD="app-specific-password"
+pnpm run make:mac
+```
+
+### Windows
+
+Use a code signing certificate:
+
+```js
+// forge.config.ts
+{
+  name: '@electron-forge/maker-squirrel',
+  config: {
+    certificateFile: './cert.pfx',
+    certificatePassword: process.env.CERT_PASSWORD
+  }
+}
+```
+
+## Security Notes
+
+### Development Flags
+
+In development, the app runs with `--no-sandbox` for easier debugging. **Remove this flag for production builds**.
+
+### Content Security Policy
+
+Review and tighten CSP rules in production builds to prevent XSS attacks.
+
+### Permissions
+
+Only request necessary permissions in the packaged app.
+
+## Build Troubleshooting
+
+### Missing Dependencies
+
+```bash
+pnpm install --force
+```
+
+### Build Fails on Linux
+
+Install required system packages:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install build-essential libx11-dev libxkbfile-dev
+
+# Fedora
+sudo dnf install @development-tools libX11-devel libxkbfile-devel
+```
+
+### macOS Notarization Issues
+
+Ensure you have:
+- Valid Apple Developer certificate
+- App-specific password configured
+- Xcode command line tools installed
+
+## Next Steps
+
+- **Deploy**: Upload built packages to distribution channels
+- **Update**: Implement auto-update using electron-updater
+- **Monitor**: Set up crash reporting and analytics
+- **Document**: Create release notes for each version
+
+For development workflows, see the [Developer Guide](/docs/developer-guide).
