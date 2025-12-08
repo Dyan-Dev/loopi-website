@@ -76,11 +76,37 @@ Click the **Navigate** node (added by default) to configure it:
 - Selector: `h1`
 - Store as: `pageTitle`
 
+**Using Variables:**
+- Type: `Set Variable`
+- Variable Name: `productId`
+- Value: `42` (automatically stored as number)
+
+Then reference it later: `{{productId}}`
+
 **Take a screenshot:**
 - Type: `Screenshot`
 - Save path: `example.png` (optional)
 
-### Step 3: Run the Automation
+### Step 3: Using Variables
+
+Loopi's **auto-typed variable system** automatically detects data types:
+
+- `"42"` → stored as `number: 42`
+- `"true"` → stored as `boolean: true`
+- `'{"key":"value"}'` → stored as `object: {key: "value"}`
+- `"[1,2,3]"` → stored as `array: [1,2,3]`
+- `"text"` → stored as `string: "text"`
+
+**Access variables with full syntax support:**
+```
+Simple: {{username}}
+Nested: {{user.name}}
+Arrays: {{users[0]}}
+Mixed: {{users[0].name}}
+Deep: {{response.data[0].meta.created_at}}
+```
+
+### Step 4: Run the Automation
 
 1. Click the **"Run"** button
 2. Watch the automation execute in a browser window
@@ -89,6 +115,7 @@ Click the **Navigate** node (added by default) to configure it:
 
 Now that you have Loopi running:
 
+- **Learn about Variables**: Read the [Variable System](/docs/variables) guide for type detection and access patterns
 - **Learn more**: Read the [Usage Guide](/docs/usage) to understand all features
 - **Try examples**: Check out [Examples](/docs/examples) for ready-made automations
 - **Explore API**: See the [API Reference](/docs/api-reference) for advanced usage

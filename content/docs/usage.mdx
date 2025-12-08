@@ -80,14 +80,24 @@ Should return the correct element.
 
 ## Variables and Templates
 
-Variables let you store and reuse data throughout your automation.
+Variables let you store and reuse data throughout your automation. Loopi's **auto-typed variable system** automatically detects and preserves data types.
+
+### Auto-Type Detection
+
+When you set or extract variables, the type is automatically detected:
+
+- `"42"` or `"3.14"` → `number`
+- `"true"` or `"false"` → `boolean`
+- `'{"key":"value"}'` → `object`
+- `'[1,2,3]'` → `array`
+- Any other text → `string`
 
 ### Creating Variables
 
 Use the **Set Variable** step:
 
 - **Variable Name**: `productPrice`
-- **Value**: `$29.99`
+- **Value**: `29.99` (automatically stored as number)
 
 Or extract from page:
 
@@ -97,7 +107,99 @@ Or extract from page:
 
 ### Using Variables
 
-Reference variables with `{{varName}}` syntax:
+Variables can be referenced in almost any text field using `{{varName}}` syntax.
+
+#### Simple Variable Access
+
+```
+{{username}}
+{{count}}
+{{isActive}}
+```
+
+#### Nested Property Access (Objects)
+
+```
+{{user.name}}
+{{user.profile.email}}
+{{config.database.host}}
+```
+
+#### Array Element Access
+
+```
+{{users[0]}}                // First element
+{{products[1].name}}        // Property of element
+{{matrix[0][1]}}            // Multi-dimensional arrays
+```
+
+#### Mixed & Deep Nesting
+
+```
+{{users[0].name}}           // User's name from array
+{{response.data[0].meta.created_at}}
+{{items[index].properties[0].value}}
+```
+
+**Real example in URLs:**
+```
+https://example.com/user/{{users[0].id}}/profile
+```
+
+### Variable Operations
+
+**Set Variable:**
+- Create or overwrite a variable with auto-type detection
+
+**Modify Variable:**
+- `set` – Assign new value
+- `increment` – Add to number (maintains numeric type)
+- `decrement` – Subtract from number
+- `append` – Add to end of string
+
+### Example: Extract and Use with Full Syntax
+
+```
+1. Navigate: https://api.example.com/user/123
+2. Extract: selector=".user-name" → storeKey="name"
+3. Extract: selector=".user-role" → storeKey="role"
+4. Navigate: https://internal.example.com/profiles/{{name}}
+5. Type: selector="input.role" → value="{{role}}"
+```
+
+### API Response Access
+
+API responses are stored as **typed objects** with direct property access (not JSON strings):
+
+```json
+{
+  "type": "apiCall",
+  "method": "GET",
+  "url": "https://api.github.com/users/torvalds",
+  "storeKey": "githubUser"
+}
+```
+
+Response stored as object:
+```json
+{
+  "login": "torvalds",
+  "followers": 262478,
+  "company": "Linux Foundation",
+  "created_at": "2011-09-03T15:26:22Z"
+}
+```
+
+**Access directly:**
+```
+{{githubUser.login}}        // "torvalds"
+{{githubUser.followers}}    // 262478 (as number!)
+{{githubUser.company}}      // "Linux Foundation"
+```
+
+No JSON parsing needed – all properties are immediately accessible!
+
+**Learn more:** See the [Variable System](/docs/variables) guide for complete details.
 
 **In URLs:**
 ```
@@ -215,18 +317,36 @@ API Call:
 
 ### Using API Responses
 
-API responses are stored as JSON strings. Access nested values in subsequent steps:
+API responses are automatically stored as **typed objects** with full property access:
 
 ```json
 {
-  "product": {
-    "name": "Widget",
-    "price": 29.99
-  }
+  "type": "apiCall",
+  "method": "GET",
+  "url": "https://api.example.com/users/123",
+  "storeKey": "userData"
 }
 ```
 
-Reference: `{{productData.product.name}}`
+**Response example:**
+```json
+{
+  "id": 123,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "roles": ["admin", "user"]
+}
+```
+
+**Direct property access:**
+```
+{{userData.id}}              // 123 (as number)
+{{userData.name}}            // "John Doe"
+{{userData.email}}           // "john@example.com"
+{{userData.roles[0]}}        // "admin" (first role)
+```
+
+**No JSON parsing required** – access properties directly with full syntax support!
 
 ## Running Automations
 

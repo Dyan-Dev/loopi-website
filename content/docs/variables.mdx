@@ -1,0 +1,392 @@
+---
+title: Variable System
+description: Complete guide to Loopi's auto-typed variable system with nested access and array indexing
+---
+
+# Variable System
+
+Loopi's powerful variable system lets you store, access, and manipulate data throughout your automations. Variables automatically detect and preserve their type, making operations type-safe and intuitive.
+
+## Auto-Type Detection
+
+When you set or extract variables, Loopi automatically detects the data type and stores it accordingly. No manual type conversion needed!
+
+### Type Detection Rules
+
+| Input | Detected Type | Example |
+|-------|-------------|---------|
+| `"42"` or `"3.14"` | `number` | $\{productPrice = 29.99\}$ |
+| `"true"` or `"false"` | `boolean` | $\{isActive = true\}$ |
+| `'{"key":"value"}'` | `object` | $\{user = \{name: "John", age: 30\}\}$ |
+| `'[1,2,3]'` | `array` | $\{products = [1, 2, 3]\}$ |
+| Any other text | `string` | $\{username = "john_doe"\}$ |
+
+### Benefits
+
+- **No Manual Casting** – Types are detected automatically
+- **Type-Safe Operations** – Numbers stay numbers, strings stay strings
+- **Correct Comparisons** – `42 > 10` works correctly (not string comparison)
+- **API Integration** – JSON responses stored as objects, not strings
+
+## Creating Variables
+
+### Set Variable Step
+
+Use the **Set Variable** step to create or update a variable:
+
+```json
+{
+  "type": "setVariable",
+  "variableName": "count",
+  "value": "42"
+}
+```
+
+**Result:** Variable `count` is stored as `number: 42`
+
+### Extract from Page
+
+Use the **Extract** step to capture data from web pages:
+
+```json
+{
+  "type": "extract",
+  "selector": ".product-price",
+  "storeKey": "price"
+}
+```
+
+**Result:** Variable `price` contains the extracted text, automatically typed
+
+### API Response Storage
+
+API responses are automatically stored as typed objects with full property access:
+
+```json
+{
+  "type": "apiCall",
+  "method": "GET",
+  "url": "https://api.github.com/users/torvalds",
+  "storeKey": "githubUser"
+}
+```
+
+**Stored as object:** `{login: "torvalds", followers: 262478, company: "Linux Foundation", ...}`
+
+## Variable Access Syntax
+
+Loopi supports multiple ways to access variables depending on the data structure.
+
+### 1. Simple Variables
+
+Access basic string, number, or boolean variables:
+
+```
+{{username}}
+{{count}}
+{{isActive}}
+```
+
+**Examples in context:**
+```
+URL: https://example.com/user/{{userId}}
+Text: "Hello {{firstName}}!"
+Condition: "{{isActive}}" equals "true"
+```
+
+### 2. Nested Properties (Dot Notation)
+
+Access properties of objects using dot notation:
+
+```
+{{user.name}}
+{{user.profile.email}}
+{{config.database.host}}
+```
+
+**Example - GitHub API:**
+```
+{{githubUser.login}}        // "torvalds"
+{{githubUser.followers}}    // 262478 (as number)
+{{githubUser.company}}      // "Linux Foundation"
+{{githubUser.created_at}}   // "2011-09-03T15:26:22Z"
+```
+
+### 3. Array Indexing
+
+Access array elements by index starting from `0`:
+
+```
+{{users[0]}}                // First element
+{{users[1]}}                // Second element
+{{products[0].name}}        // Property of first element
+```
+
+**Examples:**
+```
+{{items[0]}}                // First item in array
+{{matrix[0][1]}}            // Element at row 0, column 1
+{{data[0].id}}              // id property of first data item
+```
+
+### 4. Mixed & Deep Nesting
+
+Combine dots and brackets for complex data structures:
+
+```
+{{users[0].name}}           // First user's name
+{{response.data[0].meta.created_at}}
+{{items[index].properties[0].value}}
+{{a.b.c.d.e}}               // Deeply nested objects
+{{matrix[0].points[1].coordinates}}
+```
+
+**Real-world example:**
+```
+{{apiResponse.results[0].user.profile.avatar}}
+```
+
+### 5. Escaping & Edge Cases
+
+Variables support alphanumeric characters, underscores, numbers, brackets, and dots:
+
+```
+✅ Valid:   {{variable123}}
+✅ Valid:   {{_private}}
+✅ Valid:   {{obj.prop_name}}
+✅ Valid:   {{items[0]}}
+❌ Invalid: {{variable-name}}    // hyphens not supported
+❌ Invalid: {{obj['key']}}       // quotes not supported
+```
+
+## Modifying Variables
+
+Update existing variables without re-extracting or re-fetching data.
+
+### Set
+
+Replace variable with a new value:
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "status",
+  "operation": "set",
+  "value": "completed"
+}
+```
+
+### Increment/Decrement
+
+Add or subtract from numeric variables:
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "counter",
+  "operation": "increment"
+}
+```
+
+**Maintains type:** Result stays as `number`
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "counter",
+  "operation": "decrement"
+}
+```
+
+### Append
+
+Concatenate to string variables:
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "message",
+  "operation": "append",
+  "value": " - completed!"
+}
+```
+
+**Result:** Original message + " - completed!"
+
+## Real-World Examples
+
+### Example 1: Store and Use API Response
+
+```json
+[
+  {
+    "type": "apiCall",
+    "method": "GET",
+    "url": "https://jsonplaceholder.typicode.com/users/1",
+    "storeKey": "user"
+  },
+  {
+    "type": "navigate",
+    "value": "https://myapp.com/profile/{{user.id}}"
+  },
+  {
+    "type": "type",
+    "selector": "input[name='email']",
+    "value": "{{user.email}}"
+  }
+]
+```
+
+### Example 2: Array Processing
+
+```json
+[
+  {
+    "type": "apiCall",
+    "method": "GET",
+    "url": "https://api.example.com/products",
+    "storeKey": "products"
+  },
+  {
+    "type": "navigate",
+    "value": "https://shop.com/product/{{products[0].id}}"
+  },
+  {
+    "type": "extract",
+    "selector": ".price",
+    "storeKey": "firstProductPrice"
+  }
+]
+```
+
+### Example 3: Conditional Logic with Types
+
+```json
+[
+  {
+    "type": "setVariable",
+    "variableName": "threshold",
+    "value": "100"
+  },
+  {
+    "type": "extractWithLogic",
+    "selector": ".balance",
+    "condition": "greaterThan",
+    "expectedValue": "{{threshold}}",
+    "parseAsNumber": true,
+    "storeKey": "highBalance"
+  }
+]
+```
+
+**Why this works:** `threshold` is stored as `number: 100`, so the comparison is numeric, not string-based.
+
+### Example 4: Building Complex Data
+
+```json
+[
+  {
+    "type": "setVariable",
+    "variableName": "formData",
+    "value": "{\"name\": \"John\", \"items\": [1, 2, 3]}"
+  },
+  {
+    "type": "type",
+    "selector": "#name",
+    "value": "{{formData.name}}"
+  },
+  {
+    "type": "apiCall",
+    "method": "POST",
+    "url": "https://api.example.com/submit",
+    "body": "{\"user\": \"{{formData.name}}\", \"count\": {{formData.items.length}}}",
+    "storeKey": "response"
+  }
+]
+```
+
+## Type Safety & Operations
+
+### Numeric Operations
+
+Only numeric variables work with increment/decrement:
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "quantity",
+  "operation": "increment"
+}
+```
+
+✅ Works if `quantity` is a `number`  
+❌ Fails if `quantity` is a `string`
+
+### String Appending
+
+Only strings support append:
+
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "message",
+  "operation": "append",
+  "value": " - Done"
+}
+```
+
+✅ Works if `message` is a `string`  
+❌ Fails if `message` is a `number`
+
+### Property Access
+
+Only objects and arrays support property access:
+
+```
+{{user.name}}        // Works if user is object
+{{items[0]}}`        // Works if items is array
+```
+
+## Debugging Variables
+
+### View Variable State
+
+During **Debug Mode**:
+
+1. Click **"Debug"** instead of **"Run"**
+2. Step through each action
+3. **Output Panel** shows current variable values
+4. Inspect types and values after each step
+
+### Common Issues
+
+**Variable not substituting:**
+- Check spelling: `{{userName}}` vs `{{username}}`
+- Ensure variable exists before use
+- Use exact syntax: `{{varName}}` with double braces
+
+**Wrong variable type:**
+- Check the value you're setting
+- `"42"` → becomes `number: 42`
+- `"42"`(with quotes in JSON) → becomes `string: "42"`
+
+**Property access fails:**
+- Verify object/array structure
+- Check property name casing
+- Use array indices starting from `0`
+
+## Best Practices
+
+1. **Use Descriptive Names** – `productPrice` not `p`
+2. **Set Variables Early** – Establish data before using it
+3. **Type Awareness** – Remember auto-types for operations
+4. **Extract for Reuse** – Store values you'll use multiple times
+5. **Debug Incrementally** – Check variables at each step
+6. **API Responses** – Access properties directly (not JSON strings)
+7. **Array Processing** – Use indexing for specific elements
+
+## Next Steps
+
+- **Learn Usage Patterns**: See [Usage Guide](/docs/usage) for complete step reference
+- **Try Examples**: Check [Examples](/docs/examples) with variables in action
+- **Explore API**: Read [API Reference](/docs/api-reference) for technical details

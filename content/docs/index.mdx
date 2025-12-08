@@ -26,7 +26,7 @@ Perfect for web scraping, automated testing, repetitive task automation, and mor
 
 <Cards>
   <Card title="Getting Started" href="/docs/getting-started" description="Install and run your first automation" />
-  <Card title="Installation" href="/docs/installation" description="Setup Loopi on your platform" />
+  <Card title="Variable System" href="/docs/variables" description="Auto-typed variables with full access syntax" />
   <Card title="Usage Guide" href="/docs/usage" description="Learn how to build automations" />
   <Card title="API Reference" href="/docs/api-reference" description="Complete API documentation" />
   <Card title="Examples" href="/docs/examples" description="Ready-made automation templates" />
@@ -35,14 +35,24 @@ Perfect for web scraping, automated testing, repetitive task automation, and mor
 
 ## Key Features
 
+### Auto-Typed Variable System
+Variables automatically detect types (number, boolean, object, array, string) and support full access syntax:
+- Simple: `{{username}}`
+- Nested: `{{user.name}}`
+- Arrays: `{{users[0]}}`
+- Mixed: `{{users[0].profile.email}}`
+
 ### Visual Editor
 Build automations using a drag-and-drop node-based interface. No coding required.
+
+### API Integration
+Call APIs and access responses as typed objects with direct property access (no JSON parsing).
 
 ### Cross-Platform
 Native installers for Windows, macOS, and Linux. Built with Electron and Chromium.
 
-### Variables & Logic
-Use variables to store and reuse data. Add conditional logic to create smart workflows.
+### Conditional Logic
+Extract with conditions, compare values, and make smart decisions in your workflows.
 
 ### Element Picker
 Point-and-click element selector tool for reliable automation.

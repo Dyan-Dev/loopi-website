@@ -23,16 +23,53 @@ The main executor class handles step execution and variable management.
 
 ## Variable Substitution
 
-All step values support variable substitution using `{{varName}}` syntax.
+All step values support variable substitution using `{{varName}}` syntax with full support for:
 
-**Example:**
+### Simple Variables
+
 ```js
-// Variables: { productId: "123", baseUrl: "https://shop.com" }
-const url = "{{baseUrl}}/product/{{productId}}";
-// Result: "https://shop.com/product/123"
+// Variables: { productId: "123", userId: "user456" }
+const url = "{{productId}}";
+// Result: "123"
 ```
 
+### Nested Object Properties
+
+```js
+// Variables: { user: { name: "John", email: "john@example.com" } }
+const email = "{{user.email}}";
+// Result: "john@example.com"
+```
+
+### Array Element Access
+
+```js
+// Variables: { users: [{id: 1, name: "John"}, {id: 2, name: "Jane"}] }
+const firstName = "{{users[0].name}}";
+// Result: "John"
+```
+
+### Mixed & Deep Nesting
+
+```js
+// Complex nested structures
+const value = "{{response.data[0].user.profile.email}}";
+const matrix = "{{grid[0][1]}}";
+```
+
+### Regex Pattern
+
+Variables are matched with: `/\{\{\s*([a-zA-Z0-9_\[\].]+)\s*\}\}/g`
+
+This supports:
+- Simple names: `{{varName}}`
+- Nested properties: `{{obj.prop}}`
+- Array indices: `{{array[0]}}`
+- Mixed access: `{{array[0].prop[1].name}}`
+
 **Unknown variables** resolve to empty string.
+
+**Additional context:** See [Variable System](/docs/variables) for complete guide.
 
 ## Supported Step Types
 
@@ -336,15 +373,22 @@ interface StepHover extends StepBase {
 
 ### Set Variable
 
-Create or update a variable.
+Create or update a variable with **automatic type detection**.
 
 ```ts
 interface StepSetVariable extends StepBase {
   type: "setVariable";
   variableName: string;
-  value: string; // Supports {{var}}
+  value: string; // Auto-typed based on content
 }
 ```
+
+**Auto-Type Detection:**
+- `"42"` → `number: 42`
+- `"true"` → `boolean: true`
+- `'{"key":"value"}'` → `object: {key: "value"}`
+- `'[1,2,3]'` → `array: [1,2,3]`
+- Other text → `string`
 
 **Example:**
 ```json
@@ -357,35 +401,91 @@ interface StepSetVariable extends StepBase {
 }
 ```
 
+**Result:** Variable `userId` stored as `number: 12345` (not string!)
+
+**Type-aware examples:**
+```json
+{
+  "type": "setVariable",
+  "variableName": "threshold",
+  "value": "100"
+}
+// Stored as number: 100
+// Now you can use in comparisons: {{threshold}} > 50
+```
+
+```json
+{
+  "type": "setVariable",
+  "variableName": "userData",
+  "value": "{\"name\": \"John\", \"age\": 30}"
+}
+// Stored as object with direct property access
+// Use: {{userData.name}}, {{userData.age}}
+```
+
 ### Modify Variable
 
-Perform operations on existing variables.
+Perform operations on existing variables with **type safety**.
 
 ```ts
 interface StepModifyVariable extends StepBase {
   type: "modifyVariable";
   variableName: string;
   operation: "set" | "increment" | "decrement" | "append";
-  value: string;
+  value?: string;
 }
 ```
 
 **Operations:**
-- `set` – Assign new value
-- `increment` – Add to number
-- `decrement` – Subtract from number
-- `append` – Add to end of string
+- `set` – Assign new value (auto-typed)
+- `increment` – Add to numeric variable (maintains number type)
+- `decrement` – Subtract from numeric variable (maintains number type)
+- `append` – Concatenate to string variable
 
-**Example:**
+**Type-safe operations:**
+
 ```json
 {
   "id": "14",
   "type": "modifyVariable",
-  "description": "Increment counter",
-  "variableName": "pageCount",
-  "operation": "increment",
-  "value": "1"
+  "variableName": "counter",
+  "operation": "increment"
 }
+```
+✅ Works if `counter` is `number`  
+❌ Fails if `counter` is `string`
+
+**Example - Increment:**
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "visitCount",
+  "operation": "increment"
+}
+// If visitCount was 10, now 11 (still a number)
+```
+
+**Example - Set with auto-type:**
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "status",
+  "operation": "set",
+  "value": "completed"
+}
+// Stored as string: "completed"
+```
+
+**Example - Append:**
+```json
+{
+  "type": "modifyVariable",
+  "variableName": "log",
+  "operation": "append",
+  "value": " - step completed"
+}
+// Original: "Started", Result: "Started - step completed"
 ```
 
 ## Conditional Evaluation
