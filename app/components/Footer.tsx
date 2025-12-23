@@ -17,7 +17,7 @@ export function Footer() {
               <span className="text-lg sm:text-xl font-semibold">Loopi</span>
             </div>
             <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
-              Visual Browser Automation for humans and teams
+              Local‑first, open‑source automation with typed, visual workflows
             </p>
             <div className="flex gap-3 sm:gap-4">
               <a

@@ -11,38 +11,38 @@ import {
 const features = [
   {
     icon: Workflow,
-    title: 'Visual Editor',
-    description: 'Build automation flows with an intuitive node-based interface. No coding required.',
+    title: 'Visual Builder',
+    description: 'Drag‑and‑drop workflows with clear data flow—no code required.',
     link: '/docs#visual-editor',
   },
   {
-    icon: GitBranch,
-    title: 'Conditional Logic',
-    description: 'Add if/else branches, loops, and error handling to create robust automations.',
-    link: '/docs#conditional-logic',
-  },
-  {
     icon: Variable,
-    title: 'Variables & Loops',
-    description: 'Store data in variables and iterate through arrays with powerful loop controls.',
+    title: 'Typed Variables',
+    description: 'Auto‑typed data for safer, clearer pipelines and fewer runtime surprises.',
     link: '/docs#variables',
   },
   {
     icon: MousePointer,
-    title: 'Selector Picker',
-    description: 'Click to pick elements from a live page. Never write CSS selectors again.',
+    title: 'Real Browser Control',
+    description: 'Real browser control for reliable interaction on dynamic sites.',
     link: '/docs#selector-picker',
   },
   {
     icon: Plug,
-    title: 'API Integration',
-    description: 'Connect to REST APIs, webhooks, and external services seamlessly.',
+    title: 'API + Browser',
+    description: 'Mix API nodes with on‑screen actions to fetch, transform, and drive the UI.',
     link: '/docs#api-integration',
   },
   {
+    icon: GitBranch,
+    title: 'Local‑First Execution',
+    description: 'Workflows run on your machine—no cloud lock‑in, offline friendly.',
+    link: '/docs',
+  },
+  {
     icon: Package,
-    title: 'Cross-Platform',
-    description: 'Deploy on Windows, macOS, and Linux with native installers and packages.',
+    title: 'Open‑Source & Cross‑Platform',
+    description: 'TypeScript codebase with installers for Windows, macOS, and Linux.',
     link: '/downloads',
   },
 ];
@@ -55,7 +55,7 @@ export function FeatureGrid() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">Why Loopi</h2>
           <div className="max-w-2xl mx-auto">
             <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 text-center">
-              Powerful features that make browser automation accessible to everyone
+              Local‑first automation that blends a visual builder, typed data, APIs, and real browser control
             </p>
           </div>
         </div>

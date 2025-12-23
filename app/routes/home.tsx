@@ -11,6 +11,55 @@ export default function Home() {
     <>
       <Hero />
       <FeatureGrid />
+      {/* Comparison Section */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">How Loopi Is Different</h2>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-neutral-600 dark:text-neutral-400 text-center">
+                A local desktop app with visual workflows, real browser control, API nodes, and typed variables.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base">
+            <div className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 text-neutral-700 dark:text-neutral-300 hover:border-primary-500 transition-colors">
+              <strong>n8n:</strong> API‑centric; lacks real browser control for UI‑heavy tasks.
+            </div>
+            <div className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 text-neutral-700 dark:text-neutral-300 hover:border-primary-500 transition-colors">
+              <strong>Zapier/Make:</strong> Cloud‑only; not local‑first, limited privacy and offline use.
+            </div>
+            <div className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 text-neutral-700 dark:text-neutral-300 hover:border-primary-500 transition-colors">
+              <strong>Playwright/Puppeteer:</strong> Code‑first libraries; no visual builder or typed workflows.
+            </div>
+            <div className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 text-neutral-700 dark:text-neutral-300 hover:border-primary-500 transition-colors">
+              <strong>Selenium IDE:</strong> Fragile selectors; lower reliability on dynamic, complex sites.
+            </div>
+            <div className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 text-neutral-700 dark:text-neutral-300 hover:border-primary-500 transition-colors">
+              <strong>RPA suites:</strong> Closed‑source and heavy‑weight; higher cost and vendor lock‑in.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Roadmap Highlights */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white dark:bg-neutral-950">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl mb-3 md:mb-4">Roadmap Highlights</h2>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-neutral-600 dark:text-neutral-400 text-center">
+                Select upcoming work (non‑exhaustive; timing not promised).
+              </p>
+            </div>
+          </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base">
+            <li className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">Near‑term: No‑code API nodes, improved error handling, live variable inspector.</li>
+            <li className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">Mid‑term: AI‑assisted selector stabilizer, per‑step screenshots, Recorder 2.0.</li>
+            <li className="p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">Platform: Scheduling and headless CLI; agentic browser actions; optional cloud sync/worker.</li>
+          </ul>
+        </div>
+      </section>
       
       {/* Screenshot Carousel Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
@@ -69,9 +118,9 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl text-white mb-3 md:mb-4">Ready to automate?</h2>
           <div className="max-w-2xl mx-auto">
-            <p className="text-base sm:text-lg md:text-xl text-primary-100 mb-6 md:mb-8 text-center">
-              Start automating with our free, open source browser automation tool
-            </p>
+              <p className="text-base sm:text-lg md:text-xl text-primary-100 mb-6 md:mb-8 text-center">
+                Local‑first, open‑source automation that blends typed workflows, APIs, and real browser control
+              </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <Link

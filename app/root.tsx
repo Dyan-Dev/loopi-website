@@ -35,7 +35,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <link rel="icon" type="image/png" href="/logo.png" />
-        <title>Loopi — Visual Browser Automation for humans and teams</title>
+        <title>Loopi — Local‑First Typed Automation Platform</title>
+        <meta
+          name="description"
+          content="Local‑first, open‑source automation that combines real browser control with APIs and typed, visual workflows. Runs on Windows, macOS, and Linux."
+        />
+        <meta
+          name="keywords"
+          content="local-first automation, typed workflows, Electron webContents, browser automation, API automation, TypeScript, open-source, desktop automation"
+        />
       </head>
       <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         <RootProvider 

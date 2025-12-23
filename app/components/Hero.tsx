@@ -15,10 +15,10 @@ export function Hero() {
             <div className="space-y-6 md:space-y-8">
               <div className="space-y-3 md:space-y-4">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
-                  Loopi — Visual Browser Automation for humans and teams
+                  Loopi — Local‑First Typed Automation Platform
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400">
-                  Design browser automation as a node graph, run it in real Chromium windows, and integrate with your systems.
+                  Build visual, typed workflows that combine real browser control (Electron BrowserWindow + webContents) with APIs—running locally on Windows, macOS, and Linux.
                 </p>
               </div>
 
