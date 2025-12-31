@@ -1,39 +1,46 @@
 ---
 title: Loopi Documentation
-description: Visual Browser Automation Platform - Open Source & Free Forever
+description: Local-First Typed Automation Platform - Open Source & Free Forever
 ---
 
 import { Cards, Card } from 'fumadocs-ui/components/card';
 
 # Welcome to Loopi
 
-Loopi is a **free, open-source visual browser automation platform** that makes it easy to create, run, and share browser automations without writing code.
+Loopi is the **open-source, local-first, typed automation platform** that combines real browser automation with APIs and a visual, no-code builder. It runs on Windows, macOS, and Linux, using a clean TypeScript architecture with Electron BrowserWindow control and auto-typed variables.
 
 ## What is Loopi?
 
 Loopi provides a visual node-based editor for building browser automations. Create workflows that can:
 
-- **Navigate** websites and fill forms
-- **Extract** data from web pages
-- **Interact** with elements (click, type, select)
+- **Navigate** websites and interact with real browser elements
+- **Extract** data from web pages with auto-typed storage
+- **Interact** with elements (click, type, select, hover, file upload)
 - **Take screenshots** and capture content
-- **Call APIs** and integrate with external services
-- **Use variables** and conditional logic
+- **Call APIs** and integrate external services with typed responses
+- **Use variables** with full nested access and array indexing
+- **Conditional logic** with branching workflows
+- **Twitter/X automation** - Post tweets, search, like, retweet, send DMs
+- **Secure credentials** - Encrypted storage for API keys and tokens
+- **Custom scheduling** - Interval, cron expressions, or one-time execution
 
-Perfect for web scraping, automated testing, repetitive task automation, and more.
+Perfect for web scraping, automated testing, social media automation, repetitive tasks, and more.
 
 ## Quick Links
 
 <Cards>
   <Card title="Getting Started" href="/docs/getting-started" description="Install and run your first automation" />
   <Card title="Variable System" href="/docs/variables" description="Auto-typed variables with full access syntax" />
-  <Card title="Usage Guide" href="/docs/usage" description="Learn how to build automations" />
-  <Card title="API Reference" href="/docs/api-reference" description="Complete API documentation" />
+  <Card title="API Reference" href="/docs/api-reference" description="Complete step types documentation" />
+  <Card title="Credentials" href="/docs/credentials" description="Secure credential management" />
+  <Card title="Twitter Integration" href="/docs/twitter-integration" description="Automate Twitter/X interactions" />
   <Card title="Examples" href="/docs/examples" description="Ready-made automation templates" />
-  <Card title="FAQ" href="/docs/faq" description="Common questions and answers" />
 </Cards>
 
 ## Key Features
+
+### Local-First Architecture
+Your workflows execute on your machine—no cloud lock-in. Complete privacy and offline capabilities.
 
 ### Auto-Typed Variable System
 Variables automatically detect types (number, boolean, object, array, string) and support full access syntax:
@@ -41,24 +48,63 @@ Variables automatically detect types (number, boolean, object, array, string) an
 - Nested: `{{user.name}}`
 - Arrays: `{{users[0]}}`
 - Mixed: `{{users[0].profile.email}}`
+- Deep nesting: `{{response.data[0].meta.created_at}}`
 
-### Visual Editor
-Build automations using a drag-and-drop node-based interface. No coding required.
+### Real Browser Control
+Electron BrowserWindow + webContents automation. Real Chromium browser, not headless simulation.
+
+### Visual Node-Based Editor
+Build automations using a drag-and-drop interface. No coding required.
 
 ### API Integration
-Call APIs and access responses as typed objects with direct property access (no JSON parsing).
+Call APIs and access responses as typed objects with direct property access (no JSON parsing needed).
+
+### Twitter/X Automation
+Native support for Twitter API v2:
+- Create, delete, search tweets
+- Like and retweet
+- Send direct messages
+- Search users
+- All with variable support
+
+### Credentials Management
+Encrypted storage (AES-256-CBC) for API keys, tokens, and authentication:
+- Twitter/X credentials
+- OAuth 2.0
+- API keys
+- Basic auth
+- Custom credentials
+
+### Conditional Logic & Branching
+Create smart workflows:
+- Element existence checks
+- Value comparisons
+- If/else branching
+- Loop patterns
+
+### Element Picker
+Interactive point-and-click selector tool for reliable element targeting.
 
 ### Cross-Platform
 Native installers for Windows, macOS, and Linux. Built with Electron and Chromium.
 
-### Conditional Logic
-Extract with conditions, compare values, and make smart decisions in your workflows.
-
-### Element Picker
-Point-and-click element selector tool for reliable automation.
+### Workflow Scheduling
+Schedule automations:
+- Interval-based (every N minutes/hours)
+- Cron expressions
+- One-time execution
+- Desktop notifications
 
 ### Open Source
-MIT licensed. Full access to source code. Community-driven development.
+O'Saasy licensed. Full access to source code. Community-driven development.
+
+## How Loopi Is Different
+
+- **vs n8n**: Real browser control, not just API-centric
+- **vs Zapier/Make**: Local-first, not cloud-only
+- **vs Playwright/Puppeteer**: Visual builder, not code-first
+- **vs Selenium IDE**: Stronger selectors, typed variables
+- **vs RPA suites**: Open-source, lightweight, no vendor lock-in
 
 ## Getting Help
 

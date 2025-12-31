@@ -5,127 +5,280 @@ description: Install and run your first Loopi automation in minutes
 
 # Getting Started
 
-This guide helps you get Loopi running locally and create your first automation.
+A quick guide to building your first automation with Loopi.
 
-## Prerequisites
+## Installation
+
+### Prerequisites
 
 Before you begin, make sure you have:
 
-- **Node.js** (>= 18 recommended)
-- **npm** or **pnpm** package manager
+- **Node.js** 16+ (18+ recommended)
+- **pnpm** (or npm/yarn)
 - **Git** for cloning the repository
 
-## Quick Start
-
-### 1. Clone the Repository
+### Quick Setup
 
 ```bash
 git clone https://github.com/Dyan-Dev/loopi.git
 cd loopi
-```
-
-### 2. Install Dependencies
-
-Using pnpm (recommended):
-
-```bash
 pnpm install
 ```
 
-Or using npm:
-
-```bash
-npm install
-```
-
-### 3. Start Development Mode
+### Starting the Application
 
 ```bash
 pnpm start
 ```
 
-This will:
-- Start the Electron application in development mode
-- Enable hot reload for faster development
-- Open the Loopi UI automatically
+This launches the Electron app with hot reload for development. The Loopi UI will open automatically.
 
-## Creating Your First Automation
+## Configuring App Settings
 
-Once the app is running, you'll see the main dashboard.
+Access app preferences via the settings icon (⚙️) in the dashboard header:
 
-### Step 1: Create a New Workflow
+### Theme Settings
+- **Light Mode** - Bright interface with dark text
+- **Dark Mode** - Dark interface with light text  
+- **System** - Automatically matches your OS preference
 
-1. Click the **"Add Automation"** button in the dashboard
-2. You'll be redirected to the workflow builder console
-3. Navigate to **Settings** to name your automation
+Theme preference is saved and applied the next time you open the app.
 
-### Step 2: Add Steps
+### Download Location
+- Default: Your system's Downloads folder
+- Click "Browse" to select a custom download folder
+- All automation downloads are saved to this location automatically
+- Directory is created if it doesn't exist
 
-Click the **Navigate** node (added by default) to configure it:
+### Notifications
+- Toggle to enable/disable app notifications
+- Preference is saved automatically
 
-1. In the properties panel, set the URL to your target website
-2. Select next step by selecting the step in add next step panel
-3. Choose from available node types.
+All settings are persisted to disk and restored when you restart the application.
 
-**Navigate to a website:**
-- Type: `Navigate`
-- URL: `https://example.com`
+## Building for Distribution
 
-**Extract text:**
-- Type: `Extract`
-- Selector: `h1`
-- Store as: `pageTitle`
+```bash
+pnpm run make          # Package for your platform
+pnpm run publish       # Build and publish (requires config)
+```
 
-**Using Variables:**
-- Type: `Set Variable`
-- Variable Name: `productId`
-- Value: `42` (automatically stored as number)
+## Your First Automation
 
-Then reference it later: `{{productId}}`
+### Step 1: Create a New Automation
 
-**Take a screenshot:**
-- Type: `Screenshot`
-- Save path: `example.png` (optional)
+1. Open Loopi
+2. Click **"Add Automation"** or **"New Automation"**
+3. Enter a name and description
+4. Click **"Create"**
 
-### Step 3: Using Variables
+### Step 2: Add a Navigate Step
 
-Loopi's **auto-typed variable system** automatically detects data types:
+1. Click **"+ Add Step"** on the canvas
+2. Select **"Navigate"**
+3. Enter URL: `https://example.com`
+4. Click **"Add Step"**
+
+### Step 3: Add an Extract Step
+
+1. Click **"+ Add Step"**
+2. Select **"Extract"**
+3. Click **"Pick Element"** to select an element on the page
+4. Enter **"Store As"**: `result`
+5. Click **"Add Step"**
+
+### Step 4: Add a Screenshot Step
+
+1. Click **"+ Add Step"**
+2. Select **"Screenshot"**
+3. Click **"Add Step"**
+
+### Step 5: Run Your Automation
+
+1. Click the **"Run Automation"** button
+2. Watch it execute in the browser window
+3. Check the execution log for results
+
+## Building More Complex Automations
+
+### Using Variables
+
+**Set a variable:**
+1. Add **"Set Variable"** step
+2. Name: `username`
+3. Value: `john_doe`
+4. Click **"Add Step"**
+
+**Reference variables anywhere:**
+```
+{{username}}
+{{productId}}
+{{apiResponse}}
+```
+
+### Auto-Typed Variables
+
+Loopi's **intelligent variable system** automatically detects data types:
 
 - `"42"` → stored as `number: 42`
+- `"3.14"` → stored as `number: 3.14`
 - `"true"` → stored as `boolean: true`
-- `'{"key":"value"}'` → stored as `object: {key: "value"}`
+- `"false"` → stored as `boolean: false`
+- `'{"name":"John"}'` → stored as `object: {name: "John"}`
 - `"[1,2,3]"` → stored as `array: [1,2,3]`
-- `"text"` → stored as `string: "text"`
+- `"hello"` → stored as `string: "hello"`
 
-**Access variables with full syntax support:**
+### Advanced Variable Access
+
+**Simple variables:**
 ```
-Simple: {{username}}
-Nested: {{user.name}}
-Arrays: {{users[0]}}
-Mixed: {{users[0].name}}
-Deep: {{response.data[0].meta.created_at}}
+{{username}}
+{{count}}
+{{isActive}}
 ```
 
-### Step 4: Run the Automation
+**Nested properties (objects):**
+```
+{{user.name}}
+{{user.profile.email}}
+{{config.database.host}}
+```
 
-1. Click the **"Run"** button
-2. Watch the automation execute in a browser window
+**Array indexing:**
+```
+{{users[0]}}           // First element
+{{products[1]}}        // Second element
+{{items[0].name}}      // Property of array element
+{{data[0].user.email}} // Mixed access
+{{matrix[0][1]}}       // Multi-dimensional arrays
+```
+
+**Combined access patterns:**
+```
+{{users[0].profile.settings.theme}}
+{{response.data[0].meta.created_at}}
+{{items[index].properties[0].value}}
+```
+
+## Conditional Logic
+
+**Add a conditional node:**
+1. Click **"+ Add Step"**
+2. Select **"Conditional"**
+3. Choose condition type:
+   - **Element Exists**: Check if an element is on the page
+   - **Value Matches**: Compare extracted values
+4. Configure "if" and "else" branches
+5. Connect subsequent steps to the appropriate branch
+
+**Example: Check if Next Page exists**
+- Condition Type: `elementExists`
+- Selector: `button.next-page`
+- If exists → Click next page → Continue
+- If not exists → End automation
+
+## Loops & Iteration
+
+**Create a loop:**
+1. Extract items or data
+2. Process current item
+3. Add a conditional check (e.g., "Has more items?")
+4. Connect the "if" branch back to an earlier step
+5. Connect the "else" branch to continue or end
+
+## API Integration
+
+**Fetch data from an API:**
+1. Add **"API Call"** step
+2. Method: `GET`
+3. URL: `https://api.github.com/users/{{username}}`
+4. Store response in: `userinfo`
+5. Access data: `{{userinfo.name}}`, `{{userinfo.followers}}`
+
+**POST with dynamic data:**
+1. Set variables first: `email`, `fullName`
+2. Add **"API Call"** step
+3. Method: `POST`
+4. URL: `https://api.example.com/submit`
+5. Headers:
+   ```json
+   {
+     "Content-Type": "application/json",
+     "Authorization": "Bearer {{token}}"
+   }
+   ```
+6. Body:
+   ```json
+   {"email":"{{email}}","name":"{{fullName}}"}
+   ```
+
+**API responses are preserved as objects:**
+- Access properties directly: `{{response.field}}`
+- Access arrays: `{{response.users[0].email}}`
+- Numbers stay as numbers, not strings
+
+## Multi-Page Scraping
+
+1. Navigate to first page
+2. Extract data and store in variable
+3. Add conditional: Check if "Next Page" button exists
+4. **If exists**: Click next page → Loop back to step 2
+5. **If not exists**: End automation
+
+## Common Step Types
+
+### Navigation
+- **Navigate**: Go to a URL
+- **Wait**: Pause for specified seconds
+
+### Interaction
+- **Click**: Click an element
+- **Type**: Enter text in an input
+- **Select Option**: Choose from dropdown
+- **Hover**: Hover over an element
+- **File Upload**: Upload files
+
+### Data Extraction
+- **Extract**: Get text from an element
+- **Screenshot**: Capture the page
+
+### Variables
+- **Set Variable**: Create or update a variable
+- **Modify Variable**: Increment, decrement, append, or set
+
+### API
+- **API Call**: Make GET/POST requests
+
+### Flow Control
+- **Conditional**: Branch based on conditions
+- **Loop**: Repeat steps (connect back to earlier step)
 
 ## Next Steps
 
-Now that you have Loopi running:
+- Explore the [Variables Guide](/docs/variables) for advanced variable usage
+- Check out the [API Reference](/docs/api-reference) for all step types
+- View [Examples](/docs/examples) for ready-made automation workflows
+- Read the [Developer Guide](/docs/developer-guide) to extend Loopi
+- Learn about [Credentials Management](/docs/credentials) for secure API key storage
+- Discover [Twitter Integration](/docs/twitter-integration) for social media automation
 
-- **Learn about Variables**: Read the [Variable System](/docs/variables) guide for type detection and access patterns
-- **Learn more**: Read the [Usage Guide](/docs/usage) to understand all features
-- **Try examples**: Check out [Examples](/docs/examples) for ready-made automations
-- **Explore API**: See the [API Reference](/docs/api-reference) for advanced usage
-- **Build & package**: Visit [Installation](/docs/installation) for packaging instructions
+## Tips & Best Practices
+
+- **Use meaningful variable names** for clarity (e.g., `productPrice` instead of `var1`)
+- **Add descriptions to steps** for better documentation
+- **Test step-by-step** before running the full flow
+- **Save frequently** - Use the save button or Ctrl+S
+- **Use the selector picker** for accurate element targeting
+- **Leverage auto-typed variables** - No need to convert types manually
+- **Access nested data easily** - Use dot notation and array indices
+- **Store API responses** - They're preserved as structured objects
+- **Use conditionals for robust flows** - Handle different scenarios gracefully
 
 ## Troubleshooting
 
 ### App won't start
 - Make sure all dependencies are installed: `pnpm install`
-- Check Node.js version: `node --version` (should be >= 18)
+- Check Node.js version: `node --version` (should be >= 16)
 
 ### Browser window doesn't open
 - Check console for errors

@@ -6,7 +6,7 @@ const platforms = [
     name: 'Windows',
     icon: Monitor,
     downloads: [
-      { type: 'Installer (.exe)', size: '113 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.5.0/loopi-1.5.0.Setup.exe' },
+      { type: 'Installer (.exe)', size: '114 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.0/loopi-1.6.0.Setup.exe' },
     ],
     requirements: 'Windows 10 or later (64-bit)',
   },
@@ -14,7 +14,7 @@ const platforms = [
     name: 'Linux',
     icon: Package,
     downloads: [
-      { type: 'Debian (.deb)', size: '81.4 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.5.0/loopi_1.5.0_amd64.deb' },
+      { type: 'Debian (.deb)', size: '81.4 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.0/loopi_1.6.0_amd64.deb' },
     ],
     requirements: 'Ubuntu 20.04+',
   },
@@ -53,9 +53,9 @@ export default function Downloads() {
         <div className="p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h3 className="text-lg mb-1">Latest Release: v1.4.0</h3>
+              <h3 className="text-lg mb-1">Latest Release: v1.6.0</h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Released December 23, 2025 · <a href="https://github.com/Dyan-Dev/loopi/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
+                Released December 31, 2025 · <a href="https://github.com/Dyan-Dev/loopi/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
               </p>
             </div>
             <div className="flex gap-4 text-sm text-neutral-600 dark:text-neutral-400">
@@ -63,7 +63,7 @@ export default function Downloads() {
                 <span className="font-semibold">License:</span> MIT
               </div>
               <div>
-                <span className="font-semibold">Size:</span> ~81-113 MB
+                <span className="font-semibold">Size:</span> ~81-114 MB
               </div>
             </div>
           </div>
@@ -125,12 +125,12 @@ export default function Downloads() {
               </thead>
               <tbody className="text-neutral-600 dark:text-neutral-400">
                 <tr className="border-b border-neutral-200 dark:border-neutral-800">
-                  <td className="py-2 font-mono text-xs">loopi-1.5.0.Setup.exe</td>
-                  <td className="py-2 font-mono text-xs">9c36ade81daad5c690c4166f0bc63527743ec1969a52a40e2c0b3e78dbbeff2a</td>
+                  <td className="py-2 font-mono text-xs">loopi-1.6.0.Setup.exe</td>
+                  <td className="py-2 font-mono text-xs">880f57d3be78e531bfb6a6d0a1a9f296b412ef85dafa799d0a1a6873fa146597</td>
                 </tr>
                 <tr className="border-b border-neutral-200 dark:border-neutral-800">
-                  <td className="py-2 font-mono text-xs">loopi_1.5.0_amd64.deb</td>
-                  <td className="py-2 font-mono text-xs">1640f9eb49750bb280571ced31bfc613bda8ba6aa761818dc8d540ed293132ba</td>
+                  <td className="py-2 font-mono text-xs">loopi_1.6.0_amd64.deb</td>
+                  <td className="py-2 font-mono text-xs">aebe28d2fb2b4f8367a9232f3365ec9293d6f083fe68772baa021c686cf91735</td>
                 </tr>
               </tbody>
             </table>
@@ -157,8 +157,8 @@ export default function Downloads() {
               <code>
                 git clone https://github.com/Dyan-Dev/loopi.git{'\n'}
                 cd loopi{'\n'}
-                npm install{'\n'}
-                npm start
+                pnpm install{'\n'}
+                pnpm start
               </code>
             </pre>
           </div>

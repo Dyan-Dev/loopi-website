@@ -1,0 +1,344 @@
+---
+title: Twitter/X Integration
+description: Complete guide to automating Twitter/X with posting, likes, retweets, DMs, and search
+---
+
+# Twitter/X Integration Guide
+
+Complete guide for using Twitter/X automation steps in Loopi.
+
+## Overview
+
+The Twitter integration allows you to automate interactions with Twitter/X, including:
+- Creating, deleting, and searching tweets
+- Liking and retweeting tweets
+- Sending direct messages
+- Searching for users
+- Full variable support for dynamic content
+
+## Prerequisites
+
+### Twitter API Credentials
+
+You need Twitter API v2 credentials to use these steps:
+
+1. **API Key** (Consumer Key)
+2. **API Secret** (Consumer Secret)
+3. **Access Token**
+4. **Access Token Secret**
+
+### Getting Credentials
+
+1. Go to [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard)
+2. Create a new app or use an existing one
+3. Navigate to **"Keys and tokens"**
+4. Generate/copy your credentials
+5. Ensure your app has the appropriate permissions (Read, Write, and Direct Messages)
+
+### Saving Credentials in Loopi
+
+**Recommended Method:**
+1. Go to **Settings → Credentials**
+2. Click **"Add Credential"**
+3. Select type: **Twitter/X**
+4. Enter all four credentials
+5. Save with a descriptive name (e.g., "My Twitter Account")
+6. Use the saved credential in Twitter steps
+
+**Alternative:** Enter credentials manually in each step (not recommended for security)
+
+## Step Types
+
+### 1. Create Tweet
+
+Post a new tweet to Twitter/X.
+
+**Fields:**
+- **Tweet Text**: Content of the tweet (max 280 characters)
+- **Authentication**: Select saved credential or enter manually
+- **Reply to Tweet ID** (optional): Tweet ID to reply to
+- **Quote Tweet ID** (optional): Tweet ID to quote
+- **Media ID** (optional): Media ID to attach
+- **Store Response in Variable** (optional): Variable to store the response
+
+**Example Configuration:**
+```json
+{
+  "type": "twitterCreateTweet",
+  "text": "Hello from Loopi! #automation",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "tweetData"
+}
+```
+
+**With Variables:**
+```json
+{
+  "type": "twitterCreateTweet",
+  "text": "The price is now "`{{currentPrice}}`"! Check it out.",
+  "replyToTweetId": "{{targetTweetId}}",
+  "storeKey": "newTweet"
+}
+```
+
+**Response Data:**
+After creating a tweet, you can access:
+- `{{tweetData.id}}` - The tweet ID
+- `{{tweetData.text}}` - The tweet text
+- `{{tweetData.created_at}}` - Timestamp
+
+### 2. Delete Tweet
+
+Delete a tweet from your account.
+
+**Fields:**
+- **Tweet ID**: ID or URL of the tweet to delete
+- **Authentication**: Select saved credential or enter manually
+- **Store Response in Variable** (optional)
+
+**Example:**
+```json
+{
+  "type": "twitterDeleteTweet",
+  "tweetId": "1234567890123456789",
+  "credentialId": "my-twitter-credential"
+}
+```
+
+**Tweet ID Formats:**
+- Direct ID: `1234567890123456789`
+- Full URL: `https://twitter.com/username/status/1234567890123456789`
+- X.com URL: `https://x.com/username/status/1234567890123456789`
+- Variable: `{{tweetId}}`
+
+### 3. Like Tweet
+
+Like a tweet on Twitter/X.
+
+**Fields:**
+- **Tweet ID**: ID or URL of the tweet to like
+- **Authentication**: Select saved credential
+- **Store Response in Variable** (optional)
+
+**Example:**
+```json
+{
+  "type": "twitterLikeTweet",
+  "tweetId": "{{foundTweet.id}}",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "likeResult"
+}
+```
+
+### 4. Retweet
+
+Retweet a tweet to your timeline.
+
+**Fields:**
+- **Tweet ID**: ID or URL of the tweet to retweet
+- **Authentication**: Select saved credential
+- **Store Response in Variable** (optional)
+
+**Example:**
+```json
+{
+  "type": "twitterRetweet",
+  "tweetId": "https://twitter.com/user/status/123456789",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "retweetResult"
+}
+```
+
+### 5. Search Tweets
+
+Search for tweets using Twitter's search API (last 7 days for standard access).
+
+**Fields:**
+- **Search Query**: Search term or query with operators
+- **Max Results** (optional): Number of results (1-100, default: 10)
+- **Start Time** (optional): Filter tweets after this date
+- **End Time** (optional): Filter tweets before this date
+- **Authentication**: Select saved credential
+- **Store Results in Variable**: Variable to store search results
+
+**Search Operators:**
+- `"exact phrase"` - Search for exact phrase
+- `#hashtag` - Search by hashtag
+- `from:username` - Tweets from specific user
+- `to:username` - Replies to specific user
+- `-word` - Exclude tweets with word
+- `word1 OR word2` - Either word
+- `word1 word2` - Both words
+
+**Example:**
+```json
+{
+  "type": "twitterSearchTweets",
+  "query": "#automation OR #nocode",
+  "maxResults": "20",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "searchResults"
+}
+```
+
+**Accessing Results:**
+```
+{{searchResults[0].id}}           // First tweet ID
+{{searchResults[0].text}}         // First tweet text
+{{searchResults[0].author_id}}    // Author ID
+{{searchResults[1].created_at}}   // Second tweet timestamp
+```
+
+### 6. Send Direct Message
+
+Send a direct message to a Twitter user.
+
+**Fields:**
+- **Recipient User ID**: Twitter user ID to send message to
+- **Message Text**: Content of the message
+- **Authentication**: Select saved credential
+- **Store Response in Variable** (optional)
+
+**Example:**
+```json
+{
+  "type": "twitterSendDM",
+  "recipientId": "123456789",
+  "text": "Thanks for your interest! Here's the info: {{productLink}}",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "dmResult"
+}
+```
+
+**Finding User IDs:**
+Use the "Search Users" step first, then access `{{foundUsers[0].id}}`
+
+### 7. Search Users
+
+Search for Twitter users by username or keywords.
+
+**Fields:**
+- **Search Query**: Username or keywords to search
+- **Max Results** (optional): Number of results (1-100, default: 10)
+- **Authentication**: Select saved credential
+- **Store Results in Variable**: Variable to store search results
+
+**Example:**
+```json
+{
+  "type": "twitterSearchUsers",
+  "query": "automation",
+  "maxResults": "10",
+  "credentialId": "my-twitter-credential",
+  "storeKey": "users"
+}
+```
+
+**Accessing Results:**
+```
+{{users[0].id}}              // User ID
+{{users[0].username}}        // Username (without @)
+{{users[0].name}}            // Display name
+{{users[0].description}}     // Bio
+{{users[0].followers_count}} // Follower count
+```
+
+## Example Workflows
+
+### Workflow 1: Automated Tweet with Current Data
+
+1. **API Call**: Fetch current price from API → Store in `priceData`
+2. **Set Variable**: Extract price → Store in `currentPrice`
+3. **Create Tweet**: "Today's price: `{{currentPrice}}`"
+
+### Workflow 2: Search and Retweet
+
+1. **Search Tweets**: Query `#automation` → Store in `tweets`
+2. **Conditional**: Check if `{{tweets[0].id}}` exists
+3. **If yes**: Retweet `{{tweets[0].id}}`
+4. **If no**: End automation
+
+### Workflow 3: Monitor and Reply
+
+1. **Search Tweets**: Query `to:yourusername` → Store in `mentions`
+2. **Set Variable**: Get first mention → `firstMention = {{mentions[0]}}`
+3. **Create Tweet**: Reply to `{{firstMention.id}}` with "Thanks for reaching out!"
+
+### Workflow 4: Automated DM Campaign
+
+1. **Search Users**: Query `automation enthusiasts` → Store in `users`
+2. **Set Variable**: Current user → `currentUser = {{users[0]}}`
+3. **Send DM**: To `{{currentUser.id}}` with message
+4. **Wait**: 5 seconds
+5. **Conditional**: Check if more users → Loop back to step 2
+
+### Workflow 5: Tweet + Screenshot
+
+1. **Create Tweet**: "Check out our latest update!"  → Store in `newTweet`
+2. **Navigate**: Go to tweet URL `https://twitter.com/i/web/status/{{newTweet.id}}`
+3. **Wait**: 2 seconds
+4. **Screenshot**: Capture tweet
+
+## Rate Limits
+
+Twitter API has rate limits. Standard access typically allows:
+- **Tweet creation**: 200 per 15 minutes (user context)
+- **Search tweets**: 180 per 15 minutes
+- **Like tweet**: 1000 per 24 hours
+- **Retweet**: 1000 per 24 hours
+- **Send DM**: 500 per 24 hours
+
+**Best Practices:**
+- Add **Wait** steps between API calls (2-5 seconds)
+- Use conditional logic to check for errors
+- Store API responses to check for rate limit errors
+- Monitor your automation's API usage
+
+## Error Handling
+
+**Common Errors:**
+- **401 Unauthorized**: Invalid credentials
+- **403 Forbidden**: Insufficient permissions or suspended account
+- **404 Not Found**: Tweet or user doesn't exist
+- **429 Too Many Requests**: Rate limit exceeded
+- **400 Bad Request**: Invalid input (e.g., text too long)
+
+**Handling Errors:**
+1. Store API responses in variables
+2. Add conditional checks for success/failure
+3. Use try-catch patterns with conditional nodes
+4. Add meaningful log messages
+
+## Tips & Best Practices
+
+1. **Use Credentials Manager**: Store Twitter credentials securely
+2. **Test with small limits**: Use `maxResults: "5"` when testing
+3. **Respect rate limits**: Add delays between API calls
+4. **Handle errors gracefully**: Check for empty results before accessing
+5. **Use variables**: Make tweets dynamic with `{{variables}}`
+6. **Store responses**: Keep tweet IDs for follow-up actions
+7. **Follow Twitter rules**: Respect automation policies and terms of service
+8. **Monitor activity**: Review automation logs regularly
+9. **Be respectful**: Don't spam or harass users
+10. **Test thoroughly**: Run automations manually before scheduling
+
+## Permissions Required
+
+Ensure your Twitter app has these permissions:
+- ✅ **Read** - For searching tweets/users
+- ✅ **Write** - For creating/deleting tweets, liking, retweeting
+- ✅ **Direct Messages** - For sending DMs
+
+**To update permissions:**
+1. Go to Twitter Developer Portal → Your App → Settings
+2. Edit **App permissions**
+3. Select appropriate level
+4. **Regenerate** access token and secret (existing tokens keep old permissions)
+5. Update credentials in Loopi
+
+## Related Documentation
+
+- [Credentials Management](/docs/credentials) - Learn how to store Twitter credentials
+- [Variables Guide](/docs/variables) - Understanding variable access
+- [API Reference](/docs/api-reference) - All step types reference
+- [Examples](/docs/examples) - Ready-made Twitter automation examples
