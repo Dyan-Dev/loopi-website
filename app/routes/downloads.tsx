@@ -6,7 +6,7 @@ const platforms = [
     name: 'Windows',
     icon: Monitor,
     downloads: [
-      { type: 'Installer (.exe)', size: '114 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.0/loopi-1.6.0.Setup.exe' },
+      { type: 'Installer (.exe)', size: '114 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.2/loopi-1.6.2.Setup.exe' },
     ],
     requirements: 'Windows 10 or later (64-bit)',
   },
@@ -14,7 +14,7 @@ const platforms = [
     name: 'Linux',
     icon: Package,
     downloads: [
-      { type: 'Debian (.deb)', size: '81.4 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.0/loopi_1.6.0_amd64.deb' },
+      { type: 'Debian (.deb)', size: '82.7 MB', url: 'https://github.com/Dyan-Dev/loopi/releases/download/v1.6.2/loopi_1.6.2_amd64.deb' },
     ],
     requirements: 'Ubuntu 20.04+',
   },
@@ -53,9 +53,9 @@ export default function Downloads() {
         <div className="p-6 bg-neutral-50 dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h3 className="text-lg mb-1">Latest Release: v1.6.0</h3>
+              <h3 className="text-lg mb-1">Latest Release: v1.6.2</h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                Released December 31, 2025 · <a href="https://github.com/Dyan-Dev/loopi/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
+                Released January 11, 2026 · <a href="https://github.com/Dyan-Dev/loopi/releases/latest" target="_blank" rel="noopener noreferrer" className="underline">Release Notes</a>
               </p>
             </div>
             <div className="flex gap-4 text-sm text-neutral-600 dark:text-neutral-400">
@@ -125,12 +125,12 @@ export default function Downloads() {
               </thead>
               <tbody className="text-neutral-600 dark:text-neutral-400">
                 <tr className="border-b border-neutral-200 dark:border-neutral-800">
-                  <td className="py-2 font-mono text-xs">loopi-1.6.0.Setup.exe</td>
-                  <td className="py-2 font-mono text-xs">880f57d3be78e531bfb6a6d0a1a9f296b412ef85dafa799d0a1a6873fa146597</td>
+                  <td className="py-2 font-mono text-xs">loopi-1.6.2.Setup.exe</td>
+                  <td className="py-2 font-mono text-xs">ecae25223f50900e049496ebfce6aed38d9b7fcf1484396e3d1cdb2a5a31a6d7</td>
                 </tr>
                 <tr className="border-b border-neutral-200 dark:border-neutral-800">
-                  <td className="py-2 font-mono text-xs">loopi_1.6.0_amd64.deb</td>
-                  <td className="py-2 font-mono text-xs">aebe28d2fb2b4f8367a9232f3365ec9293d6f083fe68772baa021c686cf91735</td>
+                  <td className="py-2 font-mono text-xs">loopi_1.6.2_amd64.deb</td>
+                  <td className="py-2 font-mono text-xs">adbcb6a9d1e23eb8d397e7070b786472754135170c193ce33f7f0aed59f3f1bd</td>
                 </tr>
               </tbody>
             </table>
